@@ -1,4 +1,4 @@
-import { Button, Option, Select } from "@material-tailwind/react";
+import { Button, Option, Select, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ export default function ProfileUser() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userSlice);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [imageDefault, setImageDefault] = useState("");
   //validate form
   const schema = yup
     .object({
@@ -44,7 +44,6 @@ export default function ProfileUser() {
 
   //submit form
   const onSubmit = (data) => {
-    console.log(data, "data");
     const formData = new FormData();
     for (let key in data) {
       formData.append(key, data[key]);
@@ -65,7 +64,9 @@ export default function ProfileUser() {
       reader.readAsDataURL(selectedFile);
     }
   };
-
+  useEffect(() => {
+    setImageDefault(userInfo.avatar);
+  }, [userInfo]);
   useEffect(() => {
     dispatch(getDataillUser({ user_id: localStorage.getItem("user_id") })).then(
       (value) => {
@@ -73,120 +74,141 @@ export default function ProfileUser() {
         setValue("email", value.payload.email);
         setValue("phone", value.payload.phone);
         setValue("address", value.payload.address);
+        setImageDefault(value.payload.avatar);
         // setValue("avatar", value.payload.avatar);
       }
     );
   }, []);
   return (
-    <div class="px-5 py-5">
+    <div className="px-5 py-5">
       <p className="text-4xl mb-5">Thông tin và dữ liệu người dùng </p>
-      <div class=" w-full max-w-[550px] bg-white">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div class="mb-5">
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Tên người dùng"
-                  register={field}
-                  messErr={errors.name?.message}
-                />
-              )}
-            />
-          </div>
-          <div class="mb-5">
-            <Controller
-              name="phone"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Số điện thoại"
-                  register={field}
-                  messErr={errors.phone?.message}
-                />
-              )}
-            />
-          </div>
-          <div class="mb-5">
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Email"
-                  register={field}
-                  messErr={errors.email?.message}
-                />
-              )}
-            />
-          </div>
-          <div class="mb-5">
-            <Controller
-              name="address"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Địa chỉ"
-                  register={field}
-                  messErr={errors.address?.message}
-                />
-              )}
-            />
-          </div>
-
-          <div className="mb-5">
-            <div className="relative">
-              <label
-                title="Click to upload"
-                htmlFor="button2"
-                className="cursor-pointer flex items-center gap-4 px-6 py-4 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
-              >
-                <div className="w-max relative">
-                  <img
-                    className="w-12 "
-                    src="https://www.svgrepo.com/show/485545/upload-cicle.svg"
-                    alt="file upload icon"
-                    width={512}
-                    height={512}
+      <div className="w-full flex justify-around">
+        <div className=" w-[50%] max-w-[550px] bg-white">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="mb-5">
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <InputComponent
+                    title="Tên người dùng"
+                    register={field}
+                    messErr={errors.name?.message}
                   />
-                </div>
-                <div className="relative">
-                  <span className="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
-                    Tải ảnh đại diện
-                  </span>
-                  <span className="mt-0.5 block text-sm text-gray-500">
-                    Max 2 MB
-                  </span>
-                </div>
-              </label>
-              <input
-                onChange={handleImageChange}
-                hidden
-                type="file"
-                name="button2"
-                id="button2"
-                accept="image/png, image/jpeg"
+                )}
               />
             </div>
-            <div className="w-full flex justify-center mt-5">
-              {selectedImage && (
-                <div className="p-2 bg-white shadow-2xl rounded-full">
-                  <img
-                    className="h-[100px] w-[100px] rounded-full object-cover"
-                    src={selectedImage}
-                    alt=""
+            <div className="mb-5">
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                  <InputComponent
+                    title="Số điện thoại"
+                    register={field}
+                    messErr={errors.phone?.message}
                   />
-                </div>
-              )}
+                )}
+              />
             </div>
-          </div>
-          <div>
-            <Button type="submit" className="w-full">
-              Cập nhật
-            </Button>
-          </div>
-        </form>
+            <div className="mb-5">
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <InputComponent
+                    title="Email"
+                    register={field}
+                    messErr={errors.email?.message}
+                  />
+                )}
+              />
+            </div>
+            <div className="mb-5">
+              <Controller
+                name="address"
+                control={control}
+                render={({ field }) => (
+                  <InputComponent
+                    title="Địa chỉ"
+                    register={field}
+                    messErr={errors.address?.message}
+                  />
+                )}
+              />
+            </div>
+
+            <div className="mb-5">
+              <div className="relative">
+                <label
+                  title="Click to upload"
+                  htmlFor="button2"
+                  className="cursor-pointer flex items-center gap-4 px-6 py-4 before:border-gray-400/60 hover:before:border-gray-300 group before:bg-gray-100 before:absolute before:inset-0 before:rounded-3xl before:border before:border-dashed before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"
+                >
+                  <div className="w-max relative">
+                    <img
+                      className="w-12 "
+                      src="https://www.svgrepo.com/show/485545/upload-cicle.svg"
+                      alt="file upload icon"
+                      width={512}
+                      height={512}
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className="block text-base font-semibold relative text-blue-900 group-hover:text-blue-500">
+                      Tải ảnh đại diện
+                    </span>
+                    <span className="mt-0.5 block text-sm text-gray-500">
+                      Max 2 MB
+                    </span>
+                  </div>
+                </label>
+                <input
+                  onChange={handleImageChange}
+                  hidden
+                  type="file"
+                  name="button2"
+                  id="button2"
+                  accept="image/png, image/jpeg"
+                />
+              </div>
+              <div className="w-full flex justify-center mt-5">
+                {selectedImage && (
+                  <div className="p-2 bg-white shadow-2xl rounded-full">
+                    <img
+                      className="h-[100px] w-[100px] rounded-full object-cover"
+                      src={selectedImage}
+                      alt=""
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div>
+              <Button type="submit" className="w-full">
+                Cập nhật
+              </Button>
+            </div>
+          </form>
+        </div>
+        <div className="w-[400px] h-[400px] ">
+          <img
+            className="h-full w-full rounded-full object-cover object-center shadow-xl shadow-blue-gray-900/50"
+            src={
+              imageDefault
+                ? imageDefault
+                : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
+            }
+            alt="nature image"
+          />
+          <Typography
+            as="caption"
+            variant="small"
+            className="mt-2 text-center font-normal"
+          >
+            Ảnh đại diện
+          </Typography>
+        </div>
       </div>
     </div>
   );

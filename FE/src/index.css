@@ -57,18 +57,18 @@ html {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
-  border: 2px solid black;
+  border: 2px solid #2e8cdb;
   margin-right: 0.5rem;
 }
 .pagination ul li a {
   padding: 10px;
 }
 .pagination ul li.selected {
-  background: black;
+  background: #2e8cdb;
   color: white;
 }
 .pagination ul li:hover {
-  background: black;
+  background: #2e8cdb;
   transition: all;
   color: white;
 }
@@ -77,4 +77,7 @@ html {
 }
 .pagination .next a:hover {
   color: white;
+}
+.tox-tinymce-aux {
+  z-index: 99999999999 !important;
 }

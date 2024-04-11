@@ -4,15 +4,17 @@ import CardBlogV2 from "../../components/Card/CardBlogV2";
 import CardBlogV1 from "../../components/Card/CardBlogV1";
 import BoxComponent from "../../components/BoxComponent/BoxComponent";
 import DefaultPagination from "../../components/Pagination/DefaultPagination";
+import { useTranslation } from "react-i18next";
 
 export default function BlogPage() {
+  const { t } = useTranslation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <main>
       <div>
-        <SubBanner title={"Tin tức"} />
+        <SubBanner title={t("content.blog")} />
 
         <section className="news section-padding bg-white">
           <div className="container">

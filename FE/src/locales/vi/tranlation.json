@@ -2,6 +2,41 @@
     "content": {
         "functional": "Hàm",
         "class": "Lớp",
-        "text": "Đây là văn bản"
+        "text": "Đây là văn bản",
+        "affiliated-businesses":"DOANH NGHIỆP LIÊN KẾT",
+        "home":"Trang chủ",
+        "about":"Về chúng tôi",
+        "product":"Sản phẩm",
+        "blog":"Tin tức",
+        "career":"Tuyển dụng",
+        "contact":"Liên hệ",
+        "OFFICERS-AND-EMPLOYEES":"CÁN BỘ CÔNG NHÂN VIÊN",
+        "YEARS-AS-A-NATIONAL-BRAND":"NĂM THƯƠNG HIỆU",
+        "partner-agent":"ĐẠI LÝ ĐỐI TÁC",
+        "outstanding-products":"Sản phẩm nổi bật",
+        "NEWS-&-EVENTS":"Tin tức và sự kiện",
+        "INTRODUCE":"Giới thiệu",
+        "title-intro":"Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA",
+        "body-intro1":"Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+        ,"body-intro2":"Tiền thân công ty NP NAPHTHA là CTY CAO SU XANH được thành lập vào năm 2008, trong bối cảnh phát triển ngày càng lớn mạnh của các tập đoàn siêu thi Nhật, Mỹ và các Vendor, nhu cầu liên kết với các đối tác cung cấp dịch vụ, sản phẩm của nhà máy, tập đoàn là rất lớn và rất đa dạng. Công ty NP NAPHTHA không ngừng cải tiến sản xuất, nâng cao chất lượng và giảm giá thành sản phẩm, để cùng các đối tác đưa ra thị trường các sản phẩm chất lượng tốt và giá thành thấp"
+        ,"ORIENTED-DEVELOPMENT":"Định hướng phát triển",
+        "ORIENTED-DEVELOPMENT-BODY1":"Tầm nhìn và sứ mệnh NP NAPHTHA đặt ra luôn là kim chỉ nam cho các hoạt động của NPNAPHTHA. chúng tôi luôn cần cù, sáng tạo trong công việc, tận tụy với khách hàng, đối tác và không ngừng nâng cấp máy móc, thiết bị cũng như hệ thống cơ sở vật chất theo hướng hiện đại, hiệu quả và an toàn.",
+        "ORIENTED-DEVELOPMENT-BODY2":"NP NAPHTHA luôn mang lại sự hài lòng cho các khách hàng, đối tác trong và ngoài nước. Quyết tâm phấn đấu trở thành đơn vị hàng đầu cung cấp dịch vụ trọn gói cho các Vendor và tập đoàn lớn của Nhật và Mỹ"
+    ,"MISSION":"SỨ Mệnh",
+    "VISION":"Tầm nhìn",
+    "VISION-BODY":"Tầm nhìn và sứ mệnh NP NAPHTHA đặt ra luôn là kim chỉ nam cho các hoạt động của NPNAPHTHA. chúng tôi luôn cần cù, sáng tạo trong công việc, tận tụy với khách hàng, đối tác và không ngừng nâng cấp máy móc, thiết bị cũng như hệ thống cơ sở vật chất theo hướng hiện đại, hiệu quả và an toàn.",
+    "FOR-CUSTOMERS":"Đối với khách hàng",
+    "FOR-CUSTOMERS-BODY":"NP NAPHTHA xác nhận cho mình sứ mệnh trở thành 'cánh tay nối dài của khách hàng', sản phẩm và dịch vụ của chúng tôi luôn giúp khách hàng nâng cao hiệu quả kinh doanh, tiết kiệm chi phí. Từ đó khách hàng chỉ cần tập trung vào công việc phát triển kinh doanh, nâng cao doanh số sản phẩm, và góp phần thúc đẩy nên kinh tế nước nhà",
+    "FOR-EMPLOYEES":"Đối với người lao động",
+    "FOR-EMPLOYEES-BODY":"Là cầu nối giữa người lao động và doanh nghiệp, giúp người lao động có việc làm ổn định, nâng cao thu nhập, đặc biệt NP NAPHTHA luôn chú trọng nâng cao chất lượng lao động thông qua đào tạo để đảm bảo mục tiêu phát triển bền vững."
+    ,"FOR-SOCIETY":"Đối với xã hội"
+    ,"FOR-SOCIETY-BODY":"Hoạt động sản xuất của công ty sẽ hỗ trợ giải quyết vấn đề thất nghiệp cho người lao động, xây dựng cơ sở hạ tầng, kết nối nguồn cung và cầu nhằm phát triển sản xuất cho nên kinh tế Việt Nam."
+        ,"IMPROVEMENT-EFFORT-BODY":"Là cầu nối giữa người lao động và doanh nghiệp, giúp người lao động có việc làm ổn định, nâng cao thu nhập, đặc biệt NP NAPHTHA luôn chú trọng nâng cao chất lượng lao động thông qua đào tạo để đảm bảo mục tiêu phát triển bền vững."
+        ,"IMPROVEMENT-EFFORT":"Nỗ lực cải tiến",
+        "Collection":"Bộ sưu tập",
+        "Accompanying":"Đồng hành cùng bạn vươn tới tương lai",
+        "intro-banner":"CÔNG TY TNHH SX TM NP-NAPHTHA",
+        "Quick-link":"Liên kết nhanh",
+        "map":"Bản đồ"
     }
-}
+    }

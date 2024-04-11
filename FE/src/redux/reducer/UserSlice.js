@@ -39,6 +39,9 @@ export const userSlice = createSlice({
     builder.addCase(getAllUser.fulfilled, (state, action) => {
       state.allUserList = action.payload;
     });
+    builder.addCase(searchUser.fulfilled, (state, action) => {
+      state.allUserList = action.payload;
+    });
   },
 });
 
@@ -88,11 +91,11 @@ export const refreshToken = createAsyncThunk("user/refreshToken", async () => {
 export const updateUser = createAsyncThunk(
   "user/updateUser",
   async ({ id, payload }, { dispatch }) => {
+    dispatch(closeModal());
     dispatch(setLoading(true));
     try {
       const { data } = await api.put(`user/${id}`, payload);
       notify("success", "Cập nhật thành công");
-      dispatch(closeModal());
       dispatch(setLoading(false));
       return data;
     } catch (error) {
@@ -145,15 +148,57 @@ export const deleteUser = createAsyncThunk(
     }
   }
 );
+export const deleteAllUser = createAsyncThunk(
+  "user/deleteAllUser",
+  async (listId, { dispatch }) => {
+    dispatch(setLoading(true));
+    try {
+      const { data } = await api.post(`/user/deleteAll`, {
+        listDelete: listId,
+      });
+      notify("success", "Đã xóa tất cả người dùng được chọn");
+      dispatch(setLoading(false));
+      dispatch(getAllUser());
+      return data;
+    } catch (error) {
+      dispatch(setLoading(false));
+
+      console.log(error, "error");
+      notify("error", error.response.data.message);
+    }
+  }
+);
 export const createUser = createAsyncThunk(
   "user/createUser",
   async (payload, { dispatch }) => {
+    dispatch(closeModal());
     dispatch(setLoading(true));
     try {
       const { data } = await api.post(`/user/register`, payload);
       notify("success", "Tạo tài khoản thành công");
-      dispatch(closeModal());
       dispatch(getAllUser());
+      dispatch(setLoading(false));
+      return data;
+    } catch (error) {
+      console.log(error, "error");
+      notify("error", error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
+export const searchUser = createAsyncThunk(
+  "user/searchUser",
+  async ({ searchBy, searchValue }, { dispatch }) => {
+    dispatch(setLoading(true));
+    try {
+      if (searchValue.trim() == "") {
+        const data = await api.get(`/user/all`);
+        dispatch(setLoading(false));
+        return data;
+      }
+      const data = await api.get(
+        `/user/all?searchBy=${searchBy}&searchValue=${searchValue}`
+      );
       dispatch(setLoading(false));
       return data;
     } catch (error) {

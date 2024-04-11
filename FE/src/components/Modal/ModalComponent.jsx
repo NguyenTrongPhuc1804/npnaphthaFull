@@ -20,7 +20,7 @@ export default function ModalComponent() {
       <Dialog size="lg" className="" open={showModal}>
         <DialogHeader>
           <div className="w-full justify-between flex items-center">
-            <p>{title}</p>
+            <p className="text-3xl font-semibold ">{title}</p>
             <Button className="py-2 px-3" color="red" onClick={handleClose}>
               X
             </Button>

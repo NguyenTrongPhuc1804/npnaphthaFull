@@ -12,7 +12,7 @@ export default function AdminTheme() {
     <div className="w-full">
       <NavBarAdmin />
       <div className="flex">
-        <div className="lg:w-[20%] ">
+        <div className="lg:w-[17%] ">
           <SideNav />
         </div>
         <div className="lg:w-[80%] w-full">

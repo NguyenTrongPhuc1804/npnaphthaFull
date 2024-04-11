@@ -19,15 +19,22 @@ import {
   Popover,
   PopoverHandler,
   PopoverContent,
+  Checkbox,
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../redux/reducer/ModalSlice";
 import FormCreateUser from "../../../components/Form/User/FormCreateUser";
-import { deleteUser, getAllUser } from "../../../redux/reducer/UserSlice";
+import {
+  deleteAllUser,
+  deleteUser,
+  getAllUser,
+  searchUser,
+} from "../../../redux/reducer/UserSlice";
 import moment from "moment";
 import DefaultPagination from "../../../components/Pagination/DefaultPagination";
 import { closeDialog } from "../../../redux/reducer/DialogSlice";
 import FormUpdateUser from "../../../components/Form/User/FormUpdateUser";
+import { notify } from "../../../toolkits/help";
 
 const TABS = [
   {
@@ -44,20 +51,37 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Tên người dùng", "Phone", "Loại", "Ngày khởi tạo", ""];
+const TABLE_HEAD = ["", "Tên người dùng", "Phone", "Loại", "Ngày khởi tạo", ""];
 
 export default function ManagementUserPage() {
   const dispatch = useDispatch();
+  //state
   const { allUserList } = useSelector((state) => state.userSlice);
   const [currentPage, setCurrentPage] = useState(0);
   const [popover, setPopover] = useState(false);
+  const [searchBy, setSearchBy] = useState("name");
+  const [searchValue, setSearchValue] = useState("");
+  const [listDelete, setListDelete] = useState([]);
+
+  //event
+  const handleSearchUser = () => {
+    dispatch(searchUser({ searchBy, searchValue }));
+    setSearchValue("");
+  };
   const handleOpenForm = () => {
     dispatch(
       openModal({ body: <FormCreateUser />, title: "Tạo người dùng mới" })
     );
   };
   const handleDeleteUser = (user_id) => {
+    if (user_id === localStorage.getItem("user_id")) {
+      return notify("error", "Không thể xóa tài khoản của bạn");
+    }
     dispatch(deleteUser({ user_id, page: currentPage }));
+  };
+  const handleDeleteAllProduct = () => {
+    dispatch(deleteAllUser(listDelete));
+    setListDelete([]);
   };
   useEffect(() => {
     dispatch(getAllUser());
@@ -65,7 +89,7 @@ export default function ManagementUserPage() {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
               Danh sách người dùng
@@ -83,20 +107,15 @@ export default function ManagementUserPage() {
               className="flex items-center gap-3"
               size="sm"
             >
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Thêm người
-              dùng
+              + Thêm người dùng
             </Button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Tabs value="name" className="w-full md:w-max">
             <TabsHeader>
-              {TABS.map(({ label, value }) => (
-                <Tab
-                  onClick={() => console.log(value)}
-                  key={value}
-                  value={value}
-                >
+              {TABS.map(({ label, value }, idx) => (
+                <Tab onClick={() => setSearchBy(value)} key={idx} value={value}>
                   &nbsp;&nbsp;{label}&nbsp;&nbsp;
                 </Tab>
               ))}
@@ -105,9 +124,11 @@ export default function ManagementUserPage() {
           <div className="w-full md:w-72">
             <Input
               label="Search"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
               icon={
                 <MagnifyingGlassIcon
-                  onClick={() => alert("123")}
+                  onClick={handleSearchUser}
                   className="h-5 w-5 cursor-pointer"
                 />
               }
@@ -115,13 +136,20 @@ export default function ManagementUserPage() {
           </div>
         </div>
       </CardHeader>
+      {listDelete.length > 0 && (
+        <div className="pr-6 mt-4 flex justify-end">
+          <Button className="py-2 px-3" onClick={handleDeleteAllProduct}>
+            Xóa tất cả
+          </Button>
+        </div>
+      )}
       <CardBody className="overflow-scroll px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
+              {TABLE_HEAD.map((head, idx) => (
                 <th
-                  key={head}
+                  key={idx}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                 >
                   <Typography
@@ -159,11 +187,26 @@ export default function ManagementUserPage() {
                 return (
                   <tr key={name}>
                     <td className={classes}>
+                      <Checkbox
+                        value={_id}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setListDelete([...listDelete, e.target.value]);
+                          } else {
+                            setListDelete(
+                              [...listDelete].filter((ele) => ele !== _id)
+                            );
+                          }
+                        }}
+                      />
+                    </td>
+                    <td className={classes}>
                       <div className="flex items-center gap-3">
                         <Avatar
                           src={
-                            avatar ??
-                            "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
+                            avatar
+                              ? avatar
+                              : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
                           }
                           alt={name}
                           size="sm"
@@ -235,6 +278,7 @@ export default function ManagementUserPage() {
                                       phone,
                                       role,
                                       _id,
+                                      currentPage,
                                     }}
                                   />
                                 ),

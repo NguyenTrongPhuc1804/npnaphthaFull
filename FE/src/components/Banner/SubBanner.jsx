@@ -6,7 +6,7 @@ export default function SubBanner({ title, subTitle }) {
       <div className="container">
         <div className="row">
           <div className="col-lg-10 col-12 mx-auto">
-            <h1 className="text-white lg:text-5xl text-3xl font-bold">
+            <h1 className="text-white lg:text-5xl text-3xl font-bold uppercase">
               {title}
             </h1>
             <strong className="text-white">{subTitle}</strong>

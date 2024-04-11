@@ -1,29 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Banner() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="container ">
-        <div className="row px-10 lg:px-28">
+        <div className="row px-10 lg:px-20">
           <div className="col-lg-5 col-12 m-auto">
             <div className="heroText">
               <h1 className="text-white lg:text-6xl text-4xl font-bold mb-lg-5 mb-3 uppercase">
-                Công ty TNHH sx tm np-naphtha
+                {t("content.intro-banner")}
               </h1>
               <div className="c-reviews my-3 d-flex flex-wrap align-items-center">
-                {/* <div className="d-flex flex-wrap align-items-center">
-                  <h4 className="text-white mb-0 me-3">4.4/5</h4>
-                  <div className="reviews-stars">
-                    <i className="bi-star-fill reviews-icon" />
-                    <i className="bi-star-fill reviews-icon" />
-                    <i className="bi-star-fill reviews-icon" />
-                    <i className="bi-star-fill reviews-icon" />
-                    <i className="bi-star reviews-icon" />
-                  </div>
-                </div> */}
-                <p className="text-white w-100">
-                  Đồng hành cùng bạn vươn tới tương lai
-                </p>
+                <p className="text-white w-100">{t("content.Accompanying")}</p>
               </div>
             </div>
           </div>
@@ -34,12 +24,12 @@ export default function Banner() {
               data-bs-ride="carousel"
             >
               <div className="carousel-inner">
-                <div className="carousel-item active">
+                <div className="carousel-item rounded-lg overflow-hidden active">
                   <div className="carousel-image-wrap">
                     <img
                       src="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
-                      className=" w-[615px] lg:h-[450px] h-[208px] object-cover carousel-image"
-                      alt
+                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
+                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
                     />
                   </div>
                   <div className="carousel-caption">
@@ -50,12 +40,12 @@ export default function Banner() {
                     <h4 className="hero-text">Fine Dining Restaurant</h4>
                   </div>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item rounded-lg overflow-hidden">
                   <div className="carousel-image-wrap">
                     <img
                       src="https://npnaphtha.com.vn/images/slideshow/hinh_cty_2.jpg"
-                      className=" w-[615px] lg:h-[450px] h-[208px] object-cover carousel-image"
-                      alt
+                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
+                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
                     />
                   </div>
                   <div className="carousel-caption">
@@ -74,12 +64,12 @@ export default function Banner() {
                     </div>
                   </div>
                 </div>
-                <div className="carousel-item">
+                <div className="carousel-item rounded-lg overflow-hidden">
                   <div className="carousel-image-wrap">
                     <img
                       src="https://npnaphtha.com.vn/images/slideshow/11.jpg"
-                      className=" w-[615px] lg:h-[450px] h-[208px] object-cover carousel-image"
-                      alt
+                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
+                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
                     />
                   </div>
                   <div className="carousel-caption">
@@ -100,7 +90,7 @@ export default function Banner() {
                 </div>
               </div>
               <button
-                className="carousel-control-prev"
+                className="carousel-control-prev bg-colorPrimary"
                 type="button"
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="prev"
@@ -109,7 +99,7 @@ export default function Banner() {
                 <span className="visually-hidden">Previous</span>
               </button>
               <button
-                className="carousel-control-next"
+                className="carousel-control-next bg-green-400 rounded-br-lg"
                 type="button"
                 data-bs-target="#carouselExampleCaptions"
                 data-bs-slide="next"

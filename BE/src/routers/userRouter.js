@@ -7,9 +7,10 @@ const {
   getAllUser,
   getDetailUser,
   getRefreshToken,
+  deleteAllUser,
 } = require("../controllers/UserController");
 
-const { listAuth } = require("../constants/authConstants");
+const { listAuth, listAuthLevel2 } = require("../constants/authConstants");
 const { uploadImage } = require("../middlewares/upload/uploadMiddleware");
 const {
   authenMiddleware,
@@ -21,11 +22,22 @@ userRouter.post("/login", login);
 userRouter.put(
   "/:id",
   authenMiddleware,
-  authorMiddleware(listAuth),
+  authorMiddleware(listAuthLevel2),
   uploadImage("avatar", "avatarUser"),
   updateUser
 );
-userRouter.delete("/:id", authenMiddleware, deleteUser);
+userRouter.delete(
+  "/:id",
+  authenMiddleware,
+  authorMiddleware(listAuthLevel2),
+  deleteUser
+);
+userRouter.post(
+  "/deleteAll",
+  authenMiddleware,
+  authorMiddleware(listAuthLevel2),
+  deleteAllUser
+);
 userRouter.get("/all", getAllUser);
 userRouter.get("/detail/:id", getDetailUser);
 userRouter.get("/refresh-token", getRefreshToken);

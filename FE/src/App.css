@@ -187,7 +187,7 @@ strong {
 .navbar-nav .nav-link.active,
 .nav-link:focus,
 .nav-link:hover {
-  color: var(--primary-color);
+  color: #3a9ef1;
 }
 
 .nav-link:focus {
@@ -395,7 +395,6 @@ strong {
 
 .hero-carousel .carousel-control-prev,
 .hero-carousel .carousel-control-next {
-  background: var(--secondary-color);
   width: 60px;
   height: 60px;
   text-align: center;
@@ -407,7 +406,6 @@ strong {
 }
 
 .hero-carousel .carousel-control-next {
-  background: var(--primary-color);
   right: 0;
 }
 

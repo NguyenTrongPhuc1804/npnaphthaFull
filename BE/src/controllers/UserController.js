@@ -12,7 +12,8 @@ const register = async (req, res) => {
   const checkUserExist = await User.findOne({ email });
   try {
     if (checkUserExist) {
-      return res.status(404).json({ message: "Email already exists !! " });
+      await removeImage(`${process.env.DOMAIN}/${file.path}`);
+      return res.status(404).json({ message: "Email đã tồn tại !! " });
     }
     // const hashPassword = bcrypt.hashSync(password, 10);
 
@@ -101,6 +102,8 @@ const updateUser = async (req, res) => {
         { ...data, avatar: `${process.env.DOMAIN}/${file.path}` },
         { new: true }
       );
+      console.log(userUpdate, "domain");
+
       return res
         .status(200)
         .json({ message: "Cập nhật thành công", data: userUpdate });
@@ -116,12 +119,12 @@ const updateUser = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  console.log(req.user, "user");
   try {
     const checkUser = await User.findOne({ _id: id });
     if (!checkUser) {
       return res.status(404).json({ message: "User not define" });
     }
+    checkUser.avatar && (await removeImage(checkUser.avatar));
     await User.findByIdAndDelete(id);
     return res.status(200).json({ message: "Delete user success" });
   } catch (error) {
@@ -129,16 +132,39 @@ const deleteUser = async (req, res) => {
     return res.status(500).json({ message: error });
   }
 };
+const deleteAllUser = async (req, res) => {
+  const { listDelete } = req.body;
+  try {
+    for (let key in listDelete) {
+      const checkUser = await User.findOne({ _id: listDelete[key] });
+      checkUser.avatar && (await removeImage(checkUser.avatar));
+    }
+    await User.deleteMany({ _id: { $in: listDelete } });
+    return res
+      .status(200)
+      .json({ message: "Xóa tất cả user đã chọn thành công" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error });
+  }
+};
 const getAllUser = async (req, res) => {
-  const { page = 0, limit = 8, searchBy, searchValue } = req.query;
+  const {
+    page = 0,
+    limit = 8,
+    searchBy,
+    searchValue,
+    sort = "desc",
+    sortBy = "_id",
+  } = req.query;
   try {
     const totalItem = await User.countDocuments();
     if (searchBy) {
       const totalUser = await User.find({
-        [searchBy]: { $regex: searchValue },
+        [searchBy]: { $regex: searchValue, $options: "i" },
       }).countDocuments();
       const searchUser = await User.find({
-        [searchBy]: { $regex: searchValue },
+        [searchBy]: { $regex: searchValue, $options: "i" },
       })
         .limit(limit)
         .skip(page * limit);
@@ -150,6 +176,7 @@ const getAllUser = async (req, res) => {
       });
     }
     const allUser = await User.find()
+      .sort({ [sortBy]: sort })
       .limit(limit)
       .skip(page * limit);
     res.status(200).json({
@@ -198,4 +225,5 @@ module.exports = {
   getAllUser,
   getDetailUser,
   getRefreshToken,
+  deleteAllUser,
 };

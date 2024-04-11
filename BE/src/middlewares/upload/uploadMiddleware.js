@@ -27,5 +27,22 @@ const uploadImage = (name, fileName) => {
   });
   return upload.single(name);
 };
-
-module.exports = { uploadImage };
+const uploadImagePDF = (nameImage, namePdf, fileName) => {
+  const made = mkdirp.sync(`./public/pdf/${fileName}`);
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, `./public/pdf/${fileName}`);
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + "_" + file.originalname);
+    },
+  });
+  const upload = multer({
+    storage: storage,
+  });
+  return upload.fields([
+    { name: nameImage, maxCount: 1 },
+    { name: namePdf, maxCount: 1 },
+  ]);
+};
+module.exports = { uploadImage, uploadImagePDF };

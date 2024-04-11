@@ -100,7 +100,7 @@ export function TableComponent() {
               view all
             </Button>
             <Button className="flex items-center gap-3" size="sm">
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
+              + Add member
             </Button>
           </div>
         </div>

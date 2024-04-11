@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import SubBanner from "../../components/Banner/SubBanner";
+import { useTranslation } from "react-i18next";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <main>
-      <SubBanner title={"Liên hệ"} />
+      <SubBanner title={t("content.contact")} />
       <section className="contact section-padding">
         <div className="container">
           <div className="row lg:px-20 px-10">

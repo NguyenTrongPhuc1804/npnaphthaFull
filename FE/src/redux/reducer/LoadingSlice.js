@@ -27,7 +27,6 @@ export const loadingSlice = createSlice({
 
 //login user
 
-export const { setLoading, closeDrawer, showDrawer, showSideNav } =
-  loadingSlice.actions;
+export const { setLoading, showDrawer, showSideNav } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

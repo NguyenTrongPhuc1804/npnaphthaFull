@@ -26,6 +26,7 @@ export default function FormUpdateUser({ data }) {
     phone,
     role,
     _id,
+    currentPage,
   } = data;
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userSlice);
@@ -77,11 +78,14 @@ export default function FormUpdateUser({ data }) {
     for (let key in data) {
       formData.append(key, data[key]);
     }
-    dispatch(updateUser({ id: _id, payload: formData })).then((value) => {
-      if (value.payload) {
-        dispatch(getAllUser());
+
+    dispatch(updateUser({ id: _id, payload: formData, currentPage })).then(
+      (value) => {
+        if (value.payload) {
+          dispatch(getAllUser({ page: currentPage, limit: 8 }));
+        }
       }
-    });
+    );
   };
   //event upload image
   const handleImageChange = (event) => {
@@ -105,8 +109,8 @@ export default function FormUpdateUser({ data }) {
     dispatch(setCallBack({ callBack: handleSubmit(onSubmit) }));
   }, []);
   return (
-    <div class=" px-5 py-2 overflow-y-scroll h-[400px]">
-      <div class=" w-full  bg-white">
+    <div className=" px-5 py-2 overflow-y-scroll h-[400px]">
+      <div className=" w-full  bg-white">
         <form
           className="grid lg:grid-cols-2 grid-cols-1 place-items-center gap-2"
           onSubmit={handleSubmit(onSubmit)}

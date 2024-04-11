@@ -11,3 +11,4 @@ const connectDB = mongoose
     console.log(err);
   });
 module.exports = connectDB;
+// mongodb://admin:123456@3.106.141.127:27017

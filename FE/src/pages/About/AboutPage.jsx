@@ -4,48 +4,58 @@ import SubBanner from "../../components/Banner/SubBanner";
 import SlideMember from "../../components/Slider/SlideMember";
 import ScrollTop from "../../components/ScrollToTop/ScrollTop";
 import { Typography } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 
 export default function AboutPage() {
+  const { t } = useTranslation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <main>
       <div className="">
-        <SubBanner title={"Về chúng tôi"} />
+        <Helmet>
+          <title>Về chúng tôi - npnaphtha.com.vn</title>
+
+          <link
+            rel="canonical"
+            href={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+          />
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:url"
+            content={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+          />
+          <meta property="og:title" content="Về chúng tôi - npnaphtha.com.vn" />
+          <meta
+            name="keywords"
+            content="Về chúng tôi - npnaphtha.com.vn, npnaphtha.com.vn"
+          ></meta>
+          <meta
+            property="og:description"
+            content="Về chúng tôi - npnaphtha.com.vn"
+          />
+          <meta name="description" content="Về chúng tôi - npnaphtha.com.vn" />
+          {/* <meta property="og:image" content={productDetail?.image} /> */}
+          {/* <meta
+          property="og:image"
+          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
+        /> */}
+        </Helmet>
+        <SubBanner title={t("content.about")} />
         <section className="about section-padding bg-white ">
           <Typography variant="h2" className="text-center mb-10 uppercase">
-            Giới thiệu
+            {t("content.INTRODUCE")}
           </Typography>
           <div className="flex flex-wrap px-[2rem] lg:px-[2rem]  ">
             <div className="col-lg-6 col-12 sm:px-0 lg:px-10">
               <p className="text-2xl font-bold text-blue-400 py-4 ">
-                Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA
+                {t("content.title-intro")}
               </p>
-              <p className="text-justify">
-                <strong className="text-red-400 font-bold">
-                  Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA
-                </strong>{" "}
-                là một công ty chuyên sản xuất , gia công cho các Vendor của tập
-                đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra,
-                chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng,
-                cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ
-                giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)
-              </p>
+              <p className="text-justify">{t("content.body-intro1")}</p>
               <br></br>
-              <p className="text-justify">
-                Tiền thân công ty{" "}
-                <strong className="text-red-400 font-bold">
-                  NP NAPHTHA là CTY CAO SU XANH
-                </strong>{" "}
-                được thành lập vào năm 2008, trong bối cảnh phát triển ngày càng
-                lớn mạnh của các tập đoàn siêu thi Nhật, Mỹ và các Vendor, nhu
-                cầu liên kết với các đối tác cung cấp dịch vụ, sản phẩm của nhà
-                máy, tập đoàn là rất lớn và rất đa dạng. Công ty NP NAPHTHA
-                không ngừng cải tiến sản xuất, nâng cao chất lượng và giảm giá
-                thành sản phẩm, để cùng các đối tác đưa ra thị trường các sản
-                phẩm chất lượng tốt và giá thành thấp
-              </p>
+              <p className="text-justify">{t("content.body-intro2")}</p>
             </div>
             <div className="col-lg-6 col-12 mb-2 ">
               <img
@@ -61,21 +71,14 @@ export default function AboutPage() {
               <div className="row lg:px-20 sm:px-0">
                 <div className="col-lg-10 col-12 mx-auto">
                   <h1 className="text-white lg:text-4xl text-3xl font-bold mb-10">
-                    ĐỊNH HƯỚNG PHÁT TRIỂN
+                    {t("content.ORIENTED-DEVELOPMENT")}
                   </h1>
                   <p className="text-gray-200 text-base">
-                    Tầm nhìn và sứ mệnh NP NAPHTHA đặt ra luôn là kim chỉ nam
-                    cho các hoạt động của NPNAPHTHA. chúng tôi luôn cần cù, sáng
-                    tạo trong công việc, tận tụy với khách hàng, đối tác và
-                    không ngừng nâng cấp máy móc, thiết bị cũng như hệ thống cơ
-                    sở vật chất theo hướng hiện đại, hiệu quả và an toàn.
+                    {t("content.ORIENTED-DEVELOPMENT-BODY1")}
                   </p>
                   <br></br>
                   <p className="text-gray-200 text-base">
-                    NP NAPHTHA luôn mang lại sự hài lòng cho các khách hàng, đối
-                    tác trong và ngoài nước. Quyết tâm phấn đấu trở thành đơn vị
-                    hàng đầu cung cấp dịch vụ trọn gói cho các Vendor và tập
-                    đoàn lớn của Nhật và Mỹ
+                    {t("content.ORIENTED-DEVELOPMENT-BODY2")}
                   </p>
                 </div>
               </div>
@@ -87,72 +90,44 @@ export default function AboutPage() {
           <div className=" w-full grid lg:grid-cols-2  grid-cols-1 ">
             <div className="lg:p-[5rem] p-[2rem] ">
               <p className="text-3xl font-bold text-black uppercase py-3">
-                Sứ mệnh
+                {t("content.MISSION")}
               </p>
               <div className="pb-3">
                 <p className=" text-xl font-medium text-black">
-                  ĐỐI VỚI KHÁCH HÀNG
+                  {t("content.FOR-CUSTOMERS")}
                 </p>
-                <p>
-                  NP NAPHTHA xác nhận cho mình sứ mệnh trở thành "cánh tay nối
-                  dài của khách hàng ", sản phẩm và dịch vụ của chúng tôi luôn
-                  giúp khách hàng nâng cao hiệu quả kinh doanh, tiết kiệm chi
-                  phí. Từ đó khách hàng chỉ cần tập trung vào công việc phát
-                  triển kinh doanh, nâng cao doanh số sản phẩm, và góp phần thúc
-                  đẩy nên kinh tế nước nhà
-                </p>
+                <p>{t("content.FOR-CUSTOMERS-BODY")}</p>
               </div>
               <div className="pb-3">
                 <p className=" text-xl font-medium text-black">
-                  ĐỐI VỚI NGƯỜI LAO ĐỘNG
+                  {t("content.FOR-EMPLOYEES")}
                 </p>
-                <p>
-                  Là cầu nối giữa người lao động và doanh nghiệp, giúp người lao
-                  động có việc làm ổn định, nâng cao thu nhập, đặc biệt NP
-                  NAPHTHA luôn chú trọng nâng cao chất lượng lao động thông qua
-                  đào tạo để đảm bảo mục tiêu phát triển bền vững.
-                </p>
+                <p>{t("content.FOR-EMPLOYEES-BODY")}</p>
               </div>
               <div className="pb-3">
                 <p className=" text-xl font-medium text-black">
-                  ĐỐI VỚI XÃ HỘI
+                  {t("content.FOR-SOCIETY")}
                 </p>
-                <p>
-                  Hoạt động sản xuất của công ty sẽ hỗ trợ giải quyết vấn đề
-                  thất nghiệp cho người lao động, xây dựng cơ sở hạ tầng, kết
-                  nối nguồn cung và cầu nhằm phát triển sản xuất cho nên kinh tế
-                  Việt Nam.
-                </p>
+                <p>{t("content.FOR-SOCIETY-BODY")}</p>
               </div>
             </div>
             <div className="lg:p-[5rem] p-[2rem] ">
               <p className="text-3xl font-bold text-black uppercase py-3 ">
-                Tầm nhìn
+                {t("content.VISION")}
               </p>
               <div className="pb-3">
-                <p>
-                  Tầm nhìn và sứ mệnh NP NAPHTHA đặt ra luôn là kim chỉ nam cho
-                  các hoạt động của NPNAPHTHA. chúng tôi luôn cần cù, sáng tạo
-                  trong công việc, tận tụy với khách hàng, đối tác và không
-                  ngừng nâng cấp máy móc, thiết bị cũng như hệ thống cơ sở vật
-                  chất theo hướng hiện đại, hiệu quả và an toàn.
-                </p>
+                <p>{t("content.VISION-BODY")}</p>
               </div>
               <div className="pb-3">
                 <p className=" text-xl font-medium text-black">
-                  NỖ LỰC CẢI TIẾN
+                  {t("content.IMPROVEMENT-EFFORT")}
                 </p>
-                <p>
-                  Là cầu nối giữa người lao động và doanh nghiệp, giúp người lao
-                  động có việc làm ổn định, nâng cao thu nhập, đặc biệt NP
-                  NAPHTHA luôn chú trọng nâng cao chất lượng lao động thông qua
-                  đào tạo để đảm bảo mục tiêu phát triển bền vững.
-                </p>
+                <p>{t("content.IMPROVEMENT-EFFORT-BODY")}</p>
               </div>
             </div>
           </div>
         </section>
-        <section className="about section-padding">
+        {/* <section className="about section-padding">
           <div className="container">
             <div className="row sm:px-10 lg:px-24  px-[2%]">
               <div className="col-12">
@@ -161,7 +136,7 @@ export default function AboutPage() {
               <SlideMember />
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </main>
   );
