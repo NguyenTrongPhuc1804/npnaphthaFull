@@ -1,7 +1,9 @@
 const { default: mongoose } = require("mongoose");
 
 const connectDB = mongoose
-  .connect(process.env.DB_CONNECT)
+  .connect(
+    `mongodb+srv://${process.env.USERNAME_DATABASE}:${process.env.PASSWORD_DATABASE}@mern.2wzqjhh.mongodb.net/`
+  )
   .then(() => {
     console.log("connect database success");
   })

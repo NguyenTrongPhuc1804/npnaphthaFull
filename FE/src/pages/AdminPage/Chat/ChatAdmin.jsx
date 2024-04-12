@@ -39,7 +39,7 @@ export default function ChatAdmin() {
   const [nameUSer, setNameUSer] = useState("");
   const userInfo = JSON.parse(localStorage.getItem("user_info"));
   //handle event
-  const socket = useMemo(() => io(VITE_URL_SOCKET), [false]);
+  const socket = useMemo(() => io(import.meta.env.VITE_URL_SOCKET), [false]);
   const handelSendMess = (e) => {
     socket.emit("send-message-to-server", {
       text: message,
