@@ -22,7 +22,7 @@ export function SideNav() {
   const closeSideNav = () => {
     dispatch(showSideNav(false));
   };
-  const socket = useMemo(() => io("http://localhost:3000"), [false]);
+  const socket = useMemo(() => io(import.meta.env.VITE_URL_SOCKET), [false]);
   const handleLogout = () => {
     dispatch(setLogout());
   };
