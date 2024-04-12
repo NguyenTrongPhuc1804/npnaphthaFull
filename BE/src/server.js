@@ -52,6 +52,7 @@ const io = socketio(server, {
     origin: "*",
   },
 });
+
 io.on("connection", async (socket) => {
   //user connect and noti to admin
   console.log("client connected" + socket.id);

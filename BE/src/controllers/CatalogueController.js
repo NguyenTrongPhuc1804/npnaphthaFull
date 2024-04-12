@@ -1,5 +1,5 @@
 const removeImage = require("../middlewares/upload/removeImageUpload");
-const Catalogue = require("../models/catalogueModal");
+const Catalogue = require("../models/CatalogueModal");
 const getAllCatalogue = async (req, res) => {
   const {
     page = 0,
