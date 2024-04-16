@@ -39,8 +39,8 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use("/api/v1", rootRouter);
 app.get("/", (req, res) => {

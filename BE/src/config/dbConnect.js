@@ -1,7 +1,9 @@
 const { default: mongoose } = require("mongoose");
 
 const connectDB = mongoose
-  .connect("mongodb+srv://ivngg123:phucganoi123@mern.2wzqjhh.mongodb.net/")
+  .connect(
+    `mongodb://${process.env.USERNAME_DATABASE}:${process.env.USERNAME_DATABASE}@${process.env.IP_DATABASE}:27017`
+  )
   .then(() => {
     console.log("connect database success");
   })

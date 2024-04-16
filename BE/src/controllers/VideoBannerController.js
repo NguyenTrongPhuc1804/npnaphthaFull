@@ -1,5 +1,5 @@
 const removeImage = require("../middlewares/upload/removeImageUpload");
-const VideoBanner = require("../models/videoBannerModel");
+const VideoBanner = require("../models/VideoBannerModel");
 
 const createVideoBanner = async (req, res) => {
   const { file } = req;
