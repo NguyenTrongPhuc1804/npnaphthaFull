@@ -10,10 +10,12 @@ import { showSideNav } from "../../../redux/reducer/LoadingSlice";
 import { NavLink } from "react-router-dom";
 import { io } from "socket.io-client";
 import { setLogout } from "../../../redux/reducer/UserSlice";
+import { getAllContact } from "../../../redux/reducer/ContactSlice";
 
 export function SideNav() {
   const dispatch = useDispatch();
   const { isOpenSideNav } = useSelector((state) => state.loadingSlice);
+  const { data } = useSelector((state) => state.contactSlice.listAllContact);
   const [open, setOpen] = React.useState(true);
   const [listRoom, setListRoom] = useState([]);
   const [active, setActive] = useState(
@@ -28,8 +30,10 @@ export function SideNav() {
   };
 
   useEffect(() => {
+    dispatch(getAllContact());
+  }, []);
+  useEffect(() => {
     socket.emit("get-all-room-to-server");
-
     socket.on("get-all-room-to-client", (data) => {
       setListRoom(data);
     });
@@ -57,16 +61,19 @@ export function SideNav() {
                 to="/admin/"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <Button
-                  variant={active == "user" ? "gradient" : "outlined"}
-                  onClick={() => localStorage.setItem("sidenav", "user")}
-                  className="w-full flex justify-start items-center"
-                >
-                  <i className="fa-solid fa-user-group "></i>
-                  <span className="flex-1 ms-3 whitespace-nowrap">
-                    Quản lý người dùng
-                  </span>
-                </Button>
+                {JSON.parse(localStorage.getItem("user_info"))?.role ==
+                  "ADMIN" && (
+                  <Button
+                    variant={active == "user" ? "gradient" : "outlined"}
+                    onClick={() => localStorage.setItem("sidenav", "user")}
+                    className="w-full flex justify-start items-center"
+                  >
+                    <i className="fa-solid fa-user-group "></i>
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Quản lý người dùng
+                    </span>
+                  </Button>
+                )}
               </NavLink>
             </li>
             <li>
@@ -96,7 +103,7 @@ export function SideNav() {
                   onClick={() => localStorage.setItem("sidenav", "blog")}
                   className="w-full flex justify-start items-center"
                 >
-                  <i class="fa-solid fa-blog"></i>
+                  <i className="fa-solid fa-blog"></i>
                   <span className="flex-1 ms-3 whitespace-nowrap">
                     Quản lý tin tức
                   </span>
@@ -137,6 +144,42 @@ export function SideNav() {
                 </Button>
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/admin/banner"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <Button
+                  variant={active == "banner" ? "gradient" : "outlined"}
+                  onClick={() => localStorage.setItem("sidenav", "banner")}
+                  className="w-full flex justify-start items-center"
+                >
+                  <i class="fa-solid fa-image"></i>
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Quản lý banner
+                  </span>
+                </Button>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/admin/video-banner"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <Button
+                  variant={active == "video-banner" ? "gradient" : "outlined"}
+                  onClick={() =>
+                    localStorage.setItem("sidenav", "video-banner")
+                  }
+                  className="w-full flex justify-start items-center"
+                >
+                  <i class="fa-solid fa-video"></i>
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Quản lý video banner
+                  </span>
+                </Button>
+              </NavLink>
+            </li>
             <li onClick={() => setListRoom([])}>
               <NavLink
                 to="/admin/chat"
@@ -159,12 +202,34 @@ export function SideNav() {
                 </Button>
               </NavLink>
             </li>
+            <li onClick={() => setListRoom([])}>
+              <NavLink
+                to="/admin/contact"
+                className="flex items-center relative p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <Button
+                  variant={active == "contact" ? "gradient" : "outlined"}
+                  onClick={() => localStorage.setItem("sidenav", "contact")}
+                  className="w-full flex justify-start items-center"
+                >
+                  <i className="fa-solid fa-comment"></i>
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Quản lý liên hệ
+                  </span>
+                  {data?.filter((item) => item.isSeen > 0).length > 0 && (
+                    <p className="text-xs bg-red-600 text-white px-2 py-1 rounded-full ml-2">
+                      {data?.reduce((pre, next) => pre + next.isSeen, 0)}
+                    </p>
+                  )}
+                </Button>
+              </NavLink>
+            </li>
             <li>
               <Button
                 onClick={handleLogout}
                 className="w-full flex justify-start items-center"
               >
-                <i class="fa-solid fa-right-from-bracket"></i>
+                <i className="fa-solid fa-right-from-bracket"></i>
                 <span className="flex-1 ms-3 whitespace-nowrap">Đăng xuất</span>
               </Button>
             </li>

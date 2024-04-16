@@ -37,6 +37,15 @@
         "Accompanying":"Accompanying you to reach the future",
         "intro-banner":"NP-NAPHTHA PRODUCTION TRADING COMPANY LIMITED",
         "Quick-link":"Quick link",
-        "map":"Map"
+        "map":"Map",
+        "contact-form":"Leave us a message",
+        "fullname":"Full name",
+        "phone":"Phone",
+        "email":"Email",
+        "message":"Message",
+        "send":"Send",
+        "new-blog":"Latest post"
+
+
     }
 }

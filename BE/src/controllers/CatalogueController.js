@@ -78,7 +78,7 @@ const updateCatalogue = async (req, res) => {
   try {
     const checkCatalogue = await Catalogue.findOne({ _id: id });
     if (!checkCatalogue) {
-      return res.status(404).json({ message: "Không tìm file" });
+      return res.status(404).json({ message: "Không tìm thấy file" });
     }
     if (files["pdf"] && !files["image"]) {
       checkCatalogue.url && (await removeImage(checkCatalogue.url));

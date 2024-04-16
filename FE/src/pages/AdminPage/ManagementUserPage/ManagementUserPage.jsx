@@ -85,6 +85,7 @@ export default function ManagementUserPage() {
   };
   useEffect(() => {
     dispatch(getAllUser());
+    localStorage.setItem("sidenav", "user");
   }, []);
   return (
     <Card className="h-full w-full">
@@ -189,6 +190,7 @@ export default function ManagementUserPage() {
                     <td className={classes}>
                       <Checkbox
                         value={_id}
+                        disabled={_id === localStorage.getItem("user_id")}
                         onChange={(e) => {
                           if (e.target.checked) {
                             setListDelete([...listDelete, e.target.value]);

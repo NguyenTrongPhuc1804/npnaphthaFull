@@ -3,6 +3,7 @@ import { api } from "../../service/baseService";
 import { notify } from "../../toolkits/help";
 import { setLoading } from "./LoadingSlice";
 import { closeModal } from "./ModalSlice";
+import { setCurrentUser } from "./AuthSlice";
 
 const initialState = {
   userLogin: {},
@@ -42,6 +43,9 @@ export const userSlice = createSlice({
     builder.addCase(searchUser.fulfilled, (state, action) => {
       state.allUserList = action.payload;
     });
+    builder.addCase(logoutUser.fulfilled, (state, action) => {
+      state.isLogin = false;
+    });
   },
 });
 
@@ -51,10 +55,13 @@ export const loginUser = createAsyncThunk(
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.post("/user/login", payload);
+      const { data } = await api.post("/user/login", payload, {
+        withCredentials: true,
+      });
       notify("success", "Đăng nhập thành công");
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("user_id", data.user_id);
+      dispatch(setCurrentUser(data));
       dispatch(setLoading(false));
       return data;
     } catch (error) {
@@ -208,7 +215,26 @@ export const searchUser = createAsyncThunk(
     }
   }
 );
-
+export const logoutUser = createAsyncThunk(
+  "user/logoutUser",
+  async (id, { dispatch }) => {
+    dispatch(setLoading(true));
+    try {
+      const data = await api.post("/user/logout", id, {
+        withCredentials: true,
+      });
+      console.log(data, "data logput");
+      notify("success", "Đăng xuất thành công");
+      localStorage.clear();
+      dispatch(setLoading(false));
+      return data;
+    } catch (error) {
+      console.log(error, "error");
+      notify("error", error.response.data.message);
+      dispatch(setLoading(false));
+    }
+  }
+);
 export const { setLogout } = userSlice.actions;
 
 export default userSlice.reducer;

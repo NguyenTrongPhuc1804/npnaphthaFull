@@ -14,7 +14,6 @@ import { createProduct } from "../../../redux/reducer/ProductSlice";
 import { getAllCategory } from "../../../redux/reducer/CategorySlice";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
-Quill.register("modules/imageResize", ImageResize);
 import "react-quill/dist/quill.snow.css";
 import { createBlog } from "../../../redux/reducer/BlogSlice";
 export default function FormCreateBlog() {
@@ -109,6 +108,18 @@ export default function FormCreateBlog() {
                     [{ size: [] }],
                     ["bold", "italic", "underline", "strike", "blockquote"],
                     [
+                      { align: "" },
+                      { align: "center" },
+                      { align: "right" },
+                      { align: "justify" },
+                    ],
+                    [
+                      { list: "ordered" },
+                      { list: "bullet" },
+                      { indent: "-1" },
+                      { indent: "+1" },
+                    ],
+                    [
                       { list: "ordered" },
                       { list: "bullet" },
                       { indent: "-1" },
@@ -140,6 +151,7 @@ export default function FormCreateBlog() {
                 "bullet",
                 "indent",
                 "link",
+                "align",
                 "image",
                 "video",
                 "code-block",

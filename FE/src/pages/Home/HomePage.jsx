@@ -16,18 +16,18 @@ import CardProductV2 from "../../components/Card/CardProductV2";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct, searchProduct } from "../../redux/reducer/ProductSlice";
 import { getAllCategory } from "../../redux/reducer/CategorySlice";
+import { getAllBlog } from "../../redux/reducer/BlogSlice";
 import { Helmet } from "react-helmet-async";
-const arrButton = [
-  { id: 0, name: "Chop" },
-  { id: 1, name: "Chop2" },
-];
+
 export default function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //state
   const { listAllProduct } = useSelector((state) => state.productSlice);
   const { listAllCategory } = useSelector((state) => state.categorySlice);
-  const [filterProduct, setFillterProduct] = useState(0);
+  const { listAllBlog } = useSelector((state) => state.BlogSlice);
+  const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
+  const [filterProduct, setFillterProduct] = useState("all");
   const { t } = useTranslation();
   // const getData = async () => {
   //   try {
@@ -44,6 +44,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
     dispatch(getAllProduct());
     dispatch(getAllCategory());
+    dispatch(getAllBlog());
     localStorage.setItem("lng", "vi");
   }, []);
   return (
@@ -51,13 +52,13 @@ export default function HomePage() {
       <Helmet>
         <title>Trang chủ - npnaphtha.com.vn</title>
 
-        <link rel="canonical" href={import.meta.env.VITE_URL_API} />
+        <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
         <meta property="og:type" content="website" />
         <meta
           name="description"
           content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
         />
-        <meta property="og:url" content={import.meta.env.VITE_URL_API} />
+        <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
         <meta property="og:title" content="Trang chủ - npnaphtha.com.vn" />
         <meta
           name="keywords"
@@ -73,7 +74,7 @@ export default function HomePage() {
         /> */}
       </Helmet>
       <section className="hero mt-[5rem] lg:mt-[8rem]">
-        <Banner />
+        <Banner data={listAllVideo} />
       </section>
       <section>
         <div className="bg-colorPrimary w-full  grid grid-cols-2 lg:grid-cols-4  py-[4rem] px-2 lg:px-[6rem]">
@@ -159,7 +160,7 @@ export default function HomePage() {
           </BoxComponent>
         </div>
       </section>
-      <section className="BgImage bg-[url('https://images.unsplash.com/photo-1707879487566-ff0852cadd92?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dss')]" />
+      <section className={`BgImage `} />
       <section className="my-10">
         <h2 className="text-center my-5 lg:text-4xl text-2xl font-bold uppercase">
           {t("content.affiliated-businesses")}
@@ -174,11 +175,11 @@ export default function HomePage() {
             <h2 className="text-center mb-lg-5 mb-4 lg:text-4xl text-2xl font-bold uppercase">
               {t("content.NEWS-&-EVENTS")}
             </h2>
-            <CardBlogV1 />
-            <CardBlogV1 />
-            <CardBlogV2 />
-            <CardBlogV2 />
-            <CardBlogV2 />
+            {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[0]} />}
+            {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[1]} />}
+            {listAllBlog?.data?.map((item, idx) => (
+              <CardBlogV2 item={item} />
+            ))}
           </div>
         </div>
       </section>

@@ -45,4 +45,19 @@ const uploadImagePDF = (nameImage, namePdf, fileName) => {
     { name: namePdf, maxCount: 1 },
   ]);
 };
-module.exports = { uploadImage, uploadImagePDF };
+const uploadVideo = (name, fileName) => {
+  const made = mkdirp.sync(`./public/video/${fileName}`);
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, `./public/video/${fileName}`);
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + "_" + file.originalname);
+    },
+  });
+  const upload = multer({
+    storage: storage,
+  });
+  return upload.single(name);
+};
+module.exports = { uploadImage, uploadImagePDF, uploadVideo };

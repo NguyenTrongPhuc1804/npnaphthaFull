@@ -1,5 +1,7 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const {
   jwtGenarate,
   refreshToken,
@@ -67,12 +69,13 @@ const login = async (req, res) => {
     });
     const refresh_token = await refreshToken({
       id: checkUser.id,
-      isAdmin: checkUser.isAdmin,
+      role: checkUser.role,
     });
+    await User.findOneAndUpdate({ email }, { refresh_token });
     res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: false,
-      sameSite: "Strict",
+      sameSite: "strict",
     });
     res.status(200).json({
       data: {
@@ -204,18 +207,56 @@ const getDetailUser = async (req, res) => {
   }
 };
 const getRefreshToken = async (req, res) => {
-  const token = req.cookies.refresh_token;
-  console.log(token, "refresh token");
+  const refresh_token = req.cookies.refresh_token;
+  console.log(refresh_token, "refresh_token");
   try {
-    if (!token) {
-      return res.status(404).json({ message: "token is require!!" });
+    if (!refresh_token) {
+      return res.status(404).json({ message: "You'r not authenticated" });
     }
-    const newAccessToken = await newToken(token);
-    res.status(200).json({ access_token: newAccessToken });
+    jwt.verify(
+      refresh_token,
+      process.env.KEY_REFRESH_TOKEN,
+      async (err, user) => {
+        if (err) {
+          console.log(err, "erroxs");
+        }
+
+        const checkUser = await User.findOne({ _id: user.id });
+        if (checkUser.refresh_token !== refresh_token) {
+          return res
+            .status(403)
+            .json({ message: "refresh token is not valid !!" });
+        }
+        const newAccessToken = await jwtGenarate({
+          id: user.id,
+          role: user.role,
+        });
+        const newrefresh_token = await refreshToken({
+          id: user.id,
+          role: user.role,
+        });
+        await User.findOneAndUpdate(
+          { _id: user.id },
+          { refresh_token: newrefresh_token }
+        );
+        res.cookie("refresh_token", newrefresh_token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "strict",
+        });
+        res.status(200).json({ access_token: newAccessToken });
+      }
+    );
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error });
   }
+};
+const logoutUser = async (req, res) => {
+  const { id } = req.body;
+  res.clearCookie("refresh_token");
+  await User.findOneAndUpdate({ _id: id }, { refresh_token: "" });
+  res.status(200).json({ message: "logout success !!" });
 };
 module.exports = {
   register,
@@ -226,4 +267,5 @@ module.exports = {
   getDetailUser,
   getRefreshToken,
   deleteAllUser,
+  logoutUser,
 };

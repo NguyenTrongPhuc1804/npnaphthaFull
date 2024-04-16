@@ -20,12 +20,10 @@ import { useParams } from "react-router-dom";
 import BoxComponent from "../../../components/BoxComponent/BoxComponent";
 import CardProductV2 from "../../../components/Card/CardProductV2";
 import { Helmet } from "react-helmet-async";
-import { convert } from "html-to-text";
 export default function ProductDetailPage() {
   const dispatch = useDispatch();
   const { slug } = useParams();
   const { productDetail } = useSelector((state) => state.productSlice);
-  console.log(productDetail?.description, "product");
   const { listAllProduct } = useSelector((state) => state.productSlice);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   useEffect(() => {
@@ -48,12 +46,14 @@ export default function ProductDetailPage() {
 
         <link
           rel="canonical"
-          href={`${import.meta.env.VITE_URL_API}/product/${productDetail.slug}`}
+          href={`${import.meta.env.VITE_URL_DOMAIN}/product/${
+            productDetail.slug
+          }`}
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`${import.meta.env.VITE_URL_API}/product/${
+          content={`${import.meta.env.VITE_URL_DOMAIN}/product/${
             productDetail.slug
           }`}
         />

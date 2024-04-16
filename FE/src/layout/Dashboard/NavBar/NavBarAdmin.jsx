@@ -1,7 +1,17 @@
-import { Button } from "@material-tailwind/react";
+import {
+  Button,
+  Collapse,
+  Card,
+  CardBody,
+  Typography,
+} from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataillUser, setLogout } from "../../../redux/reducer/UserSlice";
+import {
+  getDataillUser,
+  logoutUser,
+  setLogout,
+} from "../../../redux/reducer/UserSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import { showSideNav } from "../../../redux/reducer/LoadingSlice";
 
@@ -9,11 +19,11 @@ export default function NavBarAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showProfile, setShowProfile] = useState(false);
-  const [showNoTi, setShowNoti] = useState(false);
+  const [showNoTi, setShowNoti] = useState(true);
   const { userInfo } = useSelector((state) => state.userSlice);
-
+  const [open, setOpen] = React.useState(true);
   const handleLogout = () => {
-    dispatch(setLogout());
+    dispatch(logoutUser(userInfo._id));
   };
   const showNavBar = () => {
     dispatch(showSideNav(true));
@@ -31,7 +41,7 @@ export default function NavBarAdmin() {
               onClick={showNavBar}
               aria-expanded="true"
               aria-controls="sidebar"
-              className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden  hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               <svg
                 className="w-[18px] h-[18px]"
@@ -57,7 +67,7 @@ export default function NavBarAdmin() {
                 alt="FlowBite Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Dashboard
+                Home
               </span>
             </NavLink>
             {/* <form action="#" method="GET" className="hidden lg:block lg:pl-2">
@@ -94,26 +104,94 @@ export default function NavBarAdmin() {
             </form> */}
           </div>
           <div className="flex items-center lg:order-2">
-            <button
+            {/* <button
+              onClick={() => setShowNoti(!showNoTi)}
               type="button"
-              className="hidden sm:inline-flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              data-dropdown-toggle="notification-dropdown"
+              className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             >
+              <span className="sr-only">View notifications</span>
               <svg
+                className="w-5 h-5"
                 aria-hidden="true"
-                className="mr-1 -ml-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 14 20"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </svg>{" "}
-              New Widget
+                <path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z" />
+              </svg>
             </button>
-
+            <div
+              class={` ${
+                showNoTi ? "block" : "hidden"
+              } top-[2rem] lg:right-[2rem] right-0 absolute overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700`}
+              id="notification-dropdown"
+            >
+              <div
+                class={`hidden py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400`}
+              >
+                Notifications
+              </div>
+              <div>
+                <a
+                  href="#"
+                  className="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div className="flex-shrink-0">
+                    <i className="fa-solid fa-inbox text-2xl"></i>
+                    <div className="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
+                      <svg
+                        className="w-2 h-2 text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 18 18"
+                      >
+                        <path d="M15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783ZM6 2h6a1 1 0 1 1 0 2H6a1 1 0 0 1 0-2Zm7 5H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Z" />
+                        <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="pl-3 w-full flex items-center">
+                    <p>banj cos 3 tin nhan moi</p>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  className="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600"
+                >
+                  <div className="flex-shrink-0">
+                    <i className="fa-solid fa-address-book text-2xl"></i>
+                    <div className="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-gray-900 rounded-full border border-white dark:border-gray-700">
+                      <svg
+                        className="w-2 h-2 text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 20 18"
+                      >
+                        <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="pl-3 w-full">
+                    <div className="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                      <span className="font-semibold text-gray-900 dark:text-white">
+                        Jese leos
+                      </span>{" "}
+                      and{" "}
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        5 others
+                      </span>{" "}
+                      started following you.
+                    </div>
+                    <div className="text-xs font-medium text-primary-700 dark:text-primary-400">
+                      10 minutes ago
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div> */}
             <button
               onClick={() => setShowProfile(!showProfile)}
               type="button"
@@ -175,14 +253,14 @@ export default function NavBarAdmin() {
                     Thông tin tài khoản
                   </button>
                 </li>
-                <li>
+                {/* <li>
                   <button
-                    onClick={() => navigate("/admin/user")}
+                    onClick={() => navigate("/admin/")}
                     className="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                   >
                     Quản lý người dùng
                   </button>
-                </li>
+                </li> */}
               </ul>
 
               <ul

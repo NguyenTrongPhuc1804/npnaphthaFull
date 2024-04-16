@@ -48,7 +48,7 @@ function ChatUserComponent() {
           color="blue"
           className="rounded-full py-4"
         >
-          <i class="fa-regular fa-comments text-3xl"></i>
+          <i className="fa-regular fa-comments text-3xl"></i>
         </Button>
       </div>
       <div
@@ -69,7 +69,12 @@ function ChatUserComponent() {
           className=" justify-center"
         >
           <p className="py-4">
-            Vui lòng điền tên và email để nhắn tin trực tiếp với quản trị viên
+            Vui lòng điền họ tên và email để nhắn tin trực tiếp với quản trị
+            viên{" "}
+            <strong className="italic text-colorPrimary">
+              Nếu như quản trị viên không trả lời bạn có thể liên hệ qua
+              facebook hoặc zalo để được liên hệ nhanh nhất
+            </strong>
           </p>
           <div className="mb-4 w-full">
             <Controller

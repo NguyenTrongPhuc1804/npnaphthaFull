@@ -1,13 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getDetailBlog } from "../../../redux/reducer/BlogSlice";
+import { Helmet } from "react-helmet-async";
 
 export default function BlogDetail() {
+  const { slug } = useParams();
+  const dispatch = useDispatch();
+  const { blogDetail } = useSelector((state) => state.BlogSlice);
+
+  console.log(blogDetail, "slug");
+  useEffect(() => {
+    dispatch(getDetailBlog({ slug }));
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <main>
+      <Helmet>
+        <title>{blogDetail?.title}</title>
+
+        <link
+          rel="canonical"
+          href={`${import.meta.env.VITE_URL_DOMAIN}/product/${blogDetail.slug}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`${import.meta.env.VITE_URL_DOMAIN}/product/${
+            blogDetail.slug
+          }`}
+        />
+        <meta property="og:title" content={blogDetail?.title} />
+        <meta name="keywords" content={blogDetail?.title}></meta>
+        <meta property="og:description" content={blogDetail?.title} />
+        <meta name="description" content={blogDetail?.title} />
+        <meta property="og:image" content={blogDetail?.image} />
+        {/* <meta
+          property="og:image"
+          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
+        /> */}
+      </Helmet>
       <header className="site-header site-news-detail-header mt-[5rem] lg:mt-[8rem]">
         <div className="container">
           <div className="row">
             <div className="col-12 lg:text-6xl text-4xl font-bold">
-              <h2>Learning a fine dining experience</h2>
+              <h2>{blogDetail?.title}</h2>
             </div>
           </div>
         </div>
@@ -17,69 +54,14 @@ export default function BlogDetail() {
           <div className="row">
             <div className="col-lg-12 col-12">
               <img
-                src="https://plus.unsplash.com/premium_photo-1664457233888-523931beef03?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={blogDetail?.image}
                 className="img-fluid news-detail-image h-[515px] w-full object-cover"
                 alt="fine dining experience"
               />
-              <div className="col-lg-10 col-10 mx-auto mt-5">
-                <h4 className="mb-3">
-                  The best fine-dining experience at Crispy Kitchen
-                </h4>
-                <p>
-                  Phasellus in augue at quam ornare malesuada. Sed magna lorem,
-                  dapibus nec lorem sed, pretium vulputate ante. In porttitor
-                  sapien urna, eu vulputate arcu pharetra non. Vivamus nec nulla
-                  quis leo sodales semper. Quisque sed ultricies tortor. Fusce
-                  porta pretium tellus, sit amet vulputate orci.
-                </p>
-                <ul className="list">
-                  <li className="list-item">
-                    Pasta stats published in the International
-                  </li>
-                  <li className="list-item">
-                    Rice flour, or legumes such as beans
-                  </li>
-                  <li className="list-item">
-                    Belgian family developed major food poisoning symptoms
-                  </li>
-                </ul>
-                <p>
-                  Pasta is a type of food typically made from an unleavened
-                  dough of wheat flour mixed with water or eggs, and formed into
-                  sheets or other shapes, then cooked by boiling or baking. Rice
-                  flour, or legumes such as beans or lentils, are sometimes used
-                  in place of wheat flour to yield a different taste
-                </p>
-                <div className="ratio ratio-16x9 my-5">
-                  <iframe
-                    width={560}
-                    height={315}
-                    src="https://www.youtube.com/embed/6vebbDZxoKE?controls=0"
-                    title="YouTube video player"
-                    frameBorder={0}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-                <p>
-                  Crispy Kitchen is free Bootstrap 5 HTML template provided by
-                  Tooplate. You are free to use this layout for commercial
-                  purposes. You are NOT allowed to redistribute the template ZIP
-                  file on any template donwnload website. Please{" "}
-                  <a href="https://www.tooplate.com/contact" target="_blank">
-                    contact us
-                  </a>{" "}
-                  for more information.
-                </p>
-                <h5 className="mt-4 mb-3">Pasta with Cream Sauce Recipe</h5>
-                <p>
-                  Pasta is a type of food typically made from an unleavened
-                  dough of wheat flour mixed with water or eggs, and formed into
-                  sheets or other shapes, then cooked by boiling or baking. Rice
-                  flour, or legumes such as beans or lentils, are sometimes used
-                  in place of wheat flour to yield a different taste
-                </p>
-              </div>
+              <div
+                className="col-lg-10 col-10 mx-auto mt-5"
+                dangerouslySetInnerHTML={{ __html: blogDetail?.content }}
+              ></div>
             </div>
           </div>
         </div>

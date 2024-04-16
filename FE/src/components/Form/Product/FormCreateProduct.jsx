@@ -111,6 +111,7 @@ export default function FormCreateProduct({ listAllCategory }) {
             />
           </div>
           <div className="mt-4 w-full">
+            <p>Mổ tả</p>
             <ReactQuill
               theme="snow"
               onChange={(e) => setValue("description", e)}
@@ -120,6 +121,18 @@ export default function FormCreateProduct({ listAllCategory }) {
                     [{ header: "1" }, { header: "2" }, { font: [] }],
                     [{ size: [] }],
                     ["bold", "italic", "underline", "strike", "blockquote"],
+                    [
+                      { align: "" },
+                      { align: "center" },
+                      { align: "right" },
+                      { align: "justify" },
+                    ],
+                    [
+                      { list: "ordered" },
+                      { list: "bullet" },
+                      { indent: "-1" },
+                      { indent: "+1" },
+                    ],
                     [
                       { list: "ordered" },
                       { list: "bullet" },
@@ -155,6 +168,7 @@ export default function FormCreateProduct({ listAllCategory }) {
                 "image",
                 "video",
                 "code-block",
+                "align",
               ]}
             />
             {errors.description?.message && (

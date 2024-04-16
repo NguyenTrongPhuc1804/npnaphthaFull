@@ -34,6 +34,9 @@ import ManagementCatalogue from "./pages/AdminPage/ManagementCatalogue/Managemen
 import ChatAdmin from "./pages/AdminPage/Chat/ChatAdmin";
 import { Toaster, toast } from "sonner";
 import ManagementBlog from "./pages/AdminPage/ManagementBlog/ManagementBlog";
+import ManagementContact from "./pages/AdminPage/ManagementContact/ManagementContact";
+import ManagementBanners from "./pages/AdminPage/ManagementBanner/ManagementBanner";
+import ManagementVideoBanner from "./pages/AdminPage/ManagementVideoBanner/ManagementVideoBanner";
 export default function App() {
   const { isLogin } = useSelector((state) => state.userSlice);
   useEffect(() => {}, [isLogin]);
@@ -48,7 +51,7 @@ export default function App() {
               <Route path="/product" element={<ProductPage />} />
               <Route path="/product/:slug" element={<ProductDetailPage />} />
               <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog-detail" element={<BlogDetail />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/catalogue" element={<CataloguePage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Route>
@@ -70,6 +73,9 @@ export default function App() {
               <Route path="catalogue" element={<ManagementCatalogue />} />
               <Route path="blog" element={<ManagementBlog />} />
               <Route path="chat" element={<ChatAdmin />} />
+              <Route path="banner" element={<ManagementBanners />} />
+              <Route path="video-banner" element={<ManagementVideoBanner />} />
+              <Route path="contact" element={<ManagementContact />} />
               <Route path="my-profile" element={<ProfileUser />} />
             </Route>
             {/* <Route path="/register" element={<RegisterPage />} /> */}

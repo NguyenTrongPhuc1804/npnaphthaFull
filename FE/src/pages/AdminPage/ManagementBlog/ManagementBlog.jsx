@@ -23,21 +23,16 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../redux/reducer/ModalSlice";
-
 import moment from "moment";
 import DefaultPagination from "../../../components/Pagination/DefaultPagination";
-
-import {
-  deleteAllProduct,
-  deleteProduct,
-  getAllProduct,
-  searchProduct,
-} from "../../../redux/reducer/ProductSlice";
-import FormCreateProduct from "../../../components/Form/Product/FormCreateProduct";
-import FormUpdateProduct from "../../../components/Form/Product/FormUpdateProduct";
-import { getAllCategory } from "../../../redux/reducer/CategorySlice";
 import FormCreateBlog from "../../../components/Form/Blog/FormCreateBlog";
-import { getAllBlog } from "../../../redux/reducer/BlogSlice";
+import {
+  deleteAllBlog,
+  deleteBlog,
+  getAllBlog,
+  searchBlog,
+} from "../../../redux/reducer/BlogSlice";
+import FormUpdateBlog from "../../../components/Form/Blog/FormUpdateBlog";
 
 const TABS = [
   {
@@ -63,15 +58,15 @@ export default function ManagementBlog() {
   const dispatch = useDispatch();
   //state
   const { listAllBlog } = useSelector((state) => state.BlogSlice);
-  const { listAllCategory } = useSelector((state) => state.categorySlice);
+
   const [currentPage, setCurrentPage] = useState(0);
-  const [searchBy, setSearchBy] = useState("name");
+  const [searchBy, setSearchBy] = useState("title");
   const [searchValue, setSearchValue] = useState("");
   const [listDelete, setListDelete] = useState([]);
 
   //event
   const handleSearchProduct = () => {
-    dispatch(searchProduct({ searchBy, searchValue }));
+    dispatch(searchBlog({ searchBy, searchValue }));
     setSearchValue("");
   };
   const handleOpenForm = () => {
@@ -83,15 +78,14 @@ export default function ManagementBlog() {
     );
   };
   const handleDeleteProduct = (id) => {
-    dispatch(deleteProduct(id));
+    dispatch(deleteBlog(id));
   };
   const handleDeleteAllProduct = () => {
-    dispatch(deleteAllProduct(listDelete));
+    dispatch(deleteAllBlog(listDelete));
     setListDelete([]);
   };
   useEffect(() => {
     dispatch(getAllBlog());
-    dispatch(getAllCategory());
   }, []);
   return (
     <Card className="h-full w-full">
@@ -119,7 +113,7 @@ export default function ManagementBlog() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs value="name" className="w-full md:w-max">
+          {/* <Tabs value="name" className="w-full md:w-max">
             <TabsHeader>
               {TABS.map(({ label, value }, idx) => (
                 <Tab onClick={() => setSearchBy(value)} key={idx} value={value}>
@@ -127,10 +121,10 @@ export default function ManagementBlog() {
                 </Tab>
               ))}
             </TabsHeader>
-          </Tabs>
+          </Tabs> */}
           <div className="w-full md:w-72">
             <Input
-              label="Search"
+              label="Tìm kiếm theo tên sản phẩm"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               icon={
@@ -229,7 +223,7 @@ export default function ManagementBlog() {
                   </td>
                   <td className={classes}>
                     <div
-                      className="w-max line-clamp-2 max-w-[300px]"
+                      className="w-max line-clamp-2 max-w-[300px] max-h-[100px] "
                       dangerouslySetInnerHTML={{ __html: item.content }}
                     ></div>
                   </td>
@@ -249,12 +243,7 @@ export default function ManagementBlog() {
                           dispatch(
                             openModal({
                               title: "Cập nhật blog",
-                              body: (
-                                <FormUpdateProduct
-                                  listAllCategory={listAllCategory}
-                                  data={item}
-                                />
-                              ),
+                              body: <FormUpdateBlog data={item} />,
                             })
                           )
                         }
@@ -297,7 +286,7 @@ export default function ManagementBlog() {
           <DefaultPagination
             pageCount={listAllBlog?.totalPage}
             e={(value) => {
-              dispatch(getAllProduct({ page: value, limit: 8 }));
+              dispatch(getAllBlog({ page: value, limit: 8 }));
               setCurrentPage(value);
             }}
           />

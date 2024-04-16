@@ -22,6 +22,8 @@ const {
 
 require("dotenv").config();
 const app = express();
+app.use(cookieParser());
+
 const port = process.env.PORT || 3000;
 
 const publicPathDirectory = path.join(__dirname, "../public");
@@ -34,11 +36,11 @@ app.use(
       process.env.DOMAIN_CORS,
       "https://npnaphtha-web.vercel.app",
     ],
+    credentials: true,
   })
 );
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use("/api/v1", rootRouter);
 app.get("/", (req, res) => {

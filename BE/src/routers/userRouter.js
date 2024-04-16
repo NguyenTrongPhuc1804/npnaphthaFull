@@ -8,6 +8,7 @@ const {
   getDetailUser,
   getRefreshToken,
   deleteAllUser,
+  logoutUser,
 } = require("../controllers/UserController");
 
 const { listAuth, listAuthLevel2 } = require("../constants/authConstants");
@@ -40,5 +41,6 @@ userRouter.post(
 );
 userRouter.get("/all", getAllUser);
 userRouter.get("/detail/:id", getDetailUser);
-userRouter.get("/refresh-token", getRefreshToken);
+userRouter.post("/refresh-token", getRefreshToken);
+userRouter.post("/logout", logoutUser);
 module.exports = userRouter;

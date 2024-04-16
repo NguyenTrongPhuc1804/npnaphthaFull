@@ -25,7 +25,6 @@ export default function ProductPage() {
 
   const search = useRef("");
   const onChange = ({ target }) => (search.current = target.value);
-  console.log(search.current, "setach");
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getAllProduct());
@@ -38,12 +37,12 @@ export default function ProductPage() {
 
         <link
           rel="canonical"
-          href={`${import.meta.env.VITE_URL_API}/product`}
+          href={`${import.meta.env.VITE_URL_DOMAIN}/product`}
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`${import.meta.env.VITE_URL_API}/product`}
+          content={`${import.meta.env.VITE_URL_DOMAIN}/product`}
         />
         <meta property="og:title" content="Sản phẩm - npnaphtha.com.vn" />
         <meta

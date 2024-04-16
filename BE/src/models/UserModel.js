@@ -33,11 +33,11 @@ const userSchema = new mongoose.Schema(
       require: true,
     },
     access_token: {
-      type: Number,
+      type: String,
       require: true,
     },
     refresh_token: {
-      type: Number,
+      type: String,
       require: true,
     },
   },

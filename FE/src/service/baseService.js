@@ -4,15 +4,34 @@ import { jwtDecode } from "jwt-decode";
 export const api = axios.create({
   baseURL: import.meta.env.VITE_URL_API,
   headers: { "X-Custom-Header": "foobar" },
+  withCredentials: true,
+  credentials: "include",
 });
 
 // Add a request interceptor
 api.interceptors.request.use(
   async function (config) {
-    let token = `Bearer ${localStorage.getItem("access_token")}`;
-
+    let date = new Date();
+    let currentToken = `Bearer ${localStorage.getItem("access_token")}`;
+    const access_token = localStorage.getItem("access_token");
+    const decodeToken = access_token && jwtDecode(access_token);
+    if (decodeToken?.exp < date.getTime() / 1000) {
+      try {
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_URL_API}/user/refresh-token`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        currentToken = `Bearer ${data.access_token}`;
+        localStorage.setItem("access_token", data.access_token);
+      } catch (error) {
+        console.log(error, "err");
+      }
+    }
     // Do something before request is sent
-    config.headers.authorization = token;
+    config.headers.authorization = currentToken;
     return config;
   },
   function (error) {

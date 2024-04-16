@@ -14,10 +14,11 @@ export default function ModalComponent() {
   const { showModal, body, callBack, title } = useSelector(
     (state) => state.modalSlice
   );
+  console.log(typeof callBack, "callksa");
   const handleClose = () => dispatch(closeModal());
   return (
-    <div className="-z-10 ">
-      <Dialog size="lg" className="" open={showModal}>
+    <div className="-z-10  ">
+      <Dialog size="xl" className="" open={showModal}>
         <DialogHeader>
           <div className="w-full justify-between flex items-center">
             <p className="text-3xl font-semibold ">{title}</p>
@@ -36,9 +37,11 @@ export default function ModalComponent() {
           >
             <span>Hủy</span>
           </Button>
-          <Button variant="gradient" onClick={callBack}>
-            <span>Lưu</span>
-          </Button>
+          {typeof callBack !== "boolean" && (
+            <Button variant="gradient" onClick={callBack}>
+              <span>Lưu</span>
+            </Button>
+          )}
         </DialogFooter>
       </Dialog>
     </div>

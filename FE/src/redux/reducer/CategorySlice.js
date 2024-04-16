@@ -24,7 +24,7 @@ export const categorySlice = createSlice({
 
 //get all Category
 export const getAllCategory = createAsyncThunk(
-  "user/getAllCategory",
+  "category/getAllCategory",
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -46,7 +46,7 @@ export const getAllCategory = createAsyncThunk(
   }
 );
 export const getDetailCategory = createAsyncThunk(
-  "user/getDetailCategory",
+  "category/getDetailCategory",
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -63,7 +63,7 @@ export const getDetailCategory = createAsyncThunk(
   }
 );
 export const createCategory = createAsyncThunk(
-  "user/createCategory",
+  "category/createCategory",
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -81,7 +81,7 @@ export const createCategory = createAsyncThunk(
   }
 );
 export const updateCategory = createAsyncThunk(
-  "user/updateCategory",
+  "category/updateCategory",
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -102,7 +102,7 @@ export const updateCategory = createAsyncThunk(
 );
 
 export const deleteCategory = createAsyncThunk(
-  "user/deleteCategory",
+  "category/deleteCategory",
   async (id, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -140,7 +140,7 @@ export const deleteAllCategory = createAsyncThunk(
   }
 );
 export const searchCategory = createAsyncThunk(
-  "user/searchCategory",
+  "category/searchCategory",
   async ({ searchBy, searchValue }, { dispatch }) => {
     console.log(searchBy, searchValue, "search");
     dispatch(setLoading(true));

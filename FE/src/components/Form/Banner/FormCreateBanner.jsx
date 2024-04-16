@@ -1,0 +1,140 @@
+import { Button, Input, Option, Select } from "@material-tailwind/react";
+import React, { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+
+import * as yup from "yup";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { notify, validateMess } from "../../../toolkits/help";
+import { openModal, setCallBack } from "../../../redux/reducer/ModalSlice";
+import { openDialog } from "../../../redux/reducer/DialogSlice";
+import InputComponent from "../../Input/InputComponent";
+
+import "react-quill/dist/quill.snow.css";
+import { createBlog } from "../../../redux/reducer/BlogSlice";
+import { createBanner } from "../../../redux/reducer/BannerSlice";
+export default function FormCreateBanner() {
+  const dispatch = useDispatch();
+  const [selectedImage, setSelectedImage] = useState("");
+  const schema = yup
+    .object({
+      title: yup
+        .string()
+        .test("len", validateMess.LEN, (val) => val.length >= 5)
+        .required(validateMess.REQUIRE),
+      sub_title: yup.string().required(validateMess.REQUIRE),
+      image: yup.mixed().required(validateMess.REQUIRE),
+    })
+    .required();
+  const {
+    control,
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      title: "",
+      sub_title: "",
+    },
+  });
+  //submit form
+
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+    dispatch(createBanner(formData));
+  };
+  //event upload image
+  const handleChangeFileMultiple = async (e) => {
+    const selectedFiles = e.target.files[0];
+    setSelectedImage(selectedFiles);
+    setValue("image", selectedFiles);
+  };
+
+  useEffect(() => {
+    dispatch(setCallBack({ callBack: handleSubmit(onSubmit) }));
+  }, []);
+  return (
+    <div className=" lg:px-5 px-2 py-2 overflow-y-scroll h-[400px]">
+      <div className=" w-full  bg-white">
+        <form
+          className="grid  grid-cols-1 place-items-start gap-2"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="mb-4 w-full">
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <InputComponent
+                  title="Tiêu đề bài viết"
+                  register={field}
+                  messErr={errors.title?.message}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <Controller
+              name="sub_title"
+              control={control}
+              render={({ field }) => (
+                <InputComponent
+                  title="Tiêu đề phụ"
+                  register={field}
+                  messErr={errors.sub_title?.message}
+                />
+              )}
+            />
+          </div>
+
+          <div className="w-fit">
+            <p>Chọn ảnh review</p>
+            <label className="block">
+              <span className="sr-only">Choose profile photo </span>
+              <input
+                accept="image/*"
+                onChange={handleChangeFileMultiple}
+                type="file"
+                className="block w-full text-sm text-gray-500
+                  file:me-4 file:py-2 file:px-4
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-600 file:text-white
+                  hover:file:bg-blue-700
+                  file:disabled:opacity-50 file:disabled:pointer-events-none
+                  dark:file:bg-blue-500
+                  dark:hover:file:bg-blue-400
+                "
+              />
+            </label>
+            <div className="mt-4">
+              <div className="flex mt-4">
+                <div className="mr-2">
+                  {selectedImage && (
+                    <img
+                      onClick={() =>
+                        dispatch(openDialog(URL.createObjectURL(selectedImage)))
+                      }
+                      className="w-20 h-20 rounded-lg object-cover shadow-2xl cursor-pointer"
+                      src={URL.createObjectURL(selectedImage)}
+                      alt=""
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            {errors.image?.message && (
+              <p className="text-base text-red-400">{errors.image.message}</p>
+            )}
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}

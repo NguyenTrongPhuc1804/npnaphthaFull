@@ -6,6 +6,9 @@ const imageRouter = require("./imgaeRouter.js");
 const catalogueRouter = require("./catalogueRouter.js");
 const siteMapRouter = require("./sitemapRouter.js");
 const blogRouter = require("./blogRouter.js");
+const contactRouter = require("./contactRouter.js");
+const bannerRouter = require("./bannerRouter.js");
+const videoBannerRouter = require("./videoBannerRouter.js");
 
 const rootRouter = express.Router();
 rootRouter.use("/user", userRouter);
@@ -15,4 +18,7 @@ rootRouter.use("/image", imageRouter);
 rootRouter.use("/catalogue", catalogueRouter);
 rootRouter.use("/blog", blogRouter);
 rootRouter.use("/map", siteMapRouter);
+rootRouter.use("/contact", contactRouter);
+rootRouter.use("/banner", bannerRouter);
+rootRouter.use("/video-banner", videoBannerRouter);
 module.exports = rootRouter;

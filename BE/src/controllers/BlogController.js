@@ -37,6 +37,7 @@ const updateBlog = async (req, res) => {
   try {
     const checkBlog = await Blog.findOne({ _id: id });
     if (!checkBlog) {
+      await removeImage(`${process.env.DOMAIN}/${file.path}`);
       return res.status(400).json({ message: "Blog not found!!" });
     }
     if (file) {

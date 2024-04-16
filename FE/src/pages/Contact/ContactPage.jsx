@@ -1,10 +1,55 @@
 import React, { useEffect } from "react";
 import SubBanner from "../../components/Banner/SubBanner";
 import { useTranslation } from "react-i18next";
-
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { validateMess } from "../../toolkits/help";
+import { createContact } from "../../redux/reducer/ContactSlice";
 export default function ContactPage() {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .email(validateMess.INVALID_EMAIL)
+        .required(validateMess.REQUIRE),
+      name: yup
+        .string()
+        .test("len", validateMess.LEN, (val) => val.length >= 5)
+        .required(validateMess.REQUIRE),
+      phone: yup
+        .string()
+        .test("len", validateMess.INVALID_PHONE, (val) => val.length >= 9)
+        .matches(/^[0-9]+$/, "Phải là số 0-9")
+        .required(validateMess.REQUIRE),
+      message: yup.string().required(validateMess.REQUIRE),
+    })
+    .required();
+  const {
+    control,
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    },
+  });
+  //submit form
+
+  const onSubmit = (data) => {
+    dispatch(createContact(data));
+    console.log(data, "data");
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -16,11 +61,12 @@ export default function ContactPage() {
           <div className="row lg:px-20 px-10">
             <div className="col-12">
               <h2 className="mb-4 text-3xl font-bold">
-                Để lại lời nhắn cho chúng tôi
+                {t("content.contact-form")}
               </h2>
             </div>
             <div className="col-lg-5 col-12">
               <form
+                onSubmit={handleSubmit(onSubmit)}
                 className="custom-form contact-form row"
                 action="#"
                 method="post"
@@ -28,58 +74,71 @@ export default function ContactPage() {
               >
                 <div className="col-lg-6 col-6">
                   <label htmlFor="contact-name" className="form-label">
-                    Họ và tên
+                    {t("content.fullname")}
                   </label>
                   <input
+                    {...register("name")}
                     type="text"
-                    name="contact-name"
-                    id="contact-name"
                     className="form-control"
                     placeholder="Your Name"
                     required
                   />
+                  {errors.name?.message && (
+                    <p className="text-base text-red-400">
+                      {errors.name?.message}
+                    </p>
+                  )}
                 </div>
                 <div className="col-lg-6 col-6">
                   <label htmlFor="contact-phone" className="form-label">
-                    Số điện thoại
+                    {t("content.phone")}
                   </label>
                   <input
-                    type="telephone"
-                    name="contact-phone"
-                    id="contact-phone"
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    {...register("phone")}
                     className="form-control"
                     placeholder="123-456-7890"
                   />
+                  {errors.phone?.message && (
+                    <p className="text-base text-red-400">
+                      {errors.phone?.message}
+                    </p>
+                  )}
                 </div>
                 <div className="col-12">
                   <label htmlFor="contact-email" className="form-label">
-                    Email
+                    {t("content.email")}
                   </label>
                   <input
-                    type="email"
-                    name="contact-email"
-                    id="contact-email"
+                    {...register("email")}
                     pattern="[^ @]*@[^ @]*"
                     className="form-control"
                     placeholder="Your Email"
                     required
                   />
+                  {errors.email?.message && (
+                    <p className="text-base text-red-400">
+                      {errors.email?.message}
+                    </p>
+                  )}
                   <label htmlFor="contact-message" className="form-label">
-                    Lời nhắn
+                    {t("content.message")}
                   </label>
                   <textarea
                     className="form-control"
                     rows={5}
-                    id="contact-message"
-                    name="contact-message"
+                    {...register("message")}
                     placeholder="Your Message"
                     defaultValue={""}
                   />
+                  {errors.message?.message && (
+                    <p className="text-base text-red-400">
+                      {errors.message?.message}
+                    </p>
+                  )}
                 </div>
                 <div className="col-lg-5 col-12 ms-auto">
                   <button type="submit" className="form-control">
-                    Gửi
+                    {t("content.send")}
                   </button>
                 </div>
               </form>
@@ -93,17 +152,31 @@ export default function ContactPage() {
             </div>
             <div className="col-12">
               <h4 className="mt-5 mb-4">
-                121 Einstein Loop N, Bronx, NY 10475, United States
+                Đường số 1, Phường Rạch Rừa, Thành phố Vũng Tầu, Bà Rịa - Vũng
+                Tàu, Việt Nam
               </h4>
               <div className="google-map pt-3">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14920.891757756479!2d-73.83496372506556!3d40.8623107607295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c28cbc17f4a0c3%3A0x9ae0f1e804a817d!2s121%20Einstein%20Loop%20N%2C%20Bronx%2C%20NY%2010475%2C%20USA!5e0!3m2!1sen!2sth!4v1650470337727!5m2!1sen!2sth"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.1062341072443!2d107.11225937508347!3d10.403390189723584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31757187c9838bd1%3A0xd1a9bd3c97318714!2zQ8O0bmcgVHkgVE5ISCBT4bqjbiBYdeG6pXQgdsOgIFRoxrDGoW5nIE3huqFpIE5QIC0gTkFQSFRIQQ!5e1!3m2!1svi!2s!4v1712996382242!5m2!1svi!2s"
                   width="100%"
                   height={300}
-                  style={{ border: 0 }}
-                  allowFullScreen
                   loading="lazy"
-                />
+                ></iframe>
+              </div>
+            </div>
+
+            <div className="col-12">
+              <h4 className="mt-5 mb-4">
+                49 Đ số 14, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh, Việt Nam
+              </h4>
+              <div className="google-map pt-3">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d741.2911746017975!2d106.69362869516156!3d10.72690301764311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fb8d596b569%3A0x6f4f2b173f93ca66!2zNDkgxJAgc-G7kSAxNCwgVMOibiBIxrBuZywgUXXhuq1uIDcsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1712996789065!5m2!1svi!2s"
+                  width="100%"
+                  height="300"
+                  loading="lazy"
+                ></iframe>
+                s
               </div>
             </div>
           </div>

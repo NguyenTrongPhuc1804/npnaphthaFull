@@ -16,7 +16,6 @@ import {
 } from "../../../redux/reducer/ProductSlice";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
-Quill.register("modules/imageResize", ImageResize);
 export default function FormUpdateProduct({ data, listAllCategory }) {
   const { _id } = data;
   const dispatch = useDispatch();
@@ -129,6 +128,18 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
                     [{ size: [] }],
                     ["bold", "italic", "underline", "strike", "blockquote"],
                     [
+                      { align: "" },
+                      { align: "center" },
+                      { align: "right" },
+                      { align: "justify" },
+                    ],
+                    [
+                      { list: "ordered" },
+                      { list: "bullet" },
+                      { indent: "-1" },
+                      { indent: "+1" },
+                    ],
+                    [
                       { list: "ordered" },
                       { list: "bullet" },
                       { indent: "-1" },
@@ -163,6 +174,7 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
                 "image",
                 "video",
                 "code-block",
+                "aligns",
               ]}
             />
             {errors.description?.message && (

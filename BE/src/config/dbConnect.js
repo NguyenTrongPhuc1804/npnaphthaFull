@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 
 const connectDB = mongoose
-  .connect(process.env.DB_CONNECT)
+  .connect("mongodb+srv://ivngg123:phucganoi123@mern.2wzqjhh.mongodb.net/")
   .then(() => {
     console.log("connect database success");
   })

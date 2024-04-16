@@ -221,7 +221,7 @@ export default function ManagementProductPage() {
                   </td>
                   <td className={classes}>
                     <div
-                      className="w-max line-clamp-2 max-w-[300px]"
+                      className="w-max line-clamp-2 max-w-[300px]  max-h-[100px] "
                       dangerouslySetInnerHTML={{ __html: item.description }}
                     ></div>
                   </td>

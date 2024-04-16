@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBanner } from "../../redux/reducer/BannerSlice";
+import { getAllVideoBanner } from "../../redux/reducer/VideoBannerSlice";
 
-export default function Banner() {
+export default function Banner({ data }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { listAllBanner } = useSelector((state) => state.bannerSlice);
+  const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
+  console.log(listAllVideo?.data?.length, "listAllVideo");
+  useEffect(() => {
+    dispatch(getAllBanner());
+    dispatch(getAllVideoBanner());
+  }, []);
   return (
     <>
       <div className="container ">
@@ -24,23 +35,32 @@ export default function Banner() {
               data-bs-ride="carousel"
             >
               <div className="carousel-inner">
-                <div className="carousel-item rounded-lg overflow-hidden active">
-                  <div className="carousel-image-wrap">
-                    <img
-                      src="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
-                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
-                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
-                    />
+                {listAllBanner?.data?.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`carousel-item rounded-lg overflow-hidden ${
+                      idx == 0 ? "active" : ""
+                    }`}
+                  >
+                    <div className="carousel-image-wrap">
+                      <img
+                        src={item.image}
+                        className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
+                        alt={item.image}
+                      />
+                    </div>
+                    <div className="carousel-caption break-words">
+                      <p className="text-white text-2xl font-bold ">
+                        {" "}
+                        {item.title}
+                      </p>
+                      <h4 className="hero-text truncate break-words">
+                        {item.sub_title}
+                      </h4>
+                    </div>
                   </div>
-                  <div className="carousel-caption">
-                    <span className="text-white">
-                      <i className="bi-geo-alt me-2" />
-                      Manhattan, New York
-                    </span>
-                    <h4 className="hero-text">Fine Dining Restaurant</h4>
-                  </div>
-                </div>
-                <div className="carousel-item rounded-lg overflow-hidden">
+                ))}
+                {/* <div className="carousel-item rounded-lg overflow-hidden">
                   <div className="carousel-image-wrap">
                     <img
                       src="https://npnaphtha.com.vn/images/slideshow/hinh_cty_2.jpg"
@@ -87,7 +107,7 @@ export default function Banner() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <button
                 className="carousel-control-prev bg-colorPrimary"
@@ -113,13 +133,12 @@ export default function Banner() {
         </div>
       </div>
       <div className="video-wrap">
-        <video autoPlay loop muted className="custom-video" poster>
-          <source
-            src={require("../../assets/video/cafe_video.mp4")}
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
+        {listAllVideo?.data?.length > 0 && (
+          <video autoPlay loop muted className="custom-video" poster>
+            <source src={listAllVideo.data[0].url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
       </div>
       <div className="overlay" />
     </>

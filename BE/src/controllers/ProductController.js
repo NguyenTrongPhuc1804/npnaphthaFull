@@ -9,6 +9,9 @@ const createProduct = async (req, res) => {
   try {
     const checkProduct = await Product.findOne({ name: data.name });
     if (checkProduct) {
+      for (let key in files) {
+        await removeImage(`${process.env.DOMAIN}/${files[key].path}`);
+      }
       return res.status(400).json({ message: "Tên sản phẩm tồn tại!!" });
     }
     const newSitemap = await Sitemap.create({
@@ -40,6 +43,9 @@ const updateProduct = async (req, res) => {
   try {
     const checkProduct = await Product.findOne({ _id: id });
     if (!checkProduct) {
+      for (let key in files) {
+        await removeImage(`${process.env.DOMAIN}/${files[key].path}`);
+      }
       return res.status(400).json({ message: "Product not found!!" });
     }
     if (files.length > 0) {
@@ -64,13 +70,11 @@ const updateProduct = async (req, res) => {
           new: true,
         }
       );
-      return res
-        .status(200)
-        .json({
-          message: "update product success",
-          data: productUpdate,
-          newSitemap,
-        });
+      return res.status(200).json({
+        message: "update product success",
+        data: productUpdate,
+        newSitemap,
+      });
     }
     const newSitemap = await Sitemap.findOneAndUpdate(
       { url: `/product/${checkProduct.slug}` },
@@ -82,13 +86,11 @@ const updateProduct = async (req, res) => {
     const productUpdate = await Product.findByIdAndUpdate(id, data, {
       new: true,
     });
-    res
-      .status(200)
-      .json({
-        message: "update product success",
-        data: productUpdate,
-        newSitemap,
-      });
+    res.status(200).json({
+      message: "update product success",
+      data: productUpdate,
+      newSitemap,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error });
@@ -189,17 +191,12 @@ const getAllProduct = async (req, res) => {
     return res.status(500).json({ message: error });
   }
 };
-const updateArrImage = (req, res) => {
-  const { files } = req;
-  console.log(files, "fileImage");
-  res.status(200).json({ mess: "success" });
-};
+
 module.exports = {
   createProduct,
   updateProduct,
   getDetailProduct,
   getAllProduct,
   deleteProduct,
-  updateArrImage,
   deleteAllProduct,
 };

@@ -21,7 +21,7 @@ export const BlogSlice = createSlice({
       state.listAllBlog = action.payload;
     });
     builder.addCase(getDetailBlog.fulfilled, (state, action) => {
-      state.BlogDetail = action.payload;
+      state.blogDetail = action.payload;
     });
   },
 });
@@ -74,11 +74,11 @@ export const createBlog = createAsyncThunk(
   }
 );
 export const updateBlog = createAsyncThunk(
-  "Blog/updateBlog",
+  "blog/updateBlog",
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.put(`/Blog/update/${id}`, payload, {
+      const { data } = await api.put(`/blog/update/${id}`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -99,11 +99,11 @@ export const updateBlog = createAsyncThunk(
   }
 );
 export const getDetailBlog = createAsyncThunk(
-  "Blog/getDetailBlog",
+  "blog/getDetailBlog",
   async ({ slug }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.get(`/Blog/detail/${slug}`);
+      const { data } = await api.get(`/blog/detail/${slug}`);
       dispatch(setLoading(false));
       return data;
     } catch (error) {
@@ -113,11 +113,11 @@ export const getDetailBlog = createAsyncThunk(
   }
 );
 export const deleteBlog = createAsyncThunk(
-  "Blog/deleteBlog",
+  "blog/deleteBlog",
   async (id, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.delete(`/Blog/delete/${id}`);
+      const { data } = await api.delete(`/blog/delete/${id}`);
       console.log(data, "data");
       notify("success", "Xóa blog thành công");
       dispatch(setLoading(false));
@@ -132,7 +132,7 @@ export const deleteBlog = createAsyncThunk(
   }
 );
 export const deleteAllBlog = createAsyncThunk(
-  "Blog/deleteAllBlog",
+  "blog/deleteAllblog",
   async (listId, { dispatch }) => {
     dispatch(setLoading(true));
     try {
@@ -152,18 +152,18 @@ export const deleteAllBlog = createAsyncThunk(
   }
 );
 export const searchBlog = createAsyncThunk(
-  "Blog/searchBlog",
+  "blog/searchblog",
   async ({ searchBy, searchValue }, { dispatch }) => {
     console.log(searchBy, searchValue, "search");
     dispatch(setLoading(true));
     try {
       if (searchValue.trim() == "") {
-        const data = await api.get(`/Blog/all`);
+        const data = await api.get(`/blog/all`);
         dispatch(setLoading(false));
         return data;
       }
       const data = await api.get(
-        `/Blog/all?searchBy=${searchBy}&searchValue=${searchValue}`
+        `/blog/all?searchBy=${searchBy}&searchValue=${searchValue}`
       );
       dispatch(setLoading(false));
       return data;
