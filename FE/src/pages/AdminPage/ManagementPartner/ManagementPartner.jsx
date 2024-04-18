@@ -41,6 +41,13 @@ import {
 } from "../../../redux/reducer/BannerSlice";
 import FormCreateBanner from "../../../components/Form/Banner/FormCreateBanner";
 import FormUpdateBanner from "../../../components/Form/Banner/FormUpdateBanner";
+import {
+  deleteAllPartner,
+  deletePartner,
+  getAllPartner,
+} from "../../../redux/reducer/PartnerSlice";
+import FormCreatePartner from "../../../components/Form/Partner/FormCreatePartner";
+import FormUpdatePartner from "../../../components/Form/Partner/FormUpdatePartner";
 
 const TABS = [
   {
@@ -53,20 +60,12 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = [
-  "",
-  "Hình ảnh",
-  "Tiêu đề",
-  "Tiêu đề phụ",
-  "Ngày khởi tạo",
-  "",
-];
+const TABLE_HEAD = ["", "Hình ảnh", "Tên đối tác", "Ngày khởi tạo", ""];
 
-export default function ManagementBanners() {
+export default function ManagementPartner() {
   const dispatch = useDispatch();
   //state
-  const { listAllBanner } = useSelector((state) => state.bannerSlice);
-
+  const { listAllPartner } = useSelector((state) => state.partnerSlice);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchBy, setSearchBy] = useState("title");
   const [searchValue, setSearchValue] = useState("");
@@ -80,20 +79,20 @@ export default function ManagementBanners() {
   const handleOpenForm = () => {
     dispatch(
       openModal({
-        body: <FormCreateBanner />,
-        title: "Tạo banner mới",
+        body: <FormCreatePartner />,
+        title: "Tạo đối tác mới",
       })
     );
   };
   const handleDeleteProduct = (id) => {
-    dispatch(deleteBanner(id));
+    dispatch(deletePartner(id));
   };
   const handleDeleteAllProduct = () => {
-    dispatch(deleteAllBanner(listDelete));
+    dispatch(deleteAllPartner(listDelete));
     setListDelete([]);
   };
   useEffect(() => {
-    dispatch(getAllBanner());
+    dispatch(getAllPartner());
   }, []);
   return (
     <Card className="h-full w-full">
@@ -101,10 +100,10 @@ export default function ManagementBanners() {
         <div className="mb-8 flex flex-wrap items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Danh sách banner
+              Danh sách đối tác
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              Xem thông tin về tất cả banner
+              Xem thông tin về tất cả đối tác
             </Typography>
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
@@ -116,7 +115,7 @@ export default function ManagementBanners() {
               className="flex items-center gap-3"
               size="sm"
             >
-              + Thêm banner
+              + Thêm đối tác
             </Button>
           </div>
         </div>
@@ -132,7 +131,7 @@ export default function ManagementBanners() {
           </Tabs> */}
           <div className="w-full md:w-72">
             <Input
-              label="Tìm kiếm theo tên tiêu đề"
+              label="Tìm kiếm theo tên đối tác"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               icon={
@@ -173,8 +172,8 @@ export default function ManagementBanners() {
             </tr>
           </thead>
           <tbody>
-            {listAllBanner?.data?.map((item, index) => {
-              const isLast = index === listAllBanner.length - 1;
+            {listAllPartner?.data?.map((item, index) => {
+              const isLast = index === listAllPartner.length - 1;
               const classes = isLast
                 ? "p-4 truncate"
                 : "p-4 border-b border-blue-gray-50 truncate";
@@ -216,21 +215,11 @@ export default function ManagementBanners() {
                         color="blue-gray"
                         className="font-normal truncate w-[150px]"
                       >
-                        {item.title}
+                        {item.name}
                       </Typography>
                     </div>
                   </td>
-                  <td className={classes}>
-                    <div className="flex flex-col">
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal w-[150px] truncate"
-                      >
-                        {item.sub_title}
-                      </Typography>
-                    </div>
-                  </td>
+
                   <td className={classes}>
                     <Typography
                       variant="small"
@@ -241,13 +230,13 @@ export default function ManagementBanners() {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <Tooltip content="Sửa banner">
+                    <Tooltip content="Sửa đối tác">
                       <IconButton
                         onClick={() =>
                           dispatch(
                             openModal({
-                              title: "Cập nhật banner",
-                              body: <FormUpdateBanner data={item} />,
+                              title: "Cập nhật đối tác",
+                              body: <FormUpdatePartner data={item} />,
                             })
                           )
                         }
@@ -256,7 +245,7 @@ export default function ManagementBanners() {
                         <PencilIcon className="h-4 w-4" />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip content="Xóa banner">
+                    <Tooltip content="Xóa đối tác">
                       <Popover>
                         <PopoverHandler>
                           <IconButton variant="text">
@@ -265,7 +254,7 @@ export default function ManagementBanners() {
                         </PopoverHandler>
                         <PopoverContent>
                           <div className="flex items-center ">
-                            <p className="text-sm mr-2">Xóa banner này??</p>
+                            <p className="text-sm mr-2">Xóa đối tác này??</p>
                             <div className="flex justify-end mt-2">
                               <Button
                                 onClick={() => handleDeleteProduct(item._id)}
@@ -288,9 +277,9 @@ export default function ManagementBanners() {
       <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
         <div className="w-full flex justify-center">
           <DefaultPagination
-            pageCount={listAllBanner?.totalPage}
+            pageCount={listAllPartner?.totalPage}
             e={(value) => {
-              dispatch(getAllBlog({ page: value, limit: 8 }));
+              dispatch(getAllPartner({ page: value, limit: 8 }));
               setCurrentPage(value);
             }}
           />

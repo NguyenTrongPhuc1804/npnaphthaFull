@@ -10,25 +10,19 @@ import { notify, validateMess } from "../../../toolkits/help";
 import { openModal, setCallBack } from "../../../redux/reducer/ModalSlice";
 import { openDialog } from "../../../redux/reducer/DialogSlice";
 import InputComponent from "../../Input/InputComponent";
-import { createProduct } from "../../../redux/reducer/ProductSlice";
-import { getAllCategory } from "../../../redux/reducer/CategorySlice";
-import ReactQuill, { Quill } from "react-quill";
-import ImageResize from "quill-image-resize-module-react";
+
 import "react-quill/dist/quill.snow.css";
 import { createBlog } from "../../../redux/reducer/BlogSlice";
-export default function FormCreateBlog() {
+import { createBanner } from "../../../redux/reducer/BannerSlice";
+import { createPartner } from "../../../redux/reducer/PartnerSlice";
+export default function FormCreatePartner() {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState("");
   const schema = yup
     .object({
-      title: yup
+      name: yup
         .string()
         .test("len", validateMess.LEN, (val) => val.length >= 5)
-        .required(validateMess.REQUIRE),
-      content: yup.string().required(validateMess.REQUIRE),
-      slug: yup
-        .string()
-        .matches(/^[^\s]*$/, "Không được chứa khoảng trắng")
         .required(validateMess.REQUIRE),
       image: yup.mixed().required(validateMess.REQUIRE),
     })
@@ -42,9 +36,7 @@ export default function FormCreateBlog() {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: "",
-      content: "",
-      slug: "",
+      name: "",
     },
   });
   //submit form
@@ -54,7 +46,7 @@ export default function FormCreateBlog() {
     for (let key in data) {
       formData.append(key, data[key]);
     }
-    dispatch(createBlog(formData));
+    dispatch(createPartner(formData));
   };
   //event upload image
   const handleChangeFileMultiple = async (e) => {
@@ -75,97 +67,18 @@ export default function FormCreateBlog() {
         >
           <div className="mb-4 w-full">
             <Controller
-              name="title"
+              name="name"
               control={control}
               render={({ field }) => (
                 <InputComponent
-                  title="Tiêu đề bài viết"
+                  title="Tên đối tác"
                   register={field}
-                  messErr={errors.title?.message}
-                />
-              )}
-            />
-          </div>
-          <div className="mb-4 w-full">
-            <Controller
-              name="slug"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Đường dẫn tĩnh"
-                  register={field}
-                  messErr={errors.slug?.message}
+                  messErr={errors.name?.message}
                 />
               )}
             />
           </div>
 
-          <div className="mt-4 w-full">
-            <ReactQuill
-              theme="snow"
-              onChange={(e) => setValue("content", e)}
-              modules={{
-                toolbar: {
-                  container: [
-                    [{ header: "1" }, { header: "2" }, { font: [] }],
-                    [{ size: [] }],
-                    ["bold", "italic", "underline", "strike", "blockquote"],
-                    [
-                      { align: "" },
-                      { align: "center" },
-                      { align: "right" },
-                      { align: "justify" },
-                    ],
-                    [
-                      { list: "ordered" },
-                      { list: "bullet" },
-                      { indent: "-1" },
-                      { indent: "+1" },
-                    ],
-                    [
-                      { list: "ordered" },
-                      { list: "bullet" },
-                      { indent: "-1" },
-                      { indent: "+1" },
-                    ],
-                    ["link", "image", "video"],
-                    ["code-block"],
-                    ["clean"],
-                  ],
-                },
-                imageResize: {
-                  parchment: Quill.import("parchment"),
-                  modules: ["Resize", "DisplaySize"],
-                },
-                clipboard: {
-                  matchVisual: false,
-                },
-              }}
-              formats={[
-                "header",
-                "font",
-                "size",
-                "bold",
-                "italic",
-                "underline",
-                "strike",
-                "blockquote",
-                "list",
-                "bullet",
-                "indent",
-                "link",
-                "align",
-                "image",
-                "video",
-                "code-block",
-              ]}
-            />
-            {errors.content?.message && (
-              <p className="text-base text-red-400">
-                {errors.content?.message}
-              </p>
-            )}
-          </div>
           <div className="w-fit">
             <p>Chọn ảnh review</p>
             <label className="block">

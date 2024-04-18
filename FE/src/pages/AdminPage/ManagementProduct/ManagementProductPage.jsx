@@ -36,6 +36,7 @@ import {
 import FormCreateProduct from "../../../components/Form/Product/FormCreateProduct";
 import FormUpdateProduct from "../../../components/Form/Product/FormUpdateProduct";
 import { getAllCategory } from "../../../redux/reducer/CategorySlice";
+import { useNavigate } from "react-router-dom";
 
 const TABS = [
   {
@@ -51,6 +52,7 @@ const TABS = [
 const TABLE_HEAD = ["", "Tên sản phẩm", "Loại", "Mô tả", "Ngày khởi tạo", ""];
 
 export default function ManagementProductPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //state
   const { listAllProduct } = useSelector((state) => state.productSlice);
@@ -170,9 +172,16 @@ export default function ManagementProductPage() {
                 : "p-4 border-b border-blue-gray-50 truncate";
 
               return (
-                <tr key={item._id}>
+                <tr
+                  onClick={(e) => {
+                    navigate(`/product/${item.slug}`);
+                  }}
+                  className="cursor-pointer hover:bg-blue-100 transition duration-300"
+                  key={item._id}
+                >
                   <td className={classes}>
                     <Checkbox
+                      onClick={(e) => e.stopPropagation()}
                       value={item._id}
                       onChange={(e) => {
                         if (e.target.checked) {
@@ -234,10 +243,11 @@ export default function ManagementProductPage() {
                       {moment(item.createdAt).format("DD/MM/YYYY")}
                     </Typography>
                   </td>
-                  <td className={classes}>
+                  <td onClick={(e) => e.stopPropagation()} className={classes}>
                     <Tooltip content="Sửa sản phẩm">
                       <IconButton
-                        onClick={() =>
+                        onClick={(e) => {
+                          e.stopPropagation();
                           dispatch(
                             openModal({
                               title: "Cập nhật sản phẩm",
@@ -248,8 +258,8 @@ export default function ManagementProductPage() {
                                 />
                               ),
                             })
-                          )
-                        }
+                          );
+                        }}
                         variant="text"
                       >
                         <PencilIcon className="h-4 w-4" />
@@ -267,7 +277,9 @@ export default function ManagementProductPage() {
                             <p className="text-sm mr-2">Xóa sản phẩm này??</p>
                             <div className="flex justify-end mt-2">
                               <Button
-                                onClick={() => handleDeleteProduct(item._id)}
+                                onClick={(e) => {
+                                  handleDeleteProduct(item._id);
+                                }}
                                 className="px-2 py-2 text-xs"
                               >
                                 Xóa

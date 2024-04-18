@@ -6,6 +6,7 @@ const cors = require("cors");
 const path = require("path");
 var cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const rateLimit = require("express-rate-limit");
 const http = require("http");
 const socketio = require("socket.io");
 const {
@@ -28,7 +29,13 @@ const port = process.env.PORT || 3000;
 
 const publicPathDirectory = path.join(__dirname, "../public");
 app.use("/api/v1/public", express.static(publicPathDirectory));
-
+// limit request
+const apiLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 100, //100 request/IP
+  message: "Too many connection",
+});
+app.use(apiLimiter);
 app.use(
   cors({
     origin: [

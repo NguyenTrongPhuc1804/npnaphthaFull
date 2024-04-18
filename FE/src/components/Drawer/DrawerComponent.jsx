@@ -6,12 +6,14 @@ import {
   IconButton,
   useSelect,
 } from "@material-tailwind/react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { showDrawer } from "../../redux/reducer/LoadingSlice";
 
 export default function DrawerComponent({ open, closeDrawer }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isOpenDrawer } = useSelector((state) => state.loadingSlice);
-  console.log(isOpenDrawer, "isOpne");
   return (
     <Drawer
       open={isOpenDrawer}
@@ -42,7 +44,10 @@ export default function DrawerComponent({ open, closeDrawer }) {
       <section>
         <div className="pl-0">
           <ul className="navbar-nav ">
-            <li className="nav-item border-b border-gray-600">
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
               <NavLink
                 to=""
                 className={({ isActive }) =>
@@ -54,7 +59,10 @@ export default function DrawerComponent({ open, closeDrawer }) {
                 Trang chủ
               </NavLink>
             </li>
-            <li className="nav-item border-b border-gray-600">
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
@@ -66,7 +74,10 @@ export default function DrawerComponent({ open, closeDrawer }) {
                 Về chúng tôi
               </NavLink>
             </li>
-            <li className="nav-item border-b border-gray-600">
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
               <NavLink
                 to="/product"
                 className={({ isActive }) =>
@@ -78,7 +89,10 @@ export default function DrawerComponent({ open, closeDrawer }) {
                 Sản phẩm
               </NavLink>
             </li>
-            <li className="nav-item border-b border-gray-600">
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
@@ -90,7 +104,25 @@ export default function DrawerComponent({ open, closeDrawer }) {
                 Bài viết
               </NavLink>
             </li>
-            <li className="nav-item border-b border-gray-600">
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
+              <NavLink
+                to="/catalogue"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link active py-3"
+                    : "nav-link inactive !text-base py-3"
+                }
+              >
+                Catalogue
+              </NavLink>
+            </li>
+            <li
+              onClick={() => dispatch(showDrawer(false))}
+              className="nav-item border-b border-gray-600"
+            >
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
@@ -106,10 +138,16 @@ export default function DrawerComponent({ open, closeDrawer }) {
         </div>
       </section>
       <section>
-        <div className="pl-6 mt-2">
-          <Typography variant="h6" color="red">
-            Hỗ trợ
-          </Typography>
+        <div className="pl-6 mt-2 w-full">
+          <Button
+            onClick={() => {
+              navigate("/contact");
+              dispatch(showDrawer(false));
+            }}
+            className="w-full bg-colorPrimary"
+          >
+            Liên hệ ngay{" "}
+          </Button>
         </div>
       </section>
     </Drawer>

@@ -18,6 +18,7 @@ import { getAllProduct, searchProduct } from "../../redux/reducer/ProductSlice";
 import { getAllCategory } from "../../redux/reducer/CategorySlice";
 import { getAllBlog } from "../../redux/reducer/BlogSlice";
 import { Helmet } from "react-helmet-async";
+import { getAllPartner } from "../../redux/reducer/PartnerSlice";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -27,6 +28,8 @@ export default function HomePage() {
   const { listAllCategory } = useSelector((state) => state.categorySlice);
   const { listAllBlog } = useSelector((state) => state.BlogSlice);
   const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
+  const { listAllPartner } = useSelector((state) => state.partnerSlice);
+
   const [filterProduct, setFillterProduct] = useState("all");
   const { t } = useTranslation();
   // const getData = async () => {
@@ -45,6 +48,7 @@ export default function HomePage() {
     dispatch(getAllProduct());
     dispatch(getAllCategory());
     dispatch(getAllBlog());
+    dispatch(getAllPartner());
     localStorage.setItem("lng", "vi");
   }, []);
   return (
@@ -166,7 +170,7 @@ export default function HomePage() {
           {t("content.affiliated-businesses")}
         </h2>
         <div className="px-[10%]">
-          <SlideLogo />
+          <SlideLogo listAllPartner={listAllPartner} />
         </div>
       </section>
       <section className="news section-padding">
@@ -178,7 +182,7 @@ export default function HomePage() {
             {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[0]} />}
             {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[1]} />}
             {listAllBlog?.data?.map((item, idx) => (
-              <CardBlogV2 item={item} />
+              <CardBlogV2 key={idx} item={item} />
             ))}
           </div>
         </div>

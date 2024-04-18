@@ -10,26 +10,18 @@ import { notify, validateMess } from "../../../toolkits/help";
 import { openModal, setCallBack } from "../../../redux/reducer/ModalSlice";
 import { openDialog } from "../../../redux/reducer/DialogSlice";
 import InputComponent from "../../Input/InputComponent";
-import { createProduct } from "../../../redux/reducer/ProductSlice";
-import { getAllCategory } from "../../../redux/reducer/CategorySlice";
-import ReactQuill, { Quill } from "react-quill";
-import ImageResize from "quill-image-resize-module-react";
-import "react-quill/dist/quill.snow.css";
-import { createBlog, updateBlog } from "../../../redux/reducer/BlogSlice";
-export default function FormUpdateBlog({ data }) {
+
+import { updateBanner } from "../../../redux/reducer/BannerSlice";
+import { updatePartner } from "../../../redux/reducer/PartnerSlice";
+export default function FormUpdatePartner({ data }) {
   const { _id } = data;
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState("");
   const schema = yup
     .object({
-      title: yup
+      name: yup
         .string()
         .test("len", validateMess.LEN, (val) => val.length >= 5)
-        .required(validateMess.REQUIRE),
-      content: yup.string().required(validateMess.REQUIRE),
-      slug: yup
-        .string()
-        .matches(/^[^\s]*$/, "Không được chứa khoảng trắng")
         .required(validateMess.REQUIRE),
     })
     .required();
@@ -43,20 +35,17 @@ export default function FormUpdateBlog({ data }) {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: data.title,
-      content: data.content,
-      slug: data.slug,
+      name: data.name,
     },
   });
   //submit form
 
   const onSubmit = (data) => {
-    console.log(data, "data");
     const formData = new FormData();
     for (let key in data) {
       formData.append(key, data[key]);
     }
-    dispatch(updateBlog({ id: _id, payload: formData }));
+    dispatch(updatePartner({ id: _id, payload: formData }));
   };
   //event upload image
   const handleChangeFileMultiple = async (e) => {
@@ -78,100 +67,18 @@ export default function FormUpdateBlog({ data }) {
         >
           <div className="mb-4 w-full">
             <Controller
-              name="title"
+              name="name"
               control={control}
               render={({ field }) => (
                 <InputComponent
-                  title="Tiêu đề bài viết"
+                  title="Tên đối tác"
                   register={field}
-                  messErr={errors.title?.message}
-                />
-              )}
-            />
-          </div>
-          <div className="mb-4 w-full">
-            <Controller
-              name="slug"
-              control={control}
-              render={({ field }) => (
-                <InputComponent
-                  title="Đường dẫn tĩnh"
-                  register={field}
-                  messErr={errors.slug?.message}
+                  messErr={errors.name?.message}
                 />
               )}
             />
           </div>
 
-          <div className="mt-4 w-full">
-            <p>Nội dung</p>
-            <ReactQuill
-              theme="snow"
-              value={getValues("content")}
-              onChange={(e) => setValue("content", e)}
-              modules={{
-                toolbar: {
-                  container: [
-                    [{ header: "1" }, { header: "2" }, { font: [] }],
-                    [{ size: [] }],
-                    ["bold", "italic", "underline", "strike", "blockquote"],
-                    [
-                      { list: "ordered" },
-                      { list: "bullet" },
-                      { indent: "-1" },
-                      { indent: "+1" },
-                    ],
-                    [
-                      { align: "" },
-                      { align: "center" },
-                      { align: "right" },
-                      { align: "justify" },
-                    ],
-                    [
-                      { list: "ordered" },
-                      { list: "bullet" },
-                      { indent: "-1" },
-                      { indent: "+1" },
-                    ],
-                    ["link", "image", "video"],
-                    ["code-block"],
-                    ["clean"],
-                    ["link"],
-                  ],
-                },
-                imageResize: {
-                  parchment: Quill.import("parchment"),
-                  modules: ["Resize", "DisplaySize"],
-                },
-                clipboard: {
-                  matchVisual: false,
-                },
-              }}
-              formats={[
-                "header",
-                "font",
-                "size",
-                "bold",
-                "italic",
-                "underline",
-                "strike",
-                "align",
-                "blockquote",
-                "list",
-                "bullet",
-                "indent",
-                "link",
-                "image",
-                "video",
-                "code-block",
-              ]}
-            />
-            {errors.content?.message && (
-              <p className="text-base text-red-400">
-                {errors.content?.message}
-              </p>
-            )}
-          </div>
           <div className="w-fit">
             <p>Chọn ảnh review</p>
             <label className="block">

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ScrollTop() {
   return (
-    <div className=" z-50 bottom-36 right-10 fixed">
+    <div className=" z-10 bottom-10 left-5 fixed">
       <Button onClick={() => window.scrollTo(0, 0)} color="blue" size="lg">
         <i className="fa-solid fa-arrow-up"></i>
       </Button>

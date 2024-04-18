@@ -5,41 +5,41 @@ import { closeModal } from "./ModalSlice";
 import { setLoading } from "./LoadingSlice";
 
 const initialState = {
-  listAllBlog: [],
-  blogDetail: {},
+  listAllPartner: [],
+  partnerDetail: {},
 };
 
-export const BlogSlice = createSlice({
-  name: "blog",
+export const partnerSlice = createSlice({
+  name: "partner",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllBlog.fulfilled, (state, action) => {
-      state.listAllBlog = action.payload;
+    builder.addCase(getAllPartner.fulfilled, (state, action) => {
+      state.listAllPartner = action.payload;
     });
-    builder.addCase(searchBlog.fulfilled, (state, action) => {
-      state.listAllBlog = action.payload;
+    builder.addCase(searchPartner.fulfilled, (state, action) => {
+      state.listAllPartner = action.payload;
     });
-    builder.addCase(getDetailBlog.fulfilled, (state, action) => {
-      state.blogDetail = action.payload;
+    builder.addCase(getDetailPartner.fulfilled, (state, action) => {
+      state.partnerDetail = action.payload;
     });
   },
 });
 
-//get all Blog
-export const getAllBlog = createAsyncThunk(
-  "blog/getAllBlog",
+//get all Partner
+export const getAllPartner = createAsyncThunk(
+  "partner/getAllPartner",
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
       if (payload) {
         const data = await api.get(
-          `/blog/all?page=${payload.page}&limit=${payload.limit}`
+          `/partner/all?page=${payload.page}&limit=${payload.limit}`
         );
         dispatch(setLoading(false));
         return data;
       }
-      const data = await api.get(`/blog/all`);
+      const data = await api.get(`/partner/all`);
       dispatch(setLoading(false));
 
       return data;
@@ -49,20 +49,20 @@ export const getAllBlog = createAsyncThunk(
     }
   }
 );
-export const createBlog = createAsyncThunk(
-  "blog/createBlog",
+export const createPartner = createAsyncThunk(
+  "partner/createPartner",
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
       dispatch(closeModal());
-      const { data } = await api.post(`/blog/create`, payload, {
+      const { data } = await api.post(`/partner/create`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      notify("success", "Tạo bài viết thành công");
+      notify("success", "Tạo đối tác thành công");
       dispatch(setLoading(false));
-      dispatch(getAllBlog());
+      dispatch(getAllPartner());
       return data;
     } catch (error) {
       dispatch(closeModal());
@@ -73,21 +73,21 @@ export const createBlog = createAsyncThunk(
     }
   }
 );
-export const updateBlog = createAsyncThunk(
-  "blog/updateBlog",
+export const updatePartner = createAsyncThunk(
+  "partner/updatePartner",
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      dispatch(closeModal());
-      const { data } = await api.put(`/blog/update/${id}`, payload, {
+      const { data } = await api.put(`/partner/update/${id}`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       console.log(data, "data");
-      notify("success", "Sửa blog thành công");
+      notify("success", "Sửa partner thành công");
+      dispatch(closeModal());
       dispatch(setLoading(false));
-      dispatch(getAllBlog());
+      dispatch(getAllPartner());
       return data;
     } catch (error) {
       dispatch(closeModal());
@@ -98,12 +98,12 @@ export const updateBlog = createAsyncThunk(
     }
   }
 );
-export const getDetailBlog = createAsyncThunk(
-  "blog/getDetailBlog",
-  async ({ slug }, { dispatch }) => {
+export const getDetailPartner = createAsyncThunk(
+  "partner/getDetailPartner",
+  async ({ id }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.get(`/blog/detail/${slug}`);
+      const { data } = await api.get(`/partner/detail/${id}`);
       dispatch(setLoading(false));
       return data;
     } catch (error) {
@@ -112,16 +112,16 @@ export const getDetailBlog = createAsyncThunk(
     }
   }
 );
-export const deleteBlog = createAsyncThunk(
-  "blog/deleteBlog",
+export const deletePartner = createAsyncThunk(
+  "partner/deletePartner",
   async (id, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.delete(`/blog/delete/${id}`);
+      const { data } = await api.delete(`/partner/delete/${id}`);
       console.log(data, "data");
-      notify("success", "Xóa blog thành công");
+      notify("success", "Xóa partner thành công");
       dispatch(setLoading(false));
-      dispatch(getAllBlog());
+      dispatch(getAllPartner());
       return data;
     } catch (error) {
       dispatch(setLoading(false));
@@ -131,17 +131,17 @@ export const deleteBlog = createAsyncThunk(
     }
   }
 );
-export const deleteAllBlog = createAsyncThunk(
-  "blog/deleteAllblog",
+export const deleteAllPartner = createAsyncThunk(
+  "partner/deleteAllpartner",
   async (listId, { dispatch }) => {
     dispatch(setLoading(true));
     try {
-      const { data } = await api.post(`/Blog/deleteAll`, {
+      const { data } = await api.post(`/partner/deleteAll`, {
         listDelete: listId,
       });
-      notify("success", "Xóa tất cả blog thành công");
+      notify("success", "Xóa tất cả đối tác thành công");
       dispatch(setLoading(false));
-      dispatch(getAllBlog());
+      dispatch(getAllPartner());
       return data;
     } catch (error) {
       dispatch(setLoading(false));
@@ -151,19 +151,19 @@ export const deleteAllBlog = createAsyncThunk(
     }
   }
 );
-export const searchBlog = createAsyncThunk(
-  "blog/searchblog",
+export const searchPartner = createAsyncThunk(
+  "partner/searchpartner",
   async ({ searchBy, searchValue }, { dispatch }) => {
     console.log(searchBy, searchValue, "search");
     dispatch(setLoading(true));
     try {
       if (searchValue.trim() == "") {
-        const data = await api.get(`/blog/all`);
+        const data = await api.get(`/partner/all`);
         dispatch(setLoading(false));
         return data;
       }
       const data = await api.get(
-        `/blog/all?searchBy=${searchBy}&searchValue=${searchValue}`
+        `/partner/all?searchBy=${searchBy}&searchValue=${searchValue}`
       );
       dispatch(setLoading(false));
       return data;
@@ -174,6 +174,6 @@ export const searchBlog = createAsyncThunk(
     }
   }
 );
-export const {} = BlogSlice.actions;
+export const {} = partnerSlice.actions;
 
-export default BlogSlice.reducer;
+export default partnerSlice.reducer;

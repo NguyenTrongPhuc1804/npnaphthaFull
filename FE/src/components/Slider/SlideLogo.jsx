@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
-export default function SlideLogo() {
+export default function SlideLogo({ listAllPartner }) {
   return (
     <div>
       <Swiper
@@ -49,14 +49,15 @@ export default function SlideLogo() {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((item, idx) => (
+        {listAllPartner?.data?.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div className="flex-col flex w-full justify-center items-center">
+            <div className="flex-col flex w-full justify-center items-center cursor-grab">
               <img
-                className="w-[80%] lg:h-[150px] h-[80px] object-cover"
-                src="https://npnaphtha.com.vn/images/d3.jpg"
-                alt="https://anmedia.vn/wp-content/uploads/2022/02/Logo-1.png"
+                className="w-[80%] lg:h-[150px] h-[80px] object-cover rounded-lg"
+                src={item.image}
+                alt={item.image}
               />
+              {/* <p className="mt-2">{item.name}</p> */}
             </div>
           </SwiperSlide>
         ))}

@@ -42,13 +42,13 @@ function ChatUserComponent() {
   };
   return (
     <div className="">
-      <div className="fixed bottom-10 right-10 z-10 ">
+      <div className="fixed bottom-10 right-[1rem] z-10 ">
         <Button
           onClick={() => setShowForm(true)}
           color="blue"
-          className="rounded-full py-4"
+          className="rounded-full px-3 py-3"
         >
-          <i className="fa-regular fa-comments text-3xl"></i>
+          <i className="fa-regular fa-comments text-lg lg:text-2xl"></i>
         </Button>
       </div>
       <div

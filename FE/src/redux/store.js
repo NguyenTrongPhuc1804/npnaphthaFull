@@ -12,6 +12,7 @@ import contactSlice from "./reducer/ContactSlice";
 import bannerSlice from "./reducer/BannerSlice";
 import authSlice from "./reducer/AuthSlice";
 import videoBannerSlice from "./reducer/VideoBannerSlice";
+import partnerSlice from "./reducer/PartnerSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     bannerSlice,
     authSlice,
     videoBannerSlice,
+    partnerSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

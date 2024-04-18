@@ -37,6 +37,8 @@ import ManagementBlog from "./pages/AdminPage/ManagementBlog/ManagementBlog";
 import ManagementContact from "./pages/AdminPage/ManagementContact/ManagementContact";
 import ManagementBanners from "./pages/AdminPage/ManagementBanner/ManagementBanner";
 import ManagementVideoBanner from "./pages/AdminPage/ManagementVideoBanner/ManagementVideoBanner";
+import ManagementPartner from "./pages/AdminPage/ManagementPartner/ManagementPartner";
+import NotFound404 from "./pages/404/NotFound404";
 export default function App() {
   const { isLogin } = useSelector((state) => state.userSlice);
   useEffect(() => {}, [isLogin]);
@@ -59,13 +61,7 @@ export default function App() {
 
             <Route
               path="/admin"
-              element={
-                localStorage.getItem("access_token") ? (
-                  <AdminTheme />
-                ) : (
-                  <Navigate to="/login" />
-                )
-              }
+              element={isLogin ? <AdminTheme /> : <Navigate to="/login" />}
             >
               <Route path="" element={<ManagementUserPage />} />
               <Route path="product" element={<ManagementProductPage />} />
@@ -77,8 +73,10 @@ export default function App() {
               <Route path="video-banner" element={<ManagementVideoBanner />} />
               <Route path="contact" element={<ManagementContact />} />
               <Route path="my-profile" element={<ProfileUser />} />
+              <Route path="partner" element={<ManagementPartner />} />
             </Route>
             {/* <Route path="/register" element={<RegisterPage />} /> */}
+            <Route path="*" element={<NotFound404 />} />
           </Routes>
           <Loading />
           <ToastContainer

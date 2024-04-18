@@ -78,6 +78,7 @@ export const updateVideoBanner = createAsyncThunk(
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
+      dispatch(closeModal());
       const { data } = await api.put(`/video-banner/update/${id}`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -85,7 +86,6 @@ export const updateVideoBanner = createAsyncThunk(
       });
       console.log(data, "data");
       notify("success", "Sửa video thành công");
-      dispatch(closeModal());
       dispatch(setLoading(false));
       dispatch(getAllVideoBanner());
       return data;

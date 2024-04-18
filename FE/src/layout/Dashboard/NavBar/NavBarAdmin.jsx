@@ -205,7 +205,7 @@ export default function NavBarAdmin() {
                 className="w-8 h-8 rounded-full"
                 src={
                   userInfo.avatar
-                    ? userInfo.avatar
+                    ? userInfo?.avatar
                     : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
                 }
                 alt="user photo"
@@ -251,6 +251,18 @@ export default function NavBarAdmin() {
                     className="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                   >
                     Thông tin tài khoản
+                  </button>
+                </li>
+                <li>
+                  <button className="w-full text-left block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
+                    Trạng thái:{" "}
+                    <strong
+                      className={`${
+                        userInfo.role === "ADMIN" && "text-green-400"
+                      }`}
+                    >
+                      {userInfo.role === "ADMIN" ? "Quản trị" : "Người dùng"}
+                    </strong>
                   </button>
                 </li>
                 {/* <li>

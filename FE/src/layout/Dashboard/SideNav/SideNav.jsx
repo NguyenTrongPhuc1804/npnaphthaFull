@@ -146,6 +146,23 @@ export function SideNav() {
             </li>
             <li>
               <NavLink
+                to="/admin/partner"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              >
+                <Button
+                  variant={active == "partner" ? "gradient" : "outlined"}
+                  onClick={() => localStorage.setItem("sidenav", "partner")}
+                  className="w-full flex justify-start items-center"
+                >
+                  <i className="fa-solid fa-handshake"></i>
+                  <span className="flex-1 ms-3 whitespace-nowrap">
+                    Quản lý đối tác
+                  </span>
+                </Button>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/admin/banner"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -154,7 +171,7 @@ export function SideNav() {
                   onClick={() => localStorage.setItem("sidenav", "banner")}
                   className="w-full flex justify-start items-center"
                 >
-                  <i class="fa-solid fa-image"></i>
+                  <i className="fa-solid fa-image"></i>
                   <span className="flex-1 ms-3 whitespace-nowrap">
                     Quản lý banner
                   </span>
@@ -173,7 +190,7 @@ export function SideNav() {
                   }
                   className="w-full flex justify-start items-center"
                 >
-                  <i class="fa-solid fa-video"></i>
+                  <i className="fa-solid fa-video"></i>
                   <span className="flex-1 ms-3 whitespace-nowrap">
                     Quản lý video banner
                   </span>
@@ -212,7 +229,7 @@ export function SideNav() {
                   onClick={() => localStorage.setItem("sidenav", "contact")}
                   className="w-full flex justify-start items-center"
                 >
-                  <i className="fa-solid fa-comment"></i>
+                  <i className="fa-solid fa-address-book"></i>
                   <span className="flex-1 ms-3 whitespace-nowrap">
                     Quản lý liên hệ
                   </span>

@@ -33,6 +33,7 @@ import {
   searchBlog,
 } from "../../../redux/reducer/BlogSlice";
 import FormUpdateBlog from "../../../components/Form/Blog/FormUpdateBlog";
+import { useNavigate } from "react-router-dom";
 
 const TABS = [
   {
@@ -55,6 +56,7 @@ const TABLE_HEAD = [
 ];
 
 export default function ManagementBlog() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //state
   const { listAllBlog } = useSelector((state) => state.BlogSlice);
@@ -172,10 +174,17 @@ export default function ManagementBlog() {
                 : "p-4 border-b border-blue-gray-50 truncate";
 
               return (
-                <tr key={item._id}>
+                <tr
+                  onClick={(e) => {
+                    navigate(`/blog/${item.slug}`);
+                  }}
+                  className="cursor-pointer hover:bg-blue-100 transition duration-300"
+                  key={item._id}
+                >
                   <td className={classes}>
                     <Checkbox
                       value={item._id}
+                      onClick={(e) => e.stopPropagation()}
                       onChange={(e) => {
                         if (e.target.checked) {
                           setListDelete([...listDelete, e.target.value]);
@@ -236,7 +245,7 @@ export default function ManagementBlog() {
                       {moment(item.createdAt).format("DD/MM/YYYY")}
                     </Typography>
                   </td>
-                  <td className={classes}>
+                  <td onClick={(e) => e.stopPropagation()} className={classes}>
                     <Tooltip content="Sửa blog">
                       <IconButton
                         onClick={() =>

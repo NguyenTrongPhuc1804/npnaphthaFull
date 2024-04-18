@@ -7,6 +7,8 @@ import ChatPage from "../../pages/ChatPage/ChatPage";
 import { Button } from "@material-tailwind/react";
 import InputComponent from "../../components/Input/InputComponent";
 import ChatUserComponent from "../../components/ChatHomePage/ChatUserComponent";
+import FacebookWidget from "../../widget/FacebookWidget/FacebookWidget";
+import ZaloWidget from "../../widget/ZaloWidget/ZaloWidget";
 
 export default function UserTheme() {
   const data = useParams();
@@ -17,6 +19,8 @@ export default function UserTheme() {
       <Outlet />
       <ScrollTop />
       <ChatUserComponent />
+      <FacebookWidget />
+      <ZaloWidget />
       <Footer />
     </div>
   );

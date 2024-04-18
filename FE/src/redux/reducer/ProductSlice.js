@@ -54,6 +54,7 @@ export const createProduct = createAsyncThunk(
   async (payload, { dispatch }) => {
     dispatch(setLoading(true));
     try {
+      dispatch(closeModal());
       const { data } = await api.post(`/product/create`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -61,7 +62,6 @@ export const createProduct = createAsyncThunk(
       });
       console.log(data, "data");
       notify("success", "Tạo sản phẩm thành công");
-      dispatch(closeModal());
       dispatch(setLoading(false));
       dispatch(getAllProduct());
       return data;
@@ -79,6 +79,7 @@ export const updateProduct = createAsyncThunk(
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
+      dispatch(closeModal());
       const { data } = await api.put(`/product/update/${id}`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -86,7 +87,6 @@ export const updateProduct = createAsyncThunk(
       });
       console.log(data, "data");
       notify("success", "Sửa sản phẩm thành công");
-      dispatch(closeModal());
       dispatch(setLoading(false));
       dispatch(getAllProduct());
       return data;

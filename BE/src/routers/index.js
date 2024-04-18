@@ -9,6 +9,7 @@ const blogRouter = require("./blogRouter.js");
 const contactRouter = require("./contactRouter.js");
 const bannerRouter = require("./bannerRouter.js");
 const videoBannerRouter = require("./videoBannerRouter.js");
+const partnerRouter = require("./PartnerRouter.js");
 
 const rootRouter = express.Router();
 rootRouter.use("/user", userRouter);
@@ -21,4 +22,5 @@ rootRouter.use("/map", siteMapRouter);
 rootRouter.use("/contact", contactRouter);
 rootRouter.use("/banner", bannerRouter);
 rootRouter.use("/video-banner", videoBannerRouter);
+rootRouter.use("/partner", partnerRouter);
 module.exports = rootRouter;

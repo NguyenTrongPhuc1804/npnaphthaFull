@@ -30,7 +30,10 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
         .required(validateMess.REQUIRE),
       description: yup.string().required(validateMess.REQUIRE),
       type: yup.string().required(validateMess.REQUIRE),
-      slug: yup.string().required(validateMess.REQUIRE),
+      slug: yup
+        .string()
+        .matches(/^[^\s]*$/, "Không được chứa khoảng trắng")
+        .required(validateMess.REQUIRE),
     })
     .required();
   const {

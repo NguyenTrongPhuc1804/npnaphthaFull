@@ -9,7 +9,6 @@ export default function Banner({ data }) {
   const { t } = useTranslation();
   const { listAllBanner } = useSelector((state) => state.bannerSlice);
   const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
-  console.log(listAllVideo?.data?.length, "listAllVideo");
   useEffect(() => {
     dispatch(getAllBanner());
     dispatch(getAllVideoBanner());
@@ -17,7 +16,7 @@ export default function Banner({ data }) {
   return (
     <>
       <div className="container ">
-        <div className="row px-10 lg:px-20">
+        <div className="row px-10 lg:px-20 ">
           <div className="col-lg-5 col-12 m-auto">
             <div className="heroText">
               <h1 className="text-white lg:text-6xl text-4xl font-bold mb-lg-5 mb-3 uppercase">
@@ -132,7 +131,7 @@ export default function Banner({ data }) {
           </div>
         </div>
       </div>
-      <div className="video-wrap">
+      <div className="video-wrap ">
         {listAllVideo?.data?.length > 0 && (
           <video autoPlay loop muted className="custom-video" poster>
             <source src={listAllVideo.data[0].url} type="video/mp4" />

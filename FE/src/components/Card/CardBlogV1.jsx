@@ -14,7 +14,7 @@ export default function CardBlogV1({ item }) {
           <img
             src={item?.image}
             className="img-fluid news-image h-[350px] object-cover"
-            alt
+            alt={item?.image}
           />
         </div>
         <div className="news-text-info news-text-info-large">
