@@ -8,7 +8,7 @@ import { setCurrentUser } from "./AuthSlice";
 const initialState = {
   userLogin: {},
   userInfo: {},
-  isLogin: false,
+  isLogin: "",
   allUserList: [],
 };
 
