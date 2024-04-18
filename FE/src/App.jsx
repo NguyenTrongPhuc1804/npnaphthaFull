@@ -61,7 +61,13 @@ export default function App() {
 
             <Route
               path="/admin"
-              element={isLogin ? <AdminTheme /> : <Navigate to="/login" />}
+              element={
+                localStorage.getItem("access_token") ? (
+                  <AdminTheme />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
             >
               <Route path="" element={<ManagementUserPage />} />
               <Route path="product" element={<ManagementProductPage />} />
