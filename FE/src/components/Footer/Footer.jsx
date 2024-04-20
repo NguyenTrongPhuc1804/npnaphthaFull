@@ -82,15 +82,13 @@ export default function Footer() {
             <p className="text-white mb-lg-4 mb-3 text-2xl font-bold text-center">
               {t("content.map")}
             </p>
-            <iframe
+            {/* <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2368240724395!2d106.660375026679!3d10.793165195595117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175293260a3dc51%3A0x17673bdc7d97b5ff!2zTmhhIEtob2EgVGjhuqltIE3hu7kgxJDhuqFpIE5hbSA1!5e0!3m2!1svi!2s!4v1710615545978!5m2!1svi!2s"
               width="100%"
               height="350"
-              // style="border:0;"
-              // allowfullscreen=""
+           
               loading="lazy"
-              // referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            ></iframe> */}
           </div>
         </div>
         {/* row ending */}
