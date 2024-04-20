@@ -59,7 +59,7 @@ export default function AboutPage() {
             </div>
             <div className="col-lg-6 col-12 mb-2 ">
               <img
-                src="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
+                src={require("../../assets/images/image-nph.jpg")}
                 className="h-[300px] sm:h-[500px] w-full rounded-lg"
               />
             </div>
