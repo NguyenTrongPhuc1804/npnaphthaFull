@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="sm:w-[120px] w-[100px] " href="index.html">
             <img
               className="w-full h-full block object-cover"
-              src="https://npnaphtha.com.vn/images/logo-cty.gif"
+              src={require("../../assets/images/logo-cty.jpg")}
             />
           </div>
         </div>
