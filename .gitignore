@@ -10,7 +10,7 @@ lerna-debug.log*
 node_modules
 FE/.env
 BE/.env
-/FE/public
+
 /BE/public
 dist-ssr
 *.local
