@@ -36,7 +36,7 @@ export default function BlogDetail() {
         <meta name="keywords" content={blogDetail?.title}></meta>
         <meta property="og:description" content={blogDetail?.title} />
         <meta name="description" content={blogDetail?.title} />
-        <meta property="og:image" content={blogDetail?.image} />
+        <meta property="og:image" key="og:image" content={blogDetail?.image} />
         {/* <meta
           property="og:image"
           content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
