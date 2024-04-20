@@ -47,14 +47,14 @@ export default function ProductDetailPage() {
         <link
           rel="canonical"
           href={`${import.meta.env.VITE_URL_DOMAIN}/product/${
-            productDetail.slug
+            productDetail?.slug
           }`}
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
           content={`${import.meta.env.VITE_URL_DOMAIN}/product/${
-            productDetail.slug
+            productDetail?.slug
           }`}
         />
         <meta property="og:title" content={productDetail?.name} />
