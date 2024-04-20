@@ -85,13 +85,13 @@ export const updateCatalogue = createAsyncThunk(
   async ({ id, payload }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
+      dispatch(closeModal());
       const data = await api.put(`/catalogue/update/${id}`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       notify("success", data.message);
-      dispatch(closeModal());
       dispatch(setLoading(false));
       dispatch(getAllCatalogue());
       return data;
