@@ -43,6 +43,7 @@ export default function Banner({ data }) {
                   >
                     <div className="carousel-image-wrap">
                       <img
+                        loading="lazy"
                         src={item.image}
                         className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
                         alt={item.image}
