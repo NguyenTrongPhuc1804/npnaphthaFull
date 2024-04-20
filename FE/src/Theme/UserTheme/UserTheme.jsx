@@ -19,7 +19,6 @@ export default function UserTheme() {
       <Outlet />
       <ScrollTop />
       <ChatUserComponent />
-      <FacebookWidget />
       <ZaloWidget />
       <Footer />
     </div>

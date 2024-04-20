@@ -72,8 +72,8 @@ function ChatUserComponent() {
             Vui lòng điền họ tên và email để nhắn tin trực tiếp với quản trị
             viên{" "}
             <strong className="italic text-colorPrimary">
-              Nếu như quản trị viên không trả lời bạn có thể liên hệ qua
-              facebook hoặc zalo để được liên hệ nhanh nhất
+              Nếu như quản trị viên lâu trả lời bạn có thể liên hệ qua zalo để
+              được trả lời nhanh nhất
             </strong>
           </p>
           <div className="mb-4 w-full">
