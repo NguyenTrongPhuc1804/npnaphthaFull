@@ -155,10 +155,9 @@ export const deleteAllProduct = createAsyncThunk(
 export const searchProduct = createAsyncThunk(
   "product/searchProduct",
   async ({ searchBy, searchValue }, { dispatch }) => {
-    console.log(searchBy, searchValue, "search");
     dispatch(setLoading(true));
     try {
-      if (searchValue.trim() == "") {
+      if (searchValue == "") {
         const data = await api.get(`/product/all`);
         dispatch(setLoading(false));
         return data;
