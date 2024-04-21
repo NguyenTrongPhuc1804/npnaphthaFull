@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 export const api = axios.create({
-  baseURL: window.process.env.VITE_URL_API,
+  baseURL: import.meta.env.VITE_URL_API,
   headers: { "X-Custom-Header": "foobar" },
   withCredentials: true,
   credentials: "include",
@@ -18,7 +18,7 @@ api.interceptors.request.use(
     if (decodeToken?.exp < date.getTime() / 1000) {
       try {
         const { data } = await axios.post(
-          `${window.process.env.VITE_URL_API}/user/refresh-token`,
+          `${import.meta.env.VITE_URL_API}/user/refresh-token`,
           {},
           {
             withCredentials: true,

@@ -37,12 +37,12 @@ export default function ProductPage() {
 
         <link
           rel="canonical"
-          href={`${window.process.env.VITE_URL_DOMAIN}/product`}
+          href={`${import.meta.env.VITE_URL_DOMAIN}/product`}
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`${window.process.env.VITE_URL_DOMAIN}/product`}
+          content={`${import.meta.env.VITE_URL_DOMAIN}/product`}
         />
         <meta property="og:title" content="Sản phẩm - npnaphtha.com.vn" />
         <meta
