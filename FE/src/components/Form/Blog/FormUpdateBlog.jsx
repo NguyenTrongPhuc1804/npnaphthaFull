@@ -96,7 +96,7 @@ export default function FormUpdateBlog({ data }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
-                  example={"Bbai-viet-1"}
+                  example={"bai-viet-1"}
                   title="Đường dẫn tĩnh"
                   register={field}
                   messErr={errors.slug?.message}
