@@ -85,7 +85,7 @@ export default function FormUpdateBanner({ data }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
-                  title="Đường dẫn tĩnh"
+                  title="Tiêu đề phụ"
                   register={field}
                   messErr={errors.sub_title?.message}
                 />
