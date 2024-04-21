@@ -34,7 +34,7 @@ export default function HomePage() {
   const { t } = useTranslation();
   // const getData = async () => {
   //   try {
-  //     const res = await axios.get(`${import.meta.env.VITE_URL_API}product/all`);
+  //     const res = await axios.get(`${window.process.env.VITE_URL_API}product/all`);
   //     return res;
   //   } catch (error) {
   //     console.log(error, "err");
@@ -56,13 +56,13 @@ export default function HomePage() {
       <Helmet>
         <title>Trang chủ - npnaphtha.com.vn</title>
 
-        <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
+        <link rel="canonical" href={window.process.env.VITE_URL_DOMAIN} />
         <meta property="og:type" content="website" />
         <meta
           name="description"
           content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
         />
-        <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
+        <meta property="og:url" content={window.process.env.VITE_URL_DOMAIN} />
         <meta property="og:title" content="Trang chủ - npnaphtha.com.vn" />
         <meta
           name="keywords"

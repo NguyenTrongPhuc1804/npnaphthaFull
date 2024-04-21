@@ -20,12 +20,12 @@ export default function AboutPage() {
 
           <link
             rel="canonical"
-            href={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+            href={`${window.process.env.VITE_URL_DOMAIN}/about`}
           />
           <meta property="og:type" content="website" />
           <meta
             property="og:url"
-            content={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+            content={`${window.process.env.VITE_URL_DOMAIN}/about`}
           />
           <meta property="og:title" content="Về chúng tôi - npnaphtha.com.vn" />
           <meta

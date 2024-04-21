@@ -21,16 +21,12 @@ export default function BlogDetail() {
 
         <link
           rel="canonical"
-          href={`${import.meta.env.VITE_URL_DOMAIN}/product/${
-            blogDetail?.slug
-          }`}
+          href={`${window.process.env.VITE_URL_DOMAIN}/product/${blogDetail?.slug}`}
         />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`${import.meta.env.VITE_URL_DOMAIN}/product/${
-            blogDetail?.slug
-          }`}
+          content={`${window.process.env.VITE_URL_DOMAIN}/product/${blogDetail?.slug}`}
         />
         <meta property="og:title" content={blogDetail?.title} />
         <meta name="keywords" content={blogDetail?.title}></meta>
