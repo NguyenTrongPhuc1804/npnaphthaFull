@@ -16,11 +16,10 @@ export function SideNav() {
   const dispatch = useDispatch();
   const { isOpenSideNav } = useSelector((state) => state.loadingSlice);
   const { data } = useSelector((state) => state.contactSlice.listAllContact);
+
   const [open, setOpen] = React.useState(true);
   const [listRoom, setListRoom] = useState([]);
-  const [active, setActive] = useState(
-    localStorage.getItem("sidenav") ?? "user"
-  );
+  const [active, setActive] = useState("product");
   const closeSideNav = () => {
     dispatch(showSideNav(false));
   };
@@ -61,26 +60,6 @@ export function SideNav() {
                 to="/admin/"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                {JSON.parse(localStorage.getItem("user_info"))?.role ==
-                  "ADMIN" && (
-                  <Button
-                    variant={active == "user" ? "gradient" : "outlined"}
-                    onClick={() => localStorage.setItem("sidenav", "user")}
-                    className="w-full flex justify-start items-center"
-                  >
-                    <i className="fa-solid fa-user-group "></i>
-                    <span className="flex-1 ms-3 whitespace-nowrap">
-                      Quản lý người dùng
-                    </span>
-                  </Button>
-                )}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin/product"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
                 <Button
                   variant={active == "product" ? "gradient" : "outlined"}
                   onClick={() => localStorage.setItem("sidenav", "product")}
@@ -93,6 +72,26 @@ export function SideNav() {
                 </Button>
               </NavLink>
             </li>
+            {JSON.parse(localStorage.getItem("user_info"))?.role == "ADMIN" && (
+              <li>
+                <NavLink
+                  to="/admin/user"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                >
+                  <Button
+                    variant={active == "user" ? "gradient" : "outlined"}
+                    onClick={() => localStorage.setItem("sidenav", "user")}
+                    className="w-full flex justify-start items-center"
+                  >
+                    <i className="fa-solid fa-user-group "></i>
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Quản lý người dùng
+                    </span>
+                  </Button>
+                </NavLink>
+              </li>
+            )}
+
             <li>
               <NavLink
                 to="/admin/blog"

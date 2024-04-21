@@ -86,6 +86,7 @@ export default function ManagementProductPage() {
   useEffect(() => {
     dispatch(getAllProduct());
     dispatch(getAllCategory());
+    localStorage.setItem("sidenav", "product");
   }, []);
   return (
     <Card className="h-full w-full">

@@ -57,6 +57,7 @@ export default function ManagementUserPage() {
   const dispatch = useDispatch();
   //state
   const { allUserList } = useSelector((state) => state.userSlice);
+
   const [currentPage, setCurrentPage] = useState(0);
   const [popover, setPopover] = useState(false);
   const [searchBy, setSearchBy] = useState("name");

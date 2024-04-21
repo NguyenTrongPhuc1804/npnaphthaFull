@@ -204,9 +204,8 @@ export default function NavBarAdmin() {
               <img
                 className="w-8 h-8 rounded-full"
                 src={
-                  userInfo.avatar
-                    ? userInfo?.avatar
-                    : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
+                  userInfo.avatar ??
+                  "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
                 }
                 alt="user photo"
               />
