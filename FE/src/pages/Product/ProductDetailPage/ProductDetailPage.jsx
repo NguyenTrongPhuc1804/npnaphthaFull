@@ -43,6 +43,7 @@ export default function ProductDetailPage() {
     <section className=" mt-[5rem] lg:mt-[8rem] p-6 lg:pt-10 ">
       <Helmet>
         <title>{productDetail?.name}</title>
+        <meta name="description" content={productDetail?.name} />
 
         <link
           rel="canonical"
@@ -60,7 +61,6 @@ export default function ProductDetailPage() {
         <meta property="og:title" content={productDetail?.name} />
         <meta name="keywords" content={productDetail?.name}></meta>
         <meta property="og:description" content={productDetail?.name} />
-        <meta name="description" content={productDetail?.name} />
         <meta property="og:image" content={productDetail?.image} />
         {/* <meta
           property="og:image"
