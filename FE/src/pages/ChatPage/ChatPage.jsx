@@ -36,7 +36,7 @@ export default function ChatPage({ setShowChatBox, roomInfo }) {
   const [listMessage, setListMessage] = useState([]);
 
   // socketRef.current = io("http://localhost:3000");
-  const socket = useMemo(() => io(process.env.VITE_URL_SOCKET), [false]);
+  const socket = useMemo(() => io(import.meta.env.VITE_URL_SOCKET), [false]);
 
   //handle event
   const handelSendMess = (e) => {
