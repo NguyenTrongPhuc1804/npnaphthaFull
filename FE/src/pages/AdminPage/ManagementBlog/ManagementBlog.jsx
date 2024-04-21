@@ -126,7 +126,7 @@ export default function ManagementBlog() {
           </Tabs> */}
           <div className="w-full md:w-72">
             <Input
-              label="Tìm kiếm theo tên sản phẩm"
+              label="Tìm kiếm theo tên bài viết"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               icon={
