@@ -99,6 +99,7 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
+                  example={"Sản phẩm 1"}
                   title="Tên sản phẩm"
                   register={field}
                   messErr={errors.name?.message}
@@ -112,6 +113,7 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
+                  example={"san-pham-1"}
                   title="Đường dẫn tĩnh"
                   register={field}
                   messErr={errors.slug?.message}

@@ -82,6 +82,7 @@ export default function FormUpdateBlog({ data }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
+                  example={"Bài viết 1"}
                   title="Tiêu đề bài viết"
                   register={field}
                   messErr={errors.title?.message}
@@ -95,6 +96,7 @@ export default function FormUpdateBlog({ data }) {
               control={control}
               render={({ field }) => (
                 <InputComponent
+                  example={"Bbai-viet-1"}
                   title="Đường dẫn tĩnh"
                   register={field}
                   messErr={errors.slug?.message}

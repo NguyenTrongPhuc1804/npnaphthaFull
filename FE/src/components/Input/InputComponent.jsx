@@ -6,11 +6,14 @@ export default function InputComponent({
   register,
   messErr,
   isNumber,
+  example,
 }) {
   const [showPass, setShowPass] = useState(isPassword ? true : false);
   return (
     <div className="">
-      <p className="text-base">{title}</p>
+      <p className="text-base">
+        {title} {example && <strong>VD: {example}</strong>}
+      </p>
       <div className="relative w-full min-w-[200px] h-10">
         <Input
           {...register}
