@@ -69,8 +69,8 @@ export default function App() {
                 )
               }
             >
-              <Route path="user" element={<ManagementUserPage />} />
               <Route path="" element={<ManagementProductPage />} />
+              <Route path="user" element={<ManagementUserPage />} />
               <Route path="category" element={<ManagementCategory />} />
               <Route path="catalogue" element={<ManagementCatalogue />} />
               <Route path="blog" element={<ManagementBlog />} />
