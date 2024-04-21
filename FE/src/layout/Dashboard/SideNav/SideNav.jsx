@@ -16,6 +16,7 @@ export function SideNav() {
   const dispatch = useDispatch();
   const { isOpenSideNav } = useSelector((state) => state.loadingSlice);
   const { data } = useSelector((state) => state.contactSlice.listAllContact);
+  const { userInfo } = useSelector((state) => state.userSlice);
 
   const [open, setOpen] = React.useState(true);
   const [listRoom, setListRoom] = useState([]);
@@ -72,7 +73,7 @@ export function SideNav() {
                 </Button>
               </NavLink>
             </li>
-            {JSON.parse(localStorage.getItem("user_info"))?.role == "ADMIN" && (
+            {userInfo?.role == "ADMIN" && (
               <li>
                 <NavLink
                   to="/admin/user"
