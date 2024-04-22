@@ -8,7 +8,7 @@ export default function InputComponent({
   isNumber,
   example,
 }) {
-  const [showPass, setShowPass] = useState(true);
+  const [showPass, setShowPass] = useState(isPassword ? true : false);
   return (
     <div className="">
       <p className="text-base">
