@@ -7,9 +7,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`site-footer section-padding bg-[url('${
-        import.meta.env.VITE_URL_DOMAIN
-      }image-nph.jpg')]`}
+      className={`site-footer section-padding bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]`}
     >
       <div className="container">
         <div className="col-12 flex lg:justify-start justify-start ">
