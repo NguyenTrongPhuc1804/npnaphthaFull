@@ -86,10 +86,10 @@ export default function Footer() {
               {t("content.map")}
             </p>
             <iframe
-              loading="lazy"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2368240724395!2d106.660375026679!3d10.793165195595117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175293260a3dc51%3A0x17673bdc7d97b5ff!2zTmhhIEtob2EgVGjhuqltIE3hu7kgxJDhuqFpIE5hbSA1!5e0!3m2!1svi!2s!4v1710615545978!5m2!1svi!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d741.2911746017975!2d106.69362869516156!3d10.72690301764311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fb8d596b569%3A0x6f4f2b173f93ca66!2zNDkgxJAgc-G7kSAxNCwgVMOibiBIxrBuZywgUXXhuq1uIDcsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1712996789065!5m2!1svi!2s"
               width="100%"
               height="350"
+              loading="lazy"
             ></iframe>
           </div>
         </div>
