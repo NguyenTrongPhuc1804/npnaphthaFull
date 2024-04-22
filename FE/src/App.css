@@ -675,7 +675,7 @@ strong {
 }
 
 .BgImage {
-  background-image: url("./public/image-nph.jpg");
+  background-image: url("../public/image-nph.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -686,7 +686,7 @@ strong {
   FOOTER              
 -----------------------------------------*/
 .site-footer {
-  background-image: url("./assets/images/image-nph.jpg");
+  background-image: url("../public/image-nph.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
