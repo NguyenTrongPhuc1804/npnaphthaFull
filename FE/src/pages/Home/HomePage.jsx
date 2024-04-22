@@ -166,7 +166,9 @@ export default function HomePage() {
         </div>
       </section>
       <section
-        className={`BgImage bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]`}
+        className={`BgImage bg-[url('${
+          import.meta.env.VITE_URL_DOMAIN
+        }/image-nph.jpg')]`}
       />
       <section className="my-10">
         <h2 className="text-center my-5 lg:text-4xl text-2xl font-bold uppercase">
