@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 export default function Footer() {
-  //const { t } = useTranslation();
-  const t = (string) => {
-    return string;
-  };
+  const { t } = useTranslation();
+
   return (
     <footer className="site-footer section-padding">
       <div className="container">

@@ -8,10 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { validateMess } from "../../toolkits/help";
 import { createContact } from "../../redux/reducer/ContactSlice";
 export default function ContactPage() {
-  //const { t } = useTranslation();
-  const t = (string) => {
-    return string;
-  };
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const schema = yup

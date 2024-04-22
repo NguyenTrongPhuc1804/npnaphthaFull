@@ -12,10 +12,8 @@ export default function BlogPage() {
   const dispatch = useDispatch();
   const { listAllBlog } = useSelector((state) => state.BlogSlice);
   console.log(listAllBlog, "all");
-  //const { t } = useTranslation();
-  const t = (string) => {
-    return string;
-  };
+  const { t } = useTranslation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getAllBlog());
