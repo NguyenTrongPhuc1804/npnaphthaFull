@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import { Input } from "@material-tailwind/react";
+import { useState } from "react";
 export default function InputComponent({
   isPassword,
   title,
@@ -8,7 +8,7 @@ export default function InputComponent({
   isNumber,
   example,
 }) {
-  const [showPass, setShowPass] = useState(isPassword ? true : false);
+  const [showPass, setShowPass] = useState(true);
   return (
     <div className="">
       <p className="text-base">
