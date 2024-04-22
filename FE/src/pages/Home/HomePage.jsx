@@ -165,7 +165,9 @@ export default function HomePage() {
           </BoxComponent>
         </div>
       </section>
-      <section className={`BgImage `} />
+      <section
+        className={`BgImage bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]`}
+      />
       <section className="my-10">
         <h2 className="text-center my-5 lg:text-4xl text-2xl font-bold uppercase">
           {t("content.affiliated-businesses")}

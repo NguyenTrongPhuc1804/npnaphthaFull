@@ -6,7 +6,7 @@ export default function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="site-footer section-padding">
+    <footer className="site-footer section-padding bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]">
       <div className="container">
         <div className="col-12 flex lg:justify-start justify-start ">
           <div className="sm:w-[120px] w-[100px] " href="index.html">
