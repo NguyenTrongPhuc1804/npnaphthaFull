@@ -60,7 +60,7 @@ export default function AboutPage() {
             </div>
             <div className="col-lg-6 col-12 mb-2 ">
               <img
-                src={`${import.meta.env.VITE_URL_DOMAIN}/image-nph.jpg`}
+                src={`${import.meta.env.VITE_URL_DOMAIN}image-nph.jpg`}
                 className="h-[300px] sm:h-[500px] w-full rounded-lg"
               />
             </div>
