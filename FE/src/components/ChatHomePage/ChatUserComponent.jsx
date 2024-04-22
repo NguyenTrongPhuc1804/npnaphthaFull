@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
 import * as yup from "yup";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Button } from "@material-tailwind/react";
 import InputComponent from "../Input/InputComponent";
 import ChatPage from "../../pages/ChatPage/ChatPage";
+import { useRef, useState } from "react";
 
 function ChatUserComponent() {
   const [showChatBox, setShowChatBox] = useState(false);
