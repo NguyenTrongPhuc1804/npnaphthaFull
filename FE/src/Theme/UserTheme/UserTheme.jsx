@@ -11,8 +11,6 @@ import FacebookWidget from "../../widget/FacebookWidget/FacebookWidget";
 import ZaloWidget from "../../widget/ZaloWidget/ZaloWidget";
 
 export default function UserTheme() {
-  const data = useParams();
-
   return (
     <div className="w-full bg-white ">
       <Header />
