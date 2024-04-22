@@ -147,7 +147,7 @@ export default function ContactPage() {
             <div className="col-lg-5 col-12 mx-auto mt-lg-5 mt-4">
               <img
                 className="w-full h-full object-cover rounded-lg"
-                src={require("../../assets/images/image-nph.jpg")}
+                src={"https://npnaphtha.com.vn/image-nph.jpg"}
                 alt=""
               />
             </div>
