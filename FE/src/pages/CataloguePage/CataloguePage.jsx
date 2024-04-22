@@ -9,7 +9,10 @@ import { getAllCatalogue } from "../../redux/reducer/CatalogueSlice";
 import CardPdf from "../../components/Card/CardPdf";
 import DefaultPagination from "../../components/Pagination/DefaultPagination";
 export default function CataloguePage() {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
+  const t = (string) => {
+    return string;
+  };
   const dispatch = useDispatch();
   const { listAllCatalogue } = useSelector((state) => state.catalogueSlice);
   console.log(listAllCatalogue, "data");

@@ -8,7 +8,10 @@ import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet-async";
 
 export default function AboutPage() {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
+  const t = (string) => {
+    return string;
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

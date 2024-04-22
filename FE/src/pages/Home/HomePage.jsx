@@ -31,7 +31,10 @@ export default function HomePage() {
   const { listAllPartner } = useSelector((state) => state.partnerSlice);
 
   const [filterProduct, setFillterProduct] = useState("all");
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
+  const t = (string) => {
+    return string;
+  };
   // const getData = async () => {
   //   try {
   //     const res = await axios.get(`${import.meta.env.VITE_URL_API}product/all`);

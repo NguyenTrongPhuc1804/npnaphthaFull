@@ -16,7 +16,10 @@ const arrButton = [
   { id: 1, name: "Chop2" },
 ];
 export default function ProductPage() {
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
+  const t = (string) => {
+    return string;
+  };
   const dispatch = useDispatch();
   const { listAllProduct } = useSelector((state) => state.productSlice);
   const { listAllCategory } = useSelector((state) => state.categorySlice);

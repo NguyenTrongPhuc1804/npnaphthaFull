@@ -6,7 +6,10 @@ import { getAllVideoBanner } from "../../redux/reducer/VideoBannerSlice";
 
 export default function Banner({ data }) {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
+  const t = (string) => {
+    return string;
+  };
   const { listAllBanner } = useSelector((state) => state.bannerSlice);
   const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
   useEffect(() => {
