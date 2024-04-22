@@ -19,11 +19,11 @@ export default function NavBarAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showProfile, setShowProfile] = useState(false);
-  const [showNoTi, setShowNoti] = useState(true);
   const { userInfo } = useSelector((state) => state.userSlice);
-  const [open, setOpen] = React.useState(true);
+  const [infoUser, setInfoUser] = React.useState("");
+
   const handleLogout = () => {
-    dispatch(logoutUser(userInfo._id));
+    dispatch(logoutUser(infoUser._id));
   };
   const showNavBar = () => {
     dispatch(showSideNav(true));
@@ -31,6 +31,7 @@ export default function NavBarAdmin() {
   useEffect(() => {
     const id = localStorage.getItem("user_id");
     dispatch(getDataillUser({ user_id: id }));
+    setInfoUser(JSON.parse(localStorage.getItem("user_info")));
   }, []);
   return (
     <header className="antialiased ">
@@ -204,8 +205,8 @@ export default function NavBarAdmin() {
               <img
                 className="w-8 h-8 rounded-full"
                 src={
-                  userInfo.avatar ??
-                  "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
+                  infoUser?.avatar ??
+                  require("../../../../public/fake_image.jpg")
                 }
                 alt="user photo"
               />
@@ -257,10 +258,10 @@ export default function NavBarAdmin() {
                     Trạng thái:{" "}
                     <strong
                       className={`${
-                        userInfo.role === "ADMIN" && "text-green-400"
+                        infoUser?.role === "ADMIN" && "text-green-400"
                       }`}
                     >
-                      {userInfo.role === "ADMIN" ? "Quản trị" : "Người dùng"}
+                      {infoUser?.role === "ADMIN" ? "Quản trị" : "Người dùng"}
                     </strong>
                   </button>
                 </li>
