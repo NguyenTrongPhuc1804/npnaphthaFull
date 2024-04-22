@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../../components/Header/Header";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import ScrollTop from "../../components/ScrollToTop/ScrollTop";
 import ChatPage from "../../pages/ChatPage/ChatPage";
