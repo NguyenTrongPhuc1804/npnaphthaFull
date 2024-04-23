@@ -29,14 +29,14 @@ export default function CataloguePage() {
       <SubBanner title={"E - Catalogue"} />
       <section className="mt-[2rem] mb-4">
         <div className="flex w-full justify-center ">
-          <Button
+          {/* <Button
             onClick={() => setButtonSelect("pdf")}
             color="blue"
             className="rounded-full mr-2 text-base"
             variant={buttonSelect === "pdf" ? "gradient" : "outlined"}
           >
             Link pdf
-          </Button>
+          </Button> */}
           {/* <Button
             onClick={() => setButtonSelect("video")}
             color="blue"

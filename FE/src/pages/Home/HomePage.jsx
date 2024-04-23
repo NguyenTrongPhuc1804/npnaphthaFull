@@ -177,13 +177,13 @@ export default function HomePage() {
         </div>
       </section>
       <section className="news section-padding">
-        <div className="container lg:px-20 px-10">
+        <div className="container   px-10">
           <div className="row">
             <h2 className="text-center mb-lg-5 mb-4 lg:text-4xl text-2xl font-bold uppercase">
               {t("content.NEWS-&-EVENTS")}
             </h2>
-            {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[0]} />}
-            {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[1]} />}
+            {/* {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[0]} />}
+            {listAllBlog.data && <CardBlogV1 item={listAllBlog?.data[1]} />} */}
             {listAllBlog?.data?.map((item, idx) => (
               <CardBlogV2 key={idx} item={item} />
             ))}

@@ -7,45 +7,36 @@ export default function Footer() {
 
   return (
     <footer
-      className={`site-footer section-padding bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]`}
+      className={`site-footer  bg-[url('https://npnaphtha.com.vn/image-nph.jpg')]`}
     >
       <div className="container">
         <div className="col-12 flex lg:justify-start justify-start ">
-          <div className="sm:w-[120px] w-[100px] " href="index.html">
+          {/* <div className="sm:w-[120px] w-[100px] " href="index.html">
             <img
               className="w-full h-full block object-cover"
               src={require("../../../public/favicon.ico")}
             />
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-around flex-wrap">
-          <div className="col-lg-4 col-md-7 col-xs-12 tooplate-mt30  text-left text-white">
+          <div className="col-lg-4 col-md-7 col-xs-12 tooplate-mt30  text-left text-white ">
             <p className="text-white mb-lg-4 mb-3 text-2xl font-bold uppercase">
               {t("content.contact")}
             </p>
-            <p className="text-xl font-bold mb-4">
-              CÔNG TY TNHH SẢN XUẤT THƯƠNG MẠI NP-NAPHTHA
-            </p>
+            {/* <p className="text-xl font-bold mb-4">
+              {t("content.intro-banner")}
+            </p> */}
             <div className="flex justify-center mb-2 ">
               <i className="fa-solid fa-house mr-2"></i>
-              <p>
-                Văn phòng : Số 49 Đường số 14, KDC Ven Sông, P Tân Phong, Quận.
-                7 Tp. HCM
-              </p>
+              <p>{t("content.Office")}</p>
             </div>
             <div className="flex justify-center mb-2 ">
               <i className="fa-solid fa-building mr-2"></i>
-              <p>
-                Nhà máy : Đường số 1 , KCN Đông Xuyên, TP. Vũng Tàu, Tỉnh Bà Rịa
-                Vũng Tàu
-              </p>
+              <p>{t("content.Factory")}</p>
             </div>
             <div className="flex justify-center mb-2 ">
               <i className="fa-solid fa-phone mr-2"></i>
-              <p>
-                Điện thoại: 0917 631 632 - 0972 434 849 (A. Nghĩa) ; 0919 498
-                129 - 0965 383 579(A. Phong)
-              </p>
+              <p>{t("content.Phone")}</p>
             </div>
             <div className="flex justify-center mb-2">
               <i className="fa-solid fa-envelope mr-2"></i>
@@ -55,7 +46,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-5 col-xs-12 tooplate-mt30 text-center">
+          <div className="col-lg-4 col-md-5 col-xs-12 tooplate-mt30 text-left pl-10 hidden lg:block">
             <p className="text-white mb-lg-4 mb-3 text-2xl font-bold uppercase">
               {t("content.Quick-link")}
             </p>
@@ -82,13 +73,13 @@ export default function Footer() {
             </ul>
           </div>
           <div className="col-lg-4 col-md-6 col-xs-12 tooplate-mt30">
-            <p className="text-white mb-lg-4 mb-3 text-2xl font-bold text-center">
+            <p className="text-white mb-lg-4 mb-3 text-2xl font-bold text-left">
               {t("content.map")}
             </p>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d741.2911746017975!2d106.69362869516156!3d10.72690301764311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752fb8d596b569%3A0x6f4f2b173f93ca66!2zNDkgxJAgc-G7kSAxNCwgVMOibiBIxrBuZywgUXXhuq1uIDcsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1712996789065!5m2!1svi!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.1062341072443!2d107.11225937508347!3d10.403390189723584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31757187c9838bd1%3A0xd1a9bd3c97318714!2zQ8O0bmcgVHkgVE5ISCBT4bqjbiBYdeG6pXQgdsOgIFRoxrDGoW5nIE3huqFpIE5QIC0gTkFQSFRIQQ!5e1!3m2!1svi!2s!4v1712996382242!5m2!1svi!2s"
               width="100%"
-              height="350"
+              height={350}
               loading="lazy"
             ></iframe>
           </div>

@@ -3,7 +3,7 @@
         "functional": "Hàm",
         "class": "Lớp",
         "text": "Đây là văn bản",
-        "affiliated-businesses":"DOANH NGHIỆP LIÊN KẾT",
+        "affiliated-businesses":"KHÁCH HÀNG",
         "home":"Trang chủ",
         "about":"Về chúng tôi",
         "product":"Sản phẩm",
@@ -36,7 +36,7 @@
         "Collection":"Bộ sưu tập",
         "Accompanying":"Đồng hành cùng bạn vươn tới tương lai",
         "intro-banner":"CÔNG TY TNHH SX TM NP-NAPHTHA",
-        "Quick-link":"Liên kết nhanh",
+        "Quick-link":"Danh mục MENU",
         "map":"Bản đồ",
         "contact-form":"Để lại lời nhắn cho chúng tôi",
         "fullname":"Họ và tên",
@@ -44,7 +44,16 @@
         "email":"Email",
         "message":"Lời nhắn",
         "send":"Gửi",
-        "new-blog":"Bài viết mới nhất"
+        "new-blog":"Bài viết mới nhất",
+        "All-blog":"Tất cả bài viết",
+        "Office":"Văn phòng : Số 49 Đường số 14, KDC Ven Sông, P Tân Phong, Quận. 7 Tp. HCM",
+        "Factory":"Nhà máy : Đường số 1 , KCN Đông Xuyên, TP. Vũng Tàu, Tỉnh Bà Rịa Vũng Tàu",
+        "Phone":"Điện thoại: 0917 631 632 - 0972 434 849 (A. Nghĩa) ; 0919 498 129 - 0965 383 579(A. Phong)",
+        "Name-product":"Tên sản phẩm",
+        "Description":"Mổ tả sản phẩm",
+        "Similar-product":"Sản phẩm tương tự",
+        "search-product":"Tìm kiếm sản phẩm"
+
 
     }
     }

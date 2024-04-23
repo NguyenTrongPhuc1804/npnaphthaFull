@@ -36,7 +36,7 @@
         "Collection":"Collection",
         "Accompanying":"Accompanying you to reach the future",
         "intro-banner":"NP-NAPHTHA PRODUCTION TRADING COMPANY LIMITED",
-        "Quick-link":"Quick link",
+        "Quick-link":"MENU LIST",
         "map":"Map",
         "contact-form":"Leave us a message",
         "fullname":"Full name",
@@ -44,7 +44,16 @@
         "email":"Email",
         "message":"Message",
         "send":"Send",
-        "new-blog":"Latest post"
+        "new-blog":"Latest post",
+        "All-blog":"All blog",
+        "Office":"Office: No. 49, Street 14, Riverside Residential Area, Tan Phong Ward, District. 7 City. HCM",
+        "Factory":"Factory: Road No. 1, Dong Xuyen Industrial Park, City. Vung Tau, Ba Ria Vung Tau Province",
+        "Phone":"Phone: 0917 631 632 - 0972 434 849 (A. Nghia); 0919 498 129 - 0965 383 579(A. Phong)",
+        "Name-product":"Name product",
+        "Description":"Description",
+        "Similar-product":"Similar product",
+        "search-product":"Search product"
+        
 
 
     }

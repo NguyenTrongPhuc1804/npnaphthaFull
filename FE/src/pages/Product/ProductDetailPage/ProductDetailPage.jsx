@@ -20,9 +20,12 @@ import { useParams } from "react-router-dom";
 import BoxComponent from "../../../components/BoxComponent/BoxComponent";
 import CardProductV2 from "../../../components/Card/CardProductV2";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
 export default function ProductDetailPage() {
   const dispatch = useDispatch();
   const { slug } = useParams();
+  const { t } = useTranslation();
+
   const { productDetail } = useSelector((state) => state.productSlice);
   const { listAllProduct } = useSelector((state) => state.productSlice);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -118,7 +121,7 @@ export default function ProductDetailPage() {
           <div className="pt-0">
             <div className=" bg-white shadow-xl p-3 rounded-lg  ">
               <p className="text-xl font-semibold text-colorPrimary ">
-                Tên sản phẩm
+                {t("content.Name-product")}
               </p>
               <div className="text-2xl font-semibold">
                 {productDetail?.name}
@@ -126,7 +129,7 @@ export default function ProductDetailPage() {
             </div>
             <div className="mt-2 bg-white shadow-xl p-3 rounded-lg overflow-y-scroll  lg:overflow-y-scroll ">
               <p className="text-xl font-semibold text-colorPrimary ">
-                Mô tả sản phẩm
+                {t("content.Description")}
               </p>
               <div
                 dangerouslySetInnerHTML={{ __html: productDetail?.description }}
@@ -134,7 +137,7 @@ export default function ProductDetailPage() {
             </div>
             <div className="mt-2  bg-white shadow-xl p-2 rounded-lg ">
               <p className="text-xl font-semibold text-colorPrimary">
-                Sản phẩm tương tự
+                {t("content.Similar-product")}
               </p>
               <BoxComponent>
                 {listAllProduct?.data?.slice(0, 4)?.map((item, idx) => (

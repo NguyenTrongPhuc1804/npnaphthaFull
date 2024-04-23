@@ -105,7 +105,7 @@ export default function ProductPage() {
                 <div className="relative flex w-full max-w-[24rem]">
                   <Input
                     type="email"
-                    label="Tìm kiếm sản phẩm"
+                    label={t("content.search-product")}
                     ref={search}
                     onChange={onChange}
                     className="pr-20"

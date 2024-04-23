@@ -103,7 +103,7 @@ export default function Header() {
           className=""
           size="md"
           defaultValue={"VN"}
-          label="Chọn ngôn ngữ"
+          label=""
           value={value}
           onChange={(val) => changeLanguage(val)}
         >

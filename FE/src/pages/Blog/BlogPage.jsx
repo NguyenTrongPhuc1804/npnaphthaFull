@@ -39,7 +39,7 @@ export default function BlogPage() {
             <div className="row lg:px-28 px-10">
               <div className="col-12 flex justify-between">
                 <h2 className="mb-lg-5 mb-4 text-3xl font-bold">
-                  Tất cả bài viết
+                  {t("content.All-blog")}
                 </h2>
               </div>
               {listAllBlog?.data?.map((item, idx) => (

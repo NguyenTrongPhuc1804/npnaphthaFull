@@ -136,8 +136,8 @@ a:hover {
 }
 
 .section-padding {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 b,
@@ -690,8 +690,8 @@ strong {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   position: relative;
 }
 
