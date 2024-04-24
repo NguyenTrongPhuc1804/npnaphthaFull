@@ -74,7 +74,7 @@ const login = async (req, res) => {
     await User.findOneAndUpdate({ email }, { refresh_token });
     res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "strict",
     });
     res.status(200).json({
@@ -241,7 +241,7 @@ const getRefreshToken = async (req, res) => {
         );
         res.cookie("refresh_token", newrefresh_token, {
           httpOnly: true,
-          secure: false,
+          secure: true,
           sameSite: "strict",
         });
         res.status(200).json({ access_token: newAccessToken });
