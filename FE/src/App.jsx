@@ -82,7 +82,7 @@ export default function App() {
               <Route path="partner" element={<ManagementPartner />} />
             </Route>
             {/* <Route path="/register" element={<RegisterPage />} /> */}
-            <Route path="*" element={<NotFound404 />} />
+            <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
           <Loading />
           <ToastContainer
