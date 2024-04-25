@@ -36,7 +36,7 @@ app.use("/api/v1/public", express.static(publicPathDirectory));
 //   max: 100, //100 request/IP
 //   message: "Too many connection",
 // });
-app.use(apiLimiter);
+// app.use(apiLimiter);
 app.use(
   cors({
     origin: [
