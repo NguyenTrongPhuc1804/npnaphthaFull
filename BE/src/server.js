@@ -31,17 +31,18 @@ const port = process.env.PORT || 3000;
 const publicPathDirectory = path.join(__dirname, "../public");
 app.use("/api/v1/public", express.static(publicPathDirectory));
 // limit request
-const apiLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 100, //100 request/IP
-  message: "Too many connection",
-});
+// const apiLimiter = rateLimit({
+//   windowMs: 5 * 60 * 1000, // 5 minutes
+//   max: 100, //100 request/IP
+//   message: "Too many connection",
+// });
 app.use(apiLimiter);
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       process.env.DOMAIN_CORS,
+      process.env.SUB_DOMAIN_CORS,
       "https://npnaphtha-web.vercel.app",
     ],
     credentials: true,
