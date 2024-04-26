@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_URL_API,
+  baseURL: "https://phucnguyen1804.site/api/v1",
   headers: { "X-Custom-Header": "foobar" },
   withCredentials: true,
   credentials: "include",
