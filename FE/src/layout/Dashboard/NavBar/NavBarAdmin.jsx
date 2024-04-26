@@ -205,8 +205,9 @@ export default function NavBarAdmin() {
               <img
                 className="w-8 h-8 rounded-full"
                 src={
-                  infoUser?.avatar ??
-                  require("../../../../public/fake_image.jpg")
+                  userInfo
+                    ? userInfo.avatar
+                    : require("../../../../public/fake_image.jpg")
                 }
                 alt="user photo"
               />
