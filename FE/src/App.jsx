@@ -32,7 +32,6 @@ import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail";
 import CataloguePage from "./pages/CataloguePage/CataloguePage";
 import ManagementCatalogue from "./pages/AdminPage/ManagementCatalogue/ManagementCatalogue";
 import ChatAdmin from "./pages/AdminPage/Chat/ChatAdmin";
-import { Toaster, toast } from "sonner";
 import ManagementBlog from "./pages/AdminPage/ManagementBlog/ManagementBlog";
 import ManagementContact from "./pages/AdminPage/ManagementContact/ManagementContact";
 import ManagementBanners from "./pages/AdminPage/ManagementBanner/ManagementBanner";
@@ -98,7 +97,6 @@ export default function App() {
             theme="colored"
             transition={Bounce}
           />
-          <Toaster position="top-right" />
           <DrawerCustomComponent />
           <DialogWithImage />
         </Router>

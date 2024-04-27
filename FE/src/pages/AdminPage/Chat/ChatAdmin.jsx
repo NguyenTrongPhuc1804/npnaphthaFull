@@ -59,7 +59,7 @@ export default function ChatAdmin() {
     //người dùng kết nối
     socket.on("user-join-room", (data) => {
       console.log(data, "user join room");
-      notifySonner("Thông báo", data);
+      notify("message", data);
     });
     //lay danh sach phong
     socket.emit("get-all-room-to-server");
@@ -76,7 +76,7 @@ export default function ChatAdmin() {
       setListRoom(data);
     });
     socket.on("send-mess-noti", ({ text, email, sender }) => {
-      notifySonner(sender, text);
+      notify("message", `${sender}:${text}`);
     });
     return () => {
       socket.disconnect();

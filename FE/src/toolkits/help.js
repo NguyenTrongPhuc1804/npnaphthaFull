@@ -10,6 +10,10 @@ export const notify = (type, message) => {
       break;
     case "warning":
       toast.warning(message);
+    case "message":
+      toast(message, {
+        theme: "dark",
+      });
 
     default:
       break;

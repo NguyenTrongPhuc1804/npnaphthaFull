@@ -1,6 +1,6 @@
-import { Toaster, toast } from "sonner";
+// import { Toaster, toast } from "sonner";
 export const notifySonner = (name, message) => {
-  toast(name, {
+  console.log(name, {
     description: message,
   });
 };

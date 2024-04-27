@@ -40,7 +40,6 @@
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "socket.io-client": "^4.7.5",
-    "sonner": "^1.4.41",
     "swiper": "^11.0.7",
     "timeago.js": "^4.0.2",
     "vite-plugin-require": "^1.1.14",
