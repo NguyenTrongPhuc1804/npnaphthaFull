@@ -38,6 +38,7 @@ import ManagementBanners from "./pages/AdminPage/ManagementBanner/ManagementBann
 import ManagementVideoBanner from "./pages/AdminPage/ManagementVideoBanner/ManagementVideoBanner";
 import ManagementPartner from "./pages/AdminPage/ManagementPartner/ManagementPartner";
 import NotFound404 from "./pages/404/NotFound404";
+import CommingSoonPage from "./pages/CommingSoonPage/CommingSoonPage";
 export default function App() {
   const { isLogin } = useSelector((state) => state.userSlice);
   useEffect(() => {}, [isLogin]);
@@ -46,15 +47,16 @@ export default function App() {
       <div>
         <Router>
           <Routes>
-            <Route path="/" element={<UserTheme />}>
+            {/* <Route path="/" element={<UserTheme />}> */}
+            <Route path="/" element={<CommingSoonPage />}>
               <Route path="" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
+              {/* <Route path="/about" element={<AboutPage />} />
               <Route path="/product" element={<ProductPage />} />
               <Route path="/product/:slug" element={<ProductDetailPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/catalogue" element={<CataloguePage />} />
-              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/contact" element={<ContactPage />} /> */}
             </Route>
             <Route path="/login" element={<LoginPage />} />
 

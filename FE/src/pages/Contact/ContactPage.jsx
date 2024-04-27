@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validateMess } from "../../toolkits/help";
 import { createContact } from "../../redux/reducer/ContactSlice";
+import { Helmet } from "react-helmet-async";
 export default function ContactPage() {
   const { t } = useTranslation();
 
@@ -56,6 +57,30 @@ export default function ContactPage() {
   }, []);
   return (
     <main>
+      <Helmet>
+        <title>Liên hệ - npnaphtha.com.vn</title>
+
+        <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
+        <meta property="og:type" content="website" />
+        <meta
+          name="description"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
+        />
+        <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
+        <meta property="og:title" content="Liên hệ - npnaphtha.com.vn" />
+        <meta
+          name="keywords"
+          content="NP NAPHTHA, npnaphtha,Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
+        ></meta>
+        <meta
+          property="og:description"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+        />
+        {/* <meta
+          property="og:image"
+          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
+        /> */}
+      </Helmet>
       <SubBanner title={t("content.contact")} />
       <section className="contact section-padding">
         <div className="container">

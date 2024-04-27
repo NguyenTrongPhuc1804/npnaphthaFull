@@ -7,6 +7,7 @@ import DefaultPagination from "../../components/Pagination/DefaultPagination";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlog, searchBlog } from "../../redux/reducer/BlogSlice";
+import { Helmet } from "react-helmet-async";
 
 export default function BlogPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,29 @@ export default function BlogPage() {
   }, []);
   return (
     <main>
+      <Helmet>
+        <title>Tin tức - npnaphtha.com.vn</title>
+        <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
+        <meta property="og:type" content="website" />
+        <meta
+          name="description"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
+        />
+        <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
+        <meta property="og:title" content="Tin tức - npnaphtha.com.vn" />
+        <meta
+          name="keywords"
+          content="NP NAPHTHA, npnaphtha,Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
+        ></meta>
+        <meta
+          property="og:description"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+        />
+        {/* <meta
+          property="og:image"
+          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
+        /> */}
+      </Helmet>
       <div>
         <SubBanner title={t("content.blog")} />
 
