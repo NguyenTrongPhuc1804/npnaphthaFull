@@ -123,9 +123,7 @@ export default function ProductDetailPage() {
               <p className="text-xl font-semibold text-colorPrimary ">
                 {t("content.Name-product")}
               </p>
-              <div className="text-2xl font-semibold">
-                {productDetail?.name}
-              </div>
+              <h2 className="text-2xl font-semibold">{productDetail?.name}</h2>
             </div>
             <div className="mt-2 bg-white shadow-xl p-3 rounded-lg overflow-y-scroll  lg:overflow-y-scroll ">
               <p className="text-xl font-semibold text-colorPrimary ">

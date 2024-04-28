@@ -7,7 +7,11 @@ export default function CommingSoonPage() {
         ĐANG BẢO TRÌ
       </h1>
       <p class="text-white text-lg mb-8">
-        npnaphtha ngừng hoạt động để bảo trì theo kế hoạch.
+        Npnaphtha ngừng hoạt động để bảo trì theo kế hoạch.Chúng tôi sẽ sớm trở
+        lại.
+      </p>
+      <p class="text-white text-lg mb-8">
+        Npnaphtha is down for planned maintenance. We'll be back soon
       </p>
     </div>
   );
