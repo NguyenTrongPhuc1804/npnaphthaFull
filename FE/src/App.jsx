@@ -47,16 +47,16 @@ export default function App() {
       <div>
         <Router>
           <Routes>
-            {/* <Route path="/" element={<UserTheme />}> */}
-            <Route path="/" element={<CommingSoonPage />}>
+            <Route path="/" element={<UserTheme />}>
+              {/* <Route path="/" element={<CommingSoonPage />}> */}
               <Route path="" element={<HomePage />} />
-              {/* <Route path="/about" element={<AboutPage />} />
+              <Route path="/about" element={<AboutPage />} />
               <Route path="/product" element={<ProductPage />} />
               <Route path="/product/:slug" element={<ProductDetailPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/catalogue" element={<CataloguePage />} />
-              <Route path="/contact" element={<ContactPage />} /> */}
+              <Route path="/contact" element={<ContactPage />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
 
