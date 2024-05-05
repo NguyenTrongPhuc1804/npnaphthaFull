@@ -50,13 +50,15 @@ export default function AboutPage() {
             {t("content.INTRODUCE")}
           </Typography>
           <div className="flex flex-wrap px-[2rem] lg:px-[2rem]  ">
-            <div className="col-lg-6 col-12 sm:px-0 lg:px-10">
+            <div className="col-lg-6 col-12 sm:px-0 lg:px-10 ">
               <p className="text-2xl font-bold text-blue-400 py-4 ">
                 {t("content.title-intro")}
               </p>
               <p className="text-justify">{t("content.body-intro1")}</p>
               <br></br>
               <p className="text-justify">{t("content.body-intro2")}</p>
+
+              <br />
             </div>
             <div className="col-lg-6 col-12 mb-2 ">
               <img
@@ -64,6 +66,70 @@ export default function AboutPage() {
                 className="h-[300px] sm:h-[500px] w-full rounded-lg"
               />
             </div>
+          </div>
+          <div className="flex flex-wrap px-[2rem] lg:px-[2rem] flex-row-reverse mt-[4rem]">
+            <div className="col-lg-6 col-12 sm:px-0 lg:px-10 ">
+              <p className="text-2xl font-bold text-blue-400 mb-2 uppercase">
+                {t("content.COMPANY-SCALE")}
+              </p>
+              <p className="text-xl font-bold">
+                {t("content.feature-product")}:
+              </p>
+              <ul className="list-disc ml-[3rem] mt-2">
+                <li>
+                  <p>{t("content.product-1")}</p>
+                </li>
+                <li>
+                  <p>{t("content.product-2")}</p>
+                </li>
+                <li>
+                  <p>{t("content.product-3")}</p>
+                </li>
+              </ul>
+              <p className="mt-2 font-bold text-xl">
+                {t("content.company-scale-title")}
+              </p>
+              <ul className="list-disc ml-[3rem] mt-2">
+                <li>
+                  <p>
+                    <strong className="font-bold">
+                      {t("content.Investment-capital")}{" "}
+                    </strong>
+                    {t("content.Investment-content")}
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong className="font-bold">
+                      {t("content.Factory-area")}{" "}
+                    </strong>
+                    {t("content.Factory-content")}
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <strong className="font-bold">
+                      {t("content.Number-of-employees")}
+                    </strong>
+                    {t("content.Number-content")}
+                  </p>
+                </li>
+              </ul>
+              <p className="mt-2">{t("content.scale-sub-title")}</p>
+            </div>
+            <div className="col-lg-6 col-12 mb-2 ">
+              <img
+                src={`${import.meta.env.VITE_URL_DOMAIN}image-nph-2.jpg`}
+                className="h-[300px] sm:h-[500px] w-full rounded-lg"
+              />
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="px-[2rem] mb-[4rem] mt-[-2rem]">
+            <p className="">{t("content.commited")}</p>
+            <br />
+            <p>{t("content.exp")}</p>
           </div>
         </section>
         <section>

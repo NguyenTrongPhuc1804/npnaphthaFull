@@ -17,8 +17,8 @@
         "NEWS-&-EVENTS":"Tin tức và sự kiện",
         "INTRODUCE":"Giới thiệu",
         "title-intro":"Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA",
-        "body-intro1":"Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
-        ,"body-intro2":"Tiền thân công ty NP NAPHTHA là CTY CAO SU XANH được thành lập vào năm 2008, trong bối cảnh phát triển ngày càng lớn mạnh của các tập đoàn siêu thi Nhật, Mỹ và các Vendor, nhu cầu liên kết với các đối tác cung cấp dịch vụ, sản phẩm của nhà máy, tập đoàn là rất lớn và rất đa dạng. Công ty NP NAPHTHA không ngừng cải tiến sản xuất, nâng cao chất lượng và giảm giá thành sản phẩm, để cùng các đối tác đưa ra thị trường các sản phẩm chất lượng tốt và giá thành thấp"
+        "body-intro1":"Thành lập vào năm 2011, với hơn 10 năm kinh nghiệm, NP NAPHTHA tự hào là một địa chỉ đáng tin cậy trong lĩnh vực sản xuất các sản phẩm từ cao su và nhựa."
+        ,"body-intro2":"Sản phẩm của chúng tôi tại NP NAPHTHA là sự kết hợp giữa công nghệ tiên tiến và nguồn nguyên liệu chất lượng cao. NP NAPHTHA không chỉ đáp ứng được các tiêu chuẩn chất lượng nghiêm ngặt của thị trường quốc tế mà còn mang lại hiệu suất vượt trội và độ bền cao, phù hợp cho nhiều ứng dụng trong các ngành công nghiệp khác nhau như giao thông, xây dựng và gia dụng."
         ,"ORIENTED-DEVELOPMENT":"Định hướng phát triển",
         "ORIENTED-DEVELOPMENT-BODY1":"Tầm nhìn và sứ mệnh NP NAPHTHA đặt ra luôn là kim chỉ nam cho các hoạt động của NPNAPHTHA. chúng tôi luôn cần cù, sáng tạo trong công việc, tận tụy với khách hàng, đối tác và không ngừng nâng cấp máy móc, thiết bị cũng như hệ thống cơ sở vật chất theo hướng hiện đại, hiệu quả và an toàn.",
         "ORIENTED-DEVELOPMENT-BODY2":"NP NAPHTHA luôn mang lại sự hài lòng cho các khách hàng, đối tác trong và ngoài nước. Quyết tâm phấn đấu trở thành đơn vị hàng đầu cung cấp dịch vụ trọn gói cho các Vendor và tập đoàn lớn của Nhật và Mỹ"
@@ -52,8 +52,21 @@
         "Name-product":"Tên sản phẩm",
         "Description":"Mổ tả sản phẩm",
         "Similar-product":"Sản phẩm tương tự",
-        "search-product":"Tìm kiếm sản phẩm"
-
-
+        "search-product":"Tìm kiếm sản phẩm",
+        "COMPANY-SCALE":"ĐẶC ĐIỂM SẢN PHẨM VÀ QUY MÔ CÔNG TY",
+        "feature-product":"Đặc điểm nổi bật của sản phẩm",
+        "product-1":"Độ bền cao và khả năng chịu nhiệt tốt.",
+        "product-2":"Sản phẩm đa dạng với nhiều độ cứng và kích thước khác nhau.",
+        "product-3":"An toàn cho môi trường và sức khỏe con người.",
+        "company-scale-title":"Về quy mô công ty:",
+        "Investment-capital":"Vốn đầu tư:",
+        "Investment-content":"Với vốn đầu tư ban đầu lên đến 1 triệu USD, chúng tôi đã đạt được sự ổn định và tin cậy trong ngành công nghiệp sản xuất sản phẩm từ cao su.",
+        "Factory-area":"Diện tích nhà máy:",
+        "Factory-content":"Nhà máy sản xuất của chúng tôi có diện tích lên đến 4800m², được trang bị hiện đại và đáp ứng đầy đủ các tiêu chuẩn kỹ thuật và an toàn.",
+        "Number-of-employees":"Số lượng công nhân viên:",
+        "Number-content":" Với đội ngũ lao động chất lượng và đầy đủ kỹ năng, chúng tôi tự hào sở hữu hơn 100 nhân viên, làm việc chăm chỉ để mang lại những sản phẩm chất lượng và dịch vụ tốt nhất cho khách hàng."
+        ,"scale-sub-title":"Những con số này là minh chứng cho sự phát triển và sự ổn định của chúng tôi trong ngành công nghiệp, cũng như cam kết của chúng tôi đối với sự thành công và sự phục vụ tốt nhất cho quý vị.",
+        "commited":"Chúng tôi cam kết duy trì chất lượng trong quá trình sản xuất và cung cấp dịch vụ hỗ trợ khách hàng chuyên nghiệp. Chúng tôi không chỉ cam kết đem lại sản phẩm chất lượng cao mà còn đặt môi trường sống và làm việc vào tâm điểm. Để thực hiện cam kết này, chúng tôi áp dụng nguyên tắc '3R - Reduce, Reuse, Recycle' một cách nghiêm ngặt trong quy trình sản xuất của mình. Chúng tôi tối ưu hóa quy trình sản xuất để hạn chế sản phẩm lỗi, giảm thiểu rác thải và tiết kiệm nguồn lực. Đồng thời, chúng tôi cũng tận dụng việc tái chế vật liệu trong quá trình sản xuất, từ đó giảm thiểu tác động tiêu cực đến môi trường và xã hội. Chúng tôi tin rằng việc bảo vệ môi trường không chỉ là trách nhiệm của chúng tôi mà còn là nhiệm vụ cần thiết để duy trì sự cân bằng và bền vững cho hành tinh của chúng ta.",
+        "exp":"Với bề dày kinh nghiệm, NP NAPHTHA đã mang về cho mình một mạng lưới đối tác và khách hàng rộng lớn từ các doanh nghiệp địa phương đến các tập đoàn quốc tế hàng đầu, thành công chinh phục các thị trường khó tính như Nhật Bản. Sự hài lòng của khách hàng vừa là bằng chứng cho chất lượng sản xuất của chúng tôi vừa là nguồn động viên lớn nhất cho chúng tôi phát triển và hoàn thiện mỗi ngày."
     }
     }

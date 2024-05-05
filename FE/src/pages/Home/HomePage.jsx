@@ -81,42 +81,7 @@ export default function HomePage() {
       <section className="hero mt-[5rem] lg:mt-[8rem]">
         <Banner data={listAllVideo} />
       </section>
-      <section>
-        <div className="bg-colorPrimary w-full  grid grid-cols-2 lg:grid-cols-4  py-[4rem] px-2 lg:px-[6rem]">
-          <div className="text-center py-4 ">
-            <p className=" text-2xl lg:text-3xl text-white font-bold mb-2 lg:mb-4">
-              4000
-            </p>
-            <p className="text-base lg:text-lg text-white font-semibold uppercase">
-              {t("content.OFFICERS-AND-EMPLOYEES")}
-            </p>
-          </div>
-          <div className="text-center py-4 ">
-            <p className=" text-2xl lg:text-3xl text-white font-bold mb-2 lg:mb-4">
-              16+
-            </p>
-            <p className="text-base lg:text-lg text-white font-semibold uppercase">
-              {t("content.YEARS-AS-A-NATIONAL-BRAND")}
-            </p>
-          </div>
-          <div className="text-center py-4 ">
-            <p className=" text-2xl lg:text-3xl text-white font-bold mb-2 lg:mb-4">
-              70+
-            </p>
-            <p className="text-base lg:text-lg text-white font-semibold uppercase">
-              {t("content.partner-agent")}
-            </p>
-          </div>
-          <div className="text-center py-4 ">
-            <p className=" text-2xl lg:text-3xl text-white font-bold mb-2 lg:mb-4">
-              100
-            </p>
-            <p className="text-base lg:text-lg text-white font-semibold uppercase">
-              {t("content.affiliated-businesses")}
-            </p>
-          </div>
-        </div>
-      </section>
+
       <section>
         <div className="w-full mx-auto menu section-padding px-10">
           <div className="lg:pl-6 pl-0 ">
