@@ -60,7 +60,10 @@ export default function ProductPage() {
         /> */}
       </Helmet>
       <div>
-        <SubBanner title={t("content.product")} />
+        <SubBanner
+          title={t("content.product")}
+          bg={`${import.meta.env.VITE_URL_DOMAIN}product.png`}
+        />
         <section>
           <div className="w-full mx-auto menu section-padding px-10">
             <div className="lg:pl-6 pl-0 ">

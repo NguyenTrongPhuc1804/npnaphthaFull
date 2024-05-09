@@ -9,10 +9,12 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showDrawer } from "../../redux/reducer/LoadingSlice";
+import { useTranslation } from "react-i18next";
 
 export default function DrawerComponent({ open, closeDrawer }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const { isOpenDrawer } = useSelector((state) => state.loadingSlice);
   return (
     <Drawer
@@ -56,7 +58,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
                     : "nav-link inactive !text-base py-3"
                 }
               >
-                Trang chủ
+                {t("content.home")}
               </NavLink>
             </li>
             <li
@@ -71,7 +73,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
                     : "nav-link inactive !text-base py-3"
                 }
               >
-                Về chúng tôi
+                {t("content.about")}
               </NavLink>
             </li>
             <li
@@ -86,7 +88,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
                     : "nav-link inactive !text-base py-3"
                 }
               >
-                Sản phẩm
+                {t("content.product")}
               </NavLink>
             </li>
             <li
@@ -101,7 +103,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
                     : "nav-link inactive !text-base py-3"
                 }
               >
-                Bài viết
+                {t("content.blog")}
               </NavLink>
             </li>
             <li
@@ -131,7 +133,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
                     : "nav-link inactive !text-base  py-3"
                 }
               >
-                Liên hệ
+                {t("content.contact")}
               </NavLink>
             </li>
           </ul>
@@ -146,7 +148,7 @@ export default function DrawerComponent({ open, closeDrawer }) {
             }}
             className="w-full bg-colorPrimary"
           >
-            Liên hệ ngay{" "}
+            {t("content.contact-now")}
           </Button>
         </div>
       </section>

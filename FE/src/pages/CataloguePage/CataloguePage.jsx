@@ -51,7 +51,10 @@ export default function CataloguePage() {
           content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
         /> */}
       </Helmet>
-      <SubBanner title={"E - Catalogue"} />
+      <SubBanner
+        title={"E - Catalogue"}
+        bg={`${import.meta.env.VITE_URL_DOMAIN}catalogue.png`}
+      />
       <section className="mt-[2rem] mb-4">
         <div className="flex w-full justify-center ">
           {/* <Button

@@ -50,7 +50,6 @@ export default function ContactPage() {
 
   const onSubmit = (data) => {
     dispatch(createContact(data));
-    console.log(data, "data");
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -81,7 +80,10 @@ export default function ContactPage() {
           content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
         /> */}
       </Helmet>
-      <SubBanner title={t("content.contact")} />
+      <SubBanner
+        title={t("content.contact")}
+        bg={`${import.meta.env.VITE_URL_DOMAIN}contact.png`}
+      />
       <section className="contact section-padding">
         <div className="container">
           <div className="row lg:px-20 px-10">
@@ -202,7 +204,6 @@ export default function ContactPage() {
                   height="300"
                   loading="lazy"
                 ></iframe>
-                s
               </div>
             </div>
           </div>

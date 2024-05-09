@@ -8,6 +8,7 @@ const createCategory = async (req, res) => {
       console.log(checkCategory, "check cate");
       return res.status(404).json({ message: "Tên danh mục đã tồn tại" });
     }
+
     const newCategory = await Category.create(data);
     res.status(201).json({
       message: "Tạo danh mục thành công",

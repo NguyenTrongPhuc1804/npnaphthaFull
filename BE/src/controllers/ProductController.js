@@ -56,6 +56,7 @@ const updateProduct = async (req, res) => {
       for (let key in thumb_image) {
         await removeImage(thumb_image[key]);
       }
+      // update sitemap
       const newSitemap = await Sitemap.findOneAndUpdate(
         { url: `/product/${checkProduct.slug}` },
         {

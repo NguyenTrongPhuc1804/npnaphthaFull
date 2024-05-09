@@ -60,7 +60,6 @@ export const createProduct = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data, "data");
       notify("success", "Tạo sản phẩm thành công");
       dispatch(setLoading(false));
       dispatch(getAllProduct());
@@ -68,7 +67,6 @@ export const createProduct = createAsyncThunk(
     } catch (error) {
       dispatch(closeModal());
       dispatch(setLoading(false));
-
       console.log(error, "error");
       notify("error", error.response.data.message);
     }

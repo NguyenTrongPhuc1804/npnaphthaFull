@@ -1,8 +1,11 @@
 import React from "react";
 
-export default function SubBanner({ title, subTitle }) {
+export default function SubBanner({ title, subTitle, bg }) {
   return (
-    <header className="mt-[5rem] lg:mt-[8rem] site-header bg-cover bg-[url('https://images.unsplash.com/photo-1707879487566-ff0852cadd92?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dss')]">
+    <header
+      className={`mt-[5rem] lg:mt-[8rem] site-header bg-cover `}
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className="container">
         <div className="row">
           <div className="col-lg-10 col-12 mx-auto">

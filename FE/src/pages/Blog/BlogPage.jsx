@@ -45,7 +45,10 @@ export default function BlogPage() {
         /> */}
       </Helmet>
       <div>
-        <SubBanner title={t("content.blog")} />
+        <SubBanner
+          title={t("content.blog")}
+          bg={`${import.meta.env.VITE_URL_DOMAIN}blog.png`}
+        />
 
         <section className="news section-padding bg-white">
           <div className="container">

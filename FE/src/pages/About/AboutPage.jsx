@@ -44,7 +44,10 @@ export default function AboutPage() {
           content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
         /> */}
         </Helmet>
-        <SubBanner title={t("content.about")} />
+        <SubBanner
+          title={t("content.about")}
+          bg={`${import.meta.env.VITE_URL_DOMAIN}about.png`}
+        />
         <section className="about section-padding bg-white ">
           <Typography variant="h2" className="text-center mb-10 uppercase">
             {t("content.INTRODUCE")}
@@ -119,7 +122,7 @@ export default function AboutPage() {
             </div>
             <div className="col-lg-6 col-12 mb-2 ">
               <img
-                src={`${import.meta.env.VITE_URL_DOMAIN}image-nph-2.jpg`}
+                src={`${import.meta.env.VITE_URL_DOMAIN}about-content.jpg`}
                 className="h-[300px] sm:h-[500px] w-full rounded-lg"
               />
             </div>
@@ -133,7 +136,14 @@ export default function AboutPage() {
           </div>
         </section>
         <section>
-          <header className="site-header bg-cover bg-[url('https://images.unsplash.com/photo-1707879487566-ff0852cadd92?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dss')]">
+          <header
+            className="site-header bg-cover"
+            style={{
+              backgroundImage: `url(${
+                import.meta.env.VITE_URL_DOMAIN
+              }about.png)`,
+            }}
+          >
             <div className="container">
               <div className="row lg:px-20 sm:px-0">
                 <div className="col-lg-10 col-12 mx-auto">

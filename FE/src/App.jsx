@@ -37,8 +37,6 @@ import ManagementContact from "./pages/AdminPage/ManagementContact/ManagementCon
 import ManagementBanners from "./pages/AdminPage/ManagementBanner/ManagementBanner";
 import ManagementVideoBanner from "./pages/AdminPage/ManagementVideoBanner/ManagementVideoBanner";
 import ManagementPartner from "./pages/AdminPage/ManagementPartner/ManagementPartner";
-import NotFound404 from "./pages/404/NotFound404";
-import CommingSoonPage from "./pages/CommingSoonPage/CommingSoonPage";
 export default function App() {
   const { isLogin } = useSelector((state) => state.userSlice);
   useEffect(() => {}, [isLogin]);
@@ -48,7 +46,6 @@ export default function App() {
         <Router>
           <Routes>
             <Route path="/" element={<UserTheme />}>
-              {/* <Route path="/" element={<CommingSoonPage />}> */}
               <Route path="" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/product" element={<ProductPage />} />

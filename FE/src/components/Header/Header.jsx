@@ -114,7 +114,7 @@ export default function Header() {
                 src={require("../../assets/images/vietnam.png")}
                 alt=""
               />
-              <p className="text-sm">Việt nam</p>
+              <p className="text-sm">Tiếng việt</p>
             </div>
           </Option>
           <Option value="en">
@@ -162,7 +162,7 @@ export default function Header() {
                   src={require("../../assets/images/vietnam.png")}
                   alt=""
                 />
-                <p className="text-sm">Việt nam</p>
+                <p className="text-sm">Tiếng việt</p>
               </div>
             </option>
             <option value="en">
