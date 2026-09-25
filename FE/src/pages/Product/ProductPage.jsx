@@ -34,25 +34,32 @@ export default function ProductPage() {
   return (
     <main>
       <Helmet>
-        <title>Sản phẩm - npnaphtha.com.vn</title>
-
+        <title>Sản phẩm cao su kỹ thuật - NP NAPHTHA</title>
         <link
           rel="canonical"
-          href={`${import.meta.env.VITE_URL_DOMAIN}/product`}
+          href={`${import.meta.env.VITE_URL_DOMAIN}product`}
         />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="NP NAPHTHA" />
+        <meta
+          name="description"
+          content="Danh mục sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và hàng gia công cho vendor."
+        />
         <meta
           property="og:url"
-          content={`${import.meta.env.VITE_URL_DOMAIN}/product`}
+          content={`${import.meta.env.VITE_URL_DOMAIN}product`}
         />
-        <meta property="og:title" content="Sản phẩm - npnaphtha.com.vn" />
+        <meta
+          property="og:title"
+          content="Sản phẩm cao su kỹ thuật - NP NAPHTHA"
+        />
         <meta
           name="keywords"
-          content="Sản phẩm NP NAPHTHA, npnaphtha,Sản phẩm Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
-        ></meta>
+          content="Sản phẩm NP NAPHTHA, cao su kỹ thuật, Slope, gối giảm tốc, rubber fender"
+        />
         <meta
           property="og:description"
-          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+          content="Danh mục sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và hàng gia công cho vendor."
         />
         {/* <meta
           property="og:image"

@@ -55,29 +55,36 @@ export default function HomePage() {
   return (
     <main>
       <Helmet>
-        <title>Trang chủ - npnaphtha.com.vn</title>
-
+        <title>NP NAPHTHA | Cao su kỹ thuật, gia công cho vendor</title>
         <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="vi_VN" />
+        <meta property="og:site_name" content="NP NAPHTHA" />
         <meta
           name="description"
-          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA chuyên sản xuất, gia công cao su kỹ thuật cho vendor tập đoàn lớn. Cung cấp Slope, gối giảm tốc, đệm chống va đập cầu cảng."
         />
         <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
-        <meta property="og:title" content="Trang chủ - npnaphtha.com.vn" />
+        <meta
+          property="og:title"
+          content="NP NAPHTHA | Cao su kỹ thuật, gia công cho vendor"
+        />
         <meta
           name="keywords"
-          content="NP NAPHTHA, npnaphtha,Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
-        ></meta>
+          content="NP NAPHTHA, npnaphtha, cao su kỹ thuật, Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
+        />
         <meta
           property="og:description"
-          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA chuyên sản xuất, gia công cao su kỹ thuật cho vendor tập đoàn lớn. Cung cấp Slope, gối giảm tốc, đệm chống va đập cầu cảng."
         />
-        {/* <meta
+        <meta
           property="og:image"
-          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
-        /> */}
+          content={`${import.meta.env.VITE_URL_DOMAIN}image-nph.jpg`}
+        />
       </Helmet>
+      <h1 className="sr-only">
+        Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA
+      </h1>
       <section className="hero mt-[5rem] lg:mt-[8rem]">
         <Banner data={listAllVideo} />
       </section>

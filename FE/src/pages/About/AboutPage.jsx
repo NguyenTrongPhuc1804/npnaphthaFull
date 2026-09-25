@@ -17,27 +17,30 @@ export default function AboutPage() {
     <main>
       <div className="">
         <Helmet>
-          <title>Về chúng tôi - npnaphtha.com.vn</title>
-
+          <title>Về chúng tôi - NP NAPHTHA</title>
           <link
             rel="canonical"
-            href={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+            href={`${import.meta.env.VITE_URL_DOMAIN}about`}
           />
           <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="NP NAPHTHA" />
           <meta
             property="og:url"
-            content={`${import.meta.env.VITE_URL_DOMAIN}/about`}
+            content={`${import.meta.env.VITE_URL_DOMAIN}about`}
           />
-          <meta property="og:title" content="Về chúng tôi - npnaphtha.com.vn" />
+          <meta property="og:title" content="Về chúng tôi - NP NAPHTHA" />
           <meta
             name="keywords"
-            content="Về chúng tôi - npnaphtha.com.vn, npnaphtha.com.vn"
-          ></meta>
+            content="Về chúng tôi NP NAPHTHA, Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
+          />
           <meta
             property="og:description"
-            content="Về chúng tôi - npnaphtha.com.vn"
+            content="Giới thiệu Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA: sản xuất, gia công cao su kỹ thuật cho vendor tập đoàn lớn."
           />
-          <meta name="description" content="Về chúng tôi - npnaphtha.com.vn" />
+          <meta
+            name="description"
+            content="Giới thiệu Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA: sản xuất, gia công cao su kỹ thuật cho vendor tập đoàn lớn."
+          />
           {/* <meta property="og:image" content={productDetail?.image} /> */}
           {/* <meta
           property="og:image"

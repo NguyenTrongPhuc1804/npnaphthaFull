@@ -50,14 +50,15 @@ export default function ProductDetailPage() {
 
         <link
           rel="canonical"
-          href={`${import.meta.env.VITE_URL_DOMAIN}/product/${
+          href={`${import.meta.env.VITE_URL_DOMAIN}product/${
             productDetail?.slug
           }`}
         />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="NP NAPHTHA" />
         <meta
           property="og:url"
-          content={`${import.meta.env.VITE_URL_DOMAIN}/product/${
+          content={`${import.meta.env.VITE_URL_DOMAIN}product/${
             productDetail?.slug
           }`}
         />

@@ -57,23 +57,29 @@ export default function ContactPage() {
   return (
     <main>
       <Helmet>
-        <title>Liên hệ - npnaphtha.com.vn</title>
-
-        <link rel="canonical" href={import.meta.env.VITE_URL_DOMAIN} />
+        <title>Liên hệ - NP NAPHTHA</title>
+        <link
+          rel="canonical"
+          href={`${import.meta.env.VITE_URL_DOMAIN}contact`}
+        />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="NP NAPHTHA" />
         <meta
           name="description"
-          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật"
+          content="Liên hệ Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA để tư vấn sản xuất, gia công cao su kỹ thuật và các sản phẩm cầu đường, cầu cảng."
         />
-        <meta property="og:url" content={import.meta.env.VITE_URL_DOMAIN} />
-        <meta property="og:title" content="Liên hệ - npnaphtha.com.vn" />
+        <meta
+          property="og:url"
+          content={`${import.meta.env.VITE_URL_DOMAIN}contact`}
+        />
+        <meta property="og:title" content="Liên hệ - NP NAPHTHA" />
         <meta
           name="keywords"
           content="NP NAPHTHA, npnaphtha,Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
         ></meta>
         <meta
           property="og:description"
-          content="Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA là một công ty chuyên sản xuất , gia công cho các Vendor của tập đoàn lớn và cung cấp các mặt hàng cao su kỹ thuật. Ngoài ra, chúng tôi còn mở rộng thêm các sản phẩm trong ngành cầu cảng, cầu đường và các mặt hàng cao su khác chuyên dùng như Slope, giờ giảm tốc, đệm chống va đập cầu cảng (Rubber Fender)"
+          content="Liên hệ Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA để tư vấn sản xuất, gia công cao su kỹ thuật và các sản phẩm cầu đường, cầu cảng."
         />
         {/* <meta
           property="og:image"
