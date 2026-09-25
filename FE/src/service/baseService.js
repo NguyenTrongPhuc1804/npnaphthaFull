@@ -1,8 +1,11 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+const API_URL =
+  import.meta.env.VITE_URL_API || "https://npnaphtha.com.vn/api/v1";
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_URL_API,
+  baseURL: API_URL,
   headers: { "X-Custom-Header": "foobar" },
   withCredentials: true,
   credentials: "include",
@@ -18,7 +21,7 @@ api.interceptors.request.use(
     if (decodeToken?.exp < date.getTime() / 1000) {
       try {
         const { data } = await axios.post(
-          `${import.meta.env.VITE_URL_API}/user/refresh-token`,
+          `${API_URL}/user/refresh-token`,
           {},
           {
             withCredentials: true,
