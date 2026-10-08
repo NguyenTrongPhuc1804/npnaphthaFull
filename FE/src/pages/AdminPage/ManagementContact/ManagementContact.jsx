@@ -95,7 +95,7 @@ export default function ManagementContact() {
     dispatch(getAllContact());
   }, []);
   return (
-    <Card className="h-full w-full">
+    <Card className="h-full w-full overflow-hidden rounded-2xl border border-ink-line shadow-card">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-8">
           <div>
@@ -156,19 +156,19 @@ export default function ManagementContact() {
           </Button>
         </div>
       )}
-      <CardBody className="overflow-scroll px-0">
+      <CardBody className="overflow-x-auto px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                  className="whitespace-nowrap border-y border-ink-line bg-ink-soft px-4 py-3"
                 >
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="!text-xs font-semibold uppercase leading-none tracking-wider opacity-70"
                   >
                     {head}
                   </Typography>
@@ -293,7 +293,7 @@ export default function ManagementContact() {
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+      <CardFooter className="flex items-center justify-between border-t border-ink-line p-4">
         <div className="w-full flex justify-center">
           <DefaultPagination
             pageCount={listAllContact?.totalPage}

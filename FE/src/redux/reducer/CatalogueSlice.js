@@ -40,7 +40,7 @@ export const getAllCatalogue = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error, "error");
-      dispatch(setLoading(true));
+      dispatch(setLoading(false));
     }
   }
 );

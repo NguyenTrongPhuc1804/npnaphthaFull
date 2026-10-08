@@ -1,22 +1,35 @@
 import React from "react";
-import { useNavigate, redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 export default function CardPdf({ data }) {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <a
-      href={data.url}
+      href={data?.url}
       target="_blank"
-      className="rounded-lg overflow-hidden cursor-pointer"
+      rel="noopener noreferrer"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-line bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
     >
-      <div className="w-[300px] h-[200px] overflow-hidden">
-        <img
-          className="w-full h-full hover:scale-125 transform transition-all duration-500 object-cover"
-          src={data.image}
-          alt={data.image}
-        />
+      <div className="aspect-[4/3] overflow-hidden bg-ink-soft">
+        {data?.image && (
+          <img
+            src={data.image}
+            alt={data?.name || ""}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        )}
       </div>
-      <div className="bg-[#fafafa] p-2">
-        <p className="text-center">{data.name}</p>
+      <div className="flex flex-1 flex-col p-4">
+        <h3 className="line-clamp-2 text-base font-semibold leading-snug text-ink group-hover:text-brand-700">
+          {data?.name}
+        </h3>
+        <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold text-brand-600">
+          <i className="fa-regular fa-file-pdf" aria-hidden="true" />
+          {t("content.download")}
+        </span>
       </div>
     </a>
   );

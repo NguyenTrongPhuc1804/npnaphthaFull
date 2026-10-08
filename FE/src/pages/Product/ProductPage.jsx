@@ -1,38 +1,83 @@
-import React, { useEffect, useRef, useState } from "react";
-import CardBlogV1 from "../../components/Card/CardBlogV1";
-import SubBanner from "../../components/Banner/SubBanner";
-import CardTailwind from "../../components/Card/CardTailwind";
-import BoxComponent from "../../components/BoxComponent/BoxComponent";
-import { Button, Input } from "@material-tailwind/react";
-import DefaultPagination from "../../components/Pagination/DefaultPagination";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
+import SubBanner from "../../components/Banner/SubBanner";
+import BoxComponent from "../../components/BoxComponent/BoxComponent";
+import CardProductV2 from "../../components/Card/CardProductV2";
+import CardSkeleton from "../../components/Skeleton/CardSkeleton";
+import DefaultPagination from "../../components/Pagination/DefaultPagination";
 import { getAllProduct, searchProduct } from "../../redux/reducer/ProductSlice";
 import { getAllCategory } from "../../redux/reducer/CategorySlice";
-import CardProductV2 from "../../components/Card/CardProductV2";
-import { useTranslation } from "react-i18next";
-import { Helmet } from "react-helmet-async";
-const arrButton = [
-  { id: 0, name: "Chop" },
-  { id: 1, name: "Chop2" },
-];
+
+const LIMIT = 8;
+const DESCRIPTION =
+  "Danh mục sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và hàng gia công cho vendor.";
+
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 export default function ProductPage() {
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
   const { listAllProduct } = useSelector((state) => state.productSlice);
   const { listAllCategory } = useSelector((state) => state.categorySlice);
-  const [filterProduct, setFillterProduct] = useState("all");
-  const [pagination, setPagination] = useState();
 
-  const search = useRef("");
-  const onChange = ({ target }) => (search.current = target.value);
+  const [filter, setFilter] = useState("all");
+  const [keyword, setKeyword] = useState("");
+  const [input, setInput] = useState("");
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getAllProduct());
-    dispatch(getAllCategory());
+    dispatch(getAllCategory({ page: 0, limit: 100 }));
   }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    let request;
+    if (keyword) {
+      request = dispatch(
+        searchProduct({
+          searchBy: "name",
+          searchValue: escapeRegex(keyword),
+          page,
+          limit: LIMIT,
+        })
+      );
+    } else if (filter !== "all") {
+      request = dispatch(
+        searchProduct({
+          searchBy: "type",
+          searchValue: filter,
+          page,
+          limit: LIMIT,
+        })
+      );
+    } else {
+      request = dispatch(getAllProduct({ page, limit: LIMIT }));
+    }
+    request.finally(() => setLoading(false));
+  }, [filter, keyword, page]);
+
+  const handleFilter = (slug) => {
+    setInput("");
+    setKeyword("");
+    setFilter(slug);
+    setPage(0);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setFilter("all");
+    setKeyword(input.trim());
+    setPage(0);
+  };
+
+  const products = listAllProduct?.data || [];
+
   return (
-    <main>
+    <>
       <Helmet>
         <title>Sản phẩm cao su kỹ thuật - NP NAPHTHA</title>
         <link
@@ -41,10 +86,7 @@ export default function ProductPage() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="NP NAPHTHA" />
-        <meta
-          name="description"
-          content="Danh mục sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và hàng gia công cho vendor."
-        />
+        <meta name="description" content={DESCRIPTION} />
         <meta
           property="og:url"
           content={`${import.meta.env.VITE_URL_DOMAIN}product`}
@@ -57,124 +99,100 @@ export default function ProductPage() {
           name="keywords"
           content="Sản phẩm NP NAPHTHA, cao su kỹ thuật, Slope, gối giảm tốc, rubber fender"
         />
-        <meta
-          property="og:description"
-          content="Danh mục sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và hàng gia công cho vendor."
-        />
-        {/* <meta
-          property="og:image"
-          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
-        /> */}
+        <meta property="og:description" content={DESCRIPTION} />
       </Helmet>
-      <div>
-        <SubBanner
-          title={t("content.product")}
-          bg={`${import.meta.env.VITE_URL_DOMAIN}product.png`}
-        />
-        <section>
-          <div className="w-full mx-auto menu section-padding px-10">
-            <div className="lg:pl-6 pl-0 ">
-              <h2 className="lg:text-4xl text-2xl font-bold pb-2 uppercase  text-center">
-                {t("content.Collection")}
-              </h2>
-              <div className="flex flex-wrap justify-between items-center">
-                <div className="">
-                  <Button
-                    onClick={() => {
-                      setFillterProduct("all");
-                      dispatch(dispatch(getAllProduct()));
-                    }}
-                    color="blue"
-                    className="mr-2 text-xs mt-2"
-                    variant={filterProduct === "all" ? "gradient" : "outlined"}
-                  >
-                    Tất cả
-                  </Button>
-                  {listAllCategory?.data?.map((item, idx) => (
-                    <Button
-                      key={idx}
-                      onClick={() => {
-                        setFillterProduct(item.slug);
-                        dispatch(
-                          searchProduct({
-                            searchBy: "type",
-                            searchValue: item.slug,
-                          })
-                        );
-                      }}
-                      color="blue"
-                      className="mr-2 text-xs mt-2"
-                      variant={
-                        filterProduct === item.slug ? "gradient" : "outlined"
-                      }
-                    >
-                      {item.name}
-                    </Button>
-                  ))}
-                </div>
-                <div className="relative flex w-full max-w-[24rem]">
-                  <Input
-                    type="email"
-                    label={t("content.search-product")}
-                    ref={search}
-                    onChange={onChange}
-                    className="pr-20"
-                    containerProps={{
-                      className: "min-w-0",
-                    }}
-                  />
-                  <Button
-                    onClick={() => {
-                      console.log(search.current, "search cur");
-                      dispatch(
-                        searchProduct({
-                          searchBy: "name",
-                          searchValue: search.current,
-                        })
-                      );
-                      setFillterProduct("all");
-                    }}
-                    size="sm"
-                    color={"blue"}
-                    className="!absolute right-1 top-1 rounded"
-                  >
-                    Search
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <BoxComponent>
-              {listAllProduct?.data?.map((item, idx) => (
-                <CardProductV2 data={item} />
+
+      <SubBanner
+        title={t("content.product")}
+        subTitle={t("content.product-desc")}
+        bg={`${import.meta.env.VITE_URL_DOMAIN}product.png`}
+      />
+
+      <section className="section">
+        <div className="wrap">
+          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div
+              role="tablist"
+              aria-label={t("content.Collection")}
+              className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-wrap lg:overflow-visible lg:px-0 lg:pb-0"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={filter === "all" && !keyword}
+                onClick={() => handleFilter("all")}
+                className={`chip ${
+                  filter === "all" && !keyword ? "chip-active" : ""
+                }`}
+              >
+                {t("content.all")}
+              </button>
+              {listAllCategory?.data?.map((item) => (
+                <button
+                  key={item._id || item.slug}
+                  type="button"
+                  role="tab"
+                  aria-selected={filter === item.slug}
+                  onClick={() => handleFilter(item.slug)}
+                  className={`chip ${filter === item.slug ? "chip-active" : ""}`}
+                >
+                  {item.name}
+                </button>
               ))}
-            </BoxComponent>
-            <div className="w-full flex justify-center">
-              {
-                <DefaultPagination
-                  pageCount={listAllProduct?.totalPage}
-                  e={(value) => {
-                    dispatch(getAllProduct({ page: value, limit: 8 }));
-                    setCurrentPage(value);
-                  }}
-                />
-              }
             </div>
+
+            <form
+              onSubmit={handleSearch}
+              role="search"
+              className="relative w-full lg:max-w-sm"
+            >
+              <i
+                className="fa-solid fa-magnifying-glass pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-ink-muted"
+                aria-hidden="true"
+              />
+              <input
+                type="search"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t("content.search-product")}
+                aria-label={t("content.search-product")}
+                className="field-input !rounded-full !pl-10 !pr-24"
+              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-brand-500 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-600"
+              >
+                {t("content.search")}
+              </button>
+            </form>
           </div>
-        </section>
-        {/* <section className="menu section-padding bg-white">
-          <div className="container">
-            <div className="row px-10 lg:px-28">
-              <div className="col-12">
-                <h2 className="mb-lg-5 mb-4 text-2xl font-bold">
-                  Sản phẩm nổi bật
-                </h2>
-              </div>
-              <CardBlogV1 />
-              <CardBlogV1 />
-            </div>
-          </div>
-        </section> */}
-      </div>
-    </main>
+
+          <BoxComponent>
+            {loading ? (
+              <CardSkeleton count={LIMIT} />
+            ) : (
+              products.map((item) => (
+                <CardProductV2 key={item._id || item.slug} data={item} />
+              ))
+            )}
+          </BoxComponent>
+
+          {!loading && products.length === 0 && (
+            <p className="rounded-2xl border border-dashed border-ink-line py-16 text-center text-ink-muted">
+              {t("content.no-products")}
+            </p>
+          )}
+
+          <DefaultPagination
+            pageCount={listAllProduct?.totalPage}
+            forcePage={page}
+            e={(value) => {
+              setPage(value);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
+        </div>
+      </section>
+    </>
   );
 }

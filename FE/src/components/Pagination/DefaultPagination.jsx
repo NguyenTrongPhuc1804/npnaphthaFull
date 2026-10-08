@@ -1,39 +1,32 @@
 import React from "react";
-import { useState } from "react";
 import ReactPaginate from "react-paginate";
-import { useNavigate } from "react-router-dom";
-import "../../index.css";
-function DefaultPagination({
-  itemsPerPage,
-  pageCount,
-  e,
-  navigation,
-  currentPage,
-}) {
-  const [itemOffset, setItemOffset] = useState(0);
-  const handlePageClick = (event) => {
-    // const newOffset = (event.selected * itemsPerPage) % items.length;
-    e(event.selected);
 
-    // navigation(event.selected);
-    console.log(
-      `User requested page number ${event.selected}, which is offset`
-    );
-    // setItemOffset(newOffset);
+function DefaultPagination({ pageCount, e, currentPage, forcePage }) {
+  const handlePageClick = (event) => {
+    e(event.selected);
   };
+
+  if (!pageCount || pageCount <= 1) return null;
+
+  const extra = forcePage !== undefined ? { forcePage } : { initialPage: currentPage };
+
   return (
-    <div className="pagination w-full flex justify-center items-center mt-8">
+    <nav
+      aria-label="Pagination"
+      className="pagination mt-10 flex w-full items-center justify-center"
+    >
       <ReactPaginate
-        breakLabel="..."
-        nextLabel="next "
+        breakLabel="…"
+        nextLabel={<i className="fa-solid fa-chevron-right text-xs" />}
+        previousLabel={<i className="fa-solid fa-chevron-left text-xs" />}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={1}
+        pageRangeDisplayed={2}
+        marginPagesDisplayed={1}
         pageCount={pageCount}
-        previousLabel="back"
         renderOnZeroPageCount={null}
-        initialPage={currentPage}
+        {...extra}
       />
-    </div>
+    </nav>
   );
 }
 

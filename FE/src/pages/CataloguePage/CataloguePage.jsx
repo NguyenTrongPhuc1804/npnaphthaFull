@@ -1,32 +1,40 @@
-import axios from "axios";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 import BoxComponent from "../../components/BoxComponent/BoxComponent";
 import SubBanner from "../../components/Banner/SubBanner";
-import { useTranslation } from "react-i18next";
-import { Button } from "@material-tailwind/react";
-import { getAllCatalogue } from "../../redux/reducer/CatalogueSlice";
 import CardPdf from "../../components/Card/CardPdf";
+import CardSkeleton from "../../components/Skeleton/CardSkeleton";
 import DefaultPagination from "../../components/Pagination/DefaultPagination";
-import { Helmet } from "react-helmet-async";
+import { getAllCatalogue } from "../../redux/reducer/CatalogueSlice";
+
+const LIMIT = 8;
+const DESCRIPTION =
+  "Tải catalogue sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và các mặt hàng gia công.";
+
 export default function CataloguePage() {
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
   const { listAllCatalogue } = useSelector((state) => state.catalogueSlice);
-  console.log(listAllCatalogue, "data");
-  const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [buttonSelect, setButtonSelect] = useState("pdf");
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllCatalogue());
+    setLoading(true);
+    dispatch(getAllCatalogue({ page, limit: LIMIT })).finally(() =>
+      setLoading(false)
+    );
+  }, [page]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
+
+  const items = listAllCatalogue?.data || [];
+
   return (
-    <div className="">
+    <>
       <Helmet>
         <title>Catalogue - NP NAPHTHA</title>
         <link
@@ -35,10 +43,7 @@ export default function CataloguePage() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="NP NAPHTHA" />
-        <meta
-          name="description"
-          content="Tải catalogue sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và các mặt hàng gia công."
-        />
+        <meta name="description" content={DESCRIPTION} />
         <meta
           property="og:url"
           content={`${import.meta.env.VITE_URL_DOMAIN}catalogue`}
@@ -47,58 +52,44 @@ export default function CataloguePage() {
         <meta
           name="keywords"
           content="NP NAPHTHA, npnaphtha,Công ty TNHH Sản Xuất và Thương Mại NP NAPHTHA"
-        ></meta>
-        <meta
-          property="og:description"
-          content="Tải catalogue sản phẩm cao su kỹ thuật NP NAPHTHA: Slope, gối giảm tốc, đệm chống va đập cầu cảng và các mặt hàng gia công."
         />
-        {/* <meta
-          property="og:image"
-          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
-        /> */}
+        <meta property="og:description" content={DESCRIPTION} />
       </Helmet>
+
       <SubBanner
-        title={"E - Catalogue"}
+        title="E - Catalogue"
+        subTitle={t("content.catalogue-desc")}
         bg={`${import.meta.env.VITE_URL_DOMAIN}catalogue.png`}
       />
-      <section className="mt-[2rem] mb-4">
-        <div className="flex w-full justify-center ">
-          {/* <Button
-            onClick={() => setButtonSelect("pdf")}
-            color="blue"
-            className="rounded-full mr-2 text-base"
-            variant={buttonSelect === "pdf" ? "gradient" : "outlined"}
-          >
-            Link pdf
-          </Button> */}
-          {/* <Button
-            onClick={() => setButtonSelect("video")}
-            color="blue"
-            className="rounded-full text-base"
-            variant={buttonSelect !== "pdf" ? "gradient" : "outlined"}
-          >
-            Link video
-          </Button> */}
-        </div>
-        <div className="py-4">
+
+      <section className="section">
+        <div className="wrap">
           <BoxComponent>
-            {listAllCatalogue?.data?.map((item, idx) => (
-              <CardPdf data={item} key={idx} />
-            ))}
+            {loading ? (
+              <CardSkeleton count={LIMIT} />
+            ) : (
+              items.map((item) => (
+                <CardPdf data={item} key={item._id || item.url} />
+              ))
+            )}
           </BoxComponent>
-        </div>
-        <div className="w-full flex justify-center">
-          {
-            <DefaultPagination
-              pageCount={listAllCatalogue?.totalPage}
-              e={(value) => {
-                dispatch(getAllProduct({ page: value, limit: 8 }));
-                setCurrentPage(value);
-              }}
-            />
-          }
+
+          {!loading && items.length === 0 && (
+            <p className="rounded-2xl border border-dashed border-ink-line py-16 text-center text-ink-muted">
+              {t("content.no-catalogue")}
+            </p>
+          )}
+
+          <DefaultPagination
+            pageCount={listAllCatalogue?.totalPage}
+            forcePage={page}
+            e={(value) => {
+              setPage(value);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
         </div>
       </section>
-    </div>
+    </>
   );
 }

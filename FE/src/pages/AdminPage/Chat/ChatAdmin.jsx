@@ -57,7 +57,6 @@ export default function ChatAdmin() {
 
     //người dùng kết nối
     socket.on("user-join-room", (data) => {
-      console.log(data, "user join room");
       notify("message", data);
     });
     //lay danh sach phong

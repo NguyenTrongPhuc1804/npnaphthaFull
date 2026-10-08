@@ -42,26 +42,28 @@ function ChatUserComponent() {
   };
   return (
     <div className="">
-      <div className="fixed bottom-10 right-[1rem] z-10 ">
-        <Button
+      <div className="fixed bottom-6 right-4 z-20">
+        <button
+          type="button"
           onClick={() => setShowForm(true)}
-          color="blue"
-          className="rounded-full px-3 py-3"
+          aria-label="Chat"
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-500 text-white shadow-card transition-transform hover:scale-105 hover:bg-brand-600 lg:h-14 lg:w-14"
         >
           <i className="fa-regular fa-comments text-lg lg:text-2xl"></i>
-        </Button>
+        </button>
       </div>
       <div
-        className={` w-[300px] h-[500px] overflow-hidden fixed bottom-10 right-10 z-50 bg-white rounded-lg shadow-xl p-4 ${
+        className={`fixed bottom-6 right-4 z-50 h-[500px] w-[calc(100vw-2rem)] max-w-[320px] overflow-hidden rounded-2xl bg-white p-5 shadow-card-hover ring-1 ring-ink-line ${
           showForm ? "" : "hidden"
         }`}
       >
         <button
+          type="button"
           onClick={() => setShowForm(false)}
-          className="absolute top-0 z-50 right-0 px-3 py-2 rounded-none bg-colorPrimary text-white font-bold"
-          color="blue"
+          aria-label="Close"
+          className="absolute right-3 top-3 z-50 flex h-8 w-8 items-center justify-center rounded-full bg-ink-soft text-ink hover:bg-brand-50"
         >
-          X
+          <i className="fa-solid fa-xmark" />
         </button>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -109,9 +111,7 @@ function ChatUserComponent() {
       </div>
       {showChatBox && (
         <div
-          className={`w-[300px] h-[500px] fixed bottom-10 right-10 z-[1000] 
-        
-       `}
+          className="fixed bottom-6 right-4 z-[1000] h-[500px] w-[300px] max-w-[calc(100vw-2rem)]"
         >
           <ChatPage setShowChatBox={setShowChatBox} roomInfo={roomInfo} />
         </div>

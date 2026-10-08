@@ -1,70 +1,96 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailBlog } from "../../../redux/reducer/BlogSlice";
 import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
+import moment from "moment";
+import { getDetailBlog } from "../../../redux/reducer/BlogSlice";
 
 export default function BlogDetail() {
   const { slug } = useParams();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { blogDetail } = useSelector((state) => state.BlogSlice);
 
-  console.log(blogDetail, "slug");
   useEffect(() => {
-    dispatch(getDetailBlog({ slug }));
     window.scrollTo(0, 0);
-  }, []);
+    dispatch(getDetailBlog({ slug }));
+  }, [slug]);
+
+  const ready = blogDetail?.slug === slug;
+  const url = `${import.meta.env.VITE_URL_DOMAIN}blog/${blogDetail?.slug}`;
+
   return (
-    <main>
+    <>
       <Helmet>
         <title>{blogDetail?.title}</title>
-
-        <link
-          rel="canonical"
-          href={`${import.meta.env.VITE_URL_DOMAIN}blog/${blogDetail?.slug}`}
-        />
+        <link rel="canonical" href={url} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="NP NAPHTHA" />
-        <meta
-          property="og:url"
-          content={`${import.meta.env.VITE_URL_DOMAIN}blog/${blogDetail?.slug}`}
-        />
+        <meta property="og:url" content={url} />
         <meta property="og:title" content={blogDetail?.title} />
-        <meta name="keywords" content={blogDetail?.title}></meta>
+        <meta name="keywords" content={blogDetail?.title} />
         <meta property="og:description" content={blogDetail?.title} />
         <meta name="description" content={blogDetail?.title} />
         <meta property="og:image" key="og:image" content={blogDetail?.image} />
-        {/* <meta
-          property="og:image"
-          content={`${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${detailFilm?.item?.poster_url}`}
-        /> */}
       </Helmet>
-      <header className="site-header site-news-detail-header mt-[5rem] lg:mt-[8rem]">
-        <div className="container">
-          <div className="row">
-            <div className="col-12 lg:text-6xl text-4xl font-bold">
-              <h2>{blogDetail?.title}</h2>
-            </div>
-          </div>
-        </div>
-      </header>
-      <section className="news-detail section-padding pt-0">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 col-12">
-              <img
-                src={blogDetail?.image}
-                className="img-fluid news-detail-image h-[515px] w-full object-cover"
-                alt="fine dining experience"
-              />
+
+      <article className="section">
+        <div className="wrap max-w-4xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-ink-muted"
+          >
+            <Link to="/" className="hover:text-brand-700">
+              {t("content.home")}
+            </Link>
+            <span aria-hidden="true">/</span>
+            <Link to="/blog" className="hover:text-brand-700">
+              {t("content.blog")}
+            </Link>
+          </nav>
+
+          {ready ? (
+            <>
+              <time
+                dateTime={blogDetail?.createdAt}
+                className="text-sm font-semibold uppercase tracking-wider text-brand-600"
+              >
+                {moment(blogDetail?.createdAt).format("DD/MM/YYYY")}
+              </time>
+              <h1 className="mt-3 text-3xl font-bold leading-tight text-ink sm:text-4xl lg:text-5xl">
+                {blogDetail?.title}
+              </h1>
+              {blogDetail?.image && (
+                <img
+                  src={blogDetail.image}
+                  alt={blogDetail?.title || ""}
+                  className="mt-8 aspect-[16/9] w-full rounded-3xl object-cover shadow-card"
+                />
+              )}
               <div
-                className="col-lg-10 col-10 mx-auto mt-5"
+                className="rich-content mx-auto mt-10 max-w-3xl text-base"
                 dangerouslySetInnerHTML={{ __html: blogDetail?.content }}
-              ></div>
+              />
+            </>
+          ) : (
+            <div className="space-y-4" aria-hidden="true">
+              <div className="skeleton h-4 w-24" />
+              <div className="skeleton h-10 w-3/4" />
+              <div className="skeleton aspect-[16/9] w-full !rounded-3xl" />
+              <div className="skeleton h-4 w-full" />
+              <div className="skeleton h-4 w-5/6" />
             </div>
+          )}
+
+          <div className="mt-12 border-t border-ink-line pt-6">
+            <Link to="/blog" className="btn-ghost">
+              <i className="fa-solid fa-arrow-left text-xs" aria-hidden="true" />
+              {t("content.back-to-blog")}
+            </Link>
           </div>
         </div>
-      </section>
-    </main>
+      </article>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Dialog,
   DialogHeader,
   DialogBody,
@@ -14,36 +13,38 @@ export default function ModalComponent() {
   const { showModal, body, callBack, title } = useSelector(
     (state) => state.modalSlice
   );
-  console.log(typeof callBack, "callksa");
   const handleClose = () => dispatch(closeModal());
+
   return (
-    <div className="-z-10  ">
-      <Dialog size="xl" className="" open={showModal}>
-        <DialogHeader>
-          <div className="w-full justify-between flex items-center">
-            <p className="text-3xl font-semibold ">{title}</p>
-            <Button className="py-2 px-3" color="red" onClick={handleClose}>
-              X
-            </Button>
-          </div>
-        </DialogHeader>
-        <DialogBody>{body}</DialogBody>
-        <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={handleClose}
-            className="mr-1"
-          >
-            <span>Hủy</span>
-          </Button>
-          {typeof callBack !== "boolean" && (
-            <Button variant="gradient" onClick={callBack}>
-              <span>Lưu</span>
-            </Button>
-          )}
-        </DialogFooter>
-      </Dialog>
-    </div>
+    <Dialog
+      size="xl"
+      open={showModal}
+      className="flex max-h-[90vh] flex-col overflow-hidden rounded-2xl"
+    >
+      <DialogHeader className="shrink-0 justify-between border-b border-ink-line px-6 py-4">
+        <h2 className="text-xl font-bold text-ink sm:text-2xl">{title}</h2>
+        <button
+          type="button"
+          onClick={handleClose}
+          aria-label="Đóng"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-ink-muted transition-colors hover:bg-ink-soft hover:text-ink"
+        >
+          <i className="fa-solid fa-xmark text-lg" />
+        </button>
+      </DialogHeader>
+      <DialogBody className="flex-1 overflow-y-auto px-4 sm:px-6">
+        {body}
+      </DialogBody>
+      <DialogFooter className="shrink-0 gap-3 border-t border-ink-line px-6 py-4">
+        <button type="button" onClick={handleClose} className="btn-ghost">
+          Hủy
+        </button>
+        {typeof callBack !== "boolean" && (
+          <button type="button" onClick={callBack} className="btn-primary">
+            Lưu
+          </button>
+        )}
+      </DialogFooter>
+    </Dialog>
   );
 }

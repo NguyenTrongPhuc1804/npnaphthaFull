@@ -1,5 +1,6 @@
 import { Input } from "@material-tailwind/react";
 import { useState } from "react";
+
 export default function InputComponent({
   isPassword,
   title,
@@ -10,36 +11,40 @@ export default function InputComponent({
 }) {
   const [showPass, setShowPass] = useState(isPassword ? true : false);
   return (
-    <div className="">
-      <p className="text-base">
-        {title} {example && <strong>VD: {example}</strong>}
+    <div className="w-full">
+      <p className="mb-1.5 text-sm font-semibold text-ink">
+        {title}{" "}
+        {example && (
+          <span className="font-normal text-ink-muted">VD: {example}</span>
+        )}
       </p>
-      <div className="relative w-full min-w-[200px] h-10">
+      <div className="relative w-full min-w-[200px]">
         <Input
           {...register}
-          autoComplete="name"
+          autoComplete="off"
           type={showPass ? "password" : isNumber ? "tel" : "text"}
           placeholder={title}
-          className=" !border-t-blue-gray-200 focus:!border-t-gray-900 flex justify-center items-center"
+          className="!border !border-ink-line bg-white !text-sm text-ink placeholder:!text-slate-400 placeholder:opacity-100 focus:!border-brand-500"
           labelProps={{
             className: "before:content-none after:content-none",
           }}
+          containerProps={{ className: "min-w-0" }}
         />
-        {isPassword ? (
-          <div
+        {isPassword && (
+          <button
+            type="button"
             onClick={() => setShowPass(!showPass)}
-            className="cursor-pointer absolute grid w-5 h-5 place-items-center  text-blue-gray-500  top-[30%] right-3 "
+            aria-label={showPass ? "Hiện mật khẩu" : "Ẩn mật khẩu"}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink"
           >
             <i
-              className={showPass ? `fa-solid fa-eye` : "fa-solid fa-eye-slash"}
+              className={showPass ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}
               aria-hidden="true"
             ></i>
-          </div>
-        ) : (
-          ""
+          </button>
         )}
-        {messErr && <p className="text-base text-red-400">{messErr}</p>}
       </div>
+      {messErr && <p className="field-error">{messErr}</p>}
     </div>
   );
 }

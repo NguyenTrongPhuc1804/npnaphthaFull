@@ -84,7 +84,7 @@ const TABLE_ROWS = [
 
 export function TableComponent() {
   return (
-    <Card className="h-full w-full">
+    <Card className="h-full w-full overflow-hidden rounded-2xl border border-ink-line shadow-card">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
@@ -122,19 +122,19 @@ export function TableComponent() {
           </div>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll px-0">
+      <CardBody className="overflow-x-auto px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                  className="whitespace-nowrap border-y border-ink-line bg-ink-soft px-4 py-3"
                 >
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="!text-xs font-semibold uppercase leading-none tracking-wider opacity-70"
                   >
                     {head}
                   </Typography>
@@ -224,7 +224,7 @@ export function TableComponent() {
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+      <CardFooter className="flex items-center justify-between border-t border-ink-line p-4">
         <Typography variant="small" color="blue-gray" className="font-normal">
           Page 1 of 10
         </Typography>

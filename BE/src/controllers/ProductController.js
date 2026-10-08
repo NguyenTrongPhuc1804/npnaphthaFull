@@ -185,12 +185,12 @@ const getAllProduct = async (req, res) => {
     const totalItem = await Product.countDocuments();
     if (searchBy) {
       const searchProduct = await Product.find({
-        [searchBy]: { $regex: searchValue },
+        [searchBy]: { $regex: searchValue, $options: "i" },
       })
         .limit(limit)
         .skip(page * limit);
       const totalItemSearch = await Product.find({
-        [searchBy]: { $regex: searchValue },
+        [searchBy]: { $regex: searchValue, $options: "i" },
       }).countDocuments();
 
       return res.status(200).json({

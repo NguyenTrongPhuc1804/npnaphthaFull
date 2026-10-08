@@ -1,147 +1,116 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import { getAllBanner } from "../../redux/reducer/BannerSlice";
 import { getAllVideoBanner } from "../../redux/reducer/VideoBannerSlice";
 
-export default function Banner({ data }) {
+export default function Banner() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const { listAllBanner } = useSelector((state) => state.bannerSlice);
   const { listAllVideo } = useSelector((state) => state.videoBannerSlice);
+
   useEffect(() => {
     dispatch(getAllBanner());
     dispatch(getAllVideoBanner());
   }, []);
-  return (
-    <>
-      <div className="container ">
-        <div className="row px-10 lg:px-20 ">
-          <div className="col-lg-5 col-12 m-auto">
-            <div className="heroText">
-              <h1 className="text-white lg:text-6xl text-4xl font-bold mb-lg-5 mb-3 uppercase">
-                {t("content.intro-banner")}
-              </h1>
-              <div className="c-reviews my-3 d-flex flex-wrap align-items-center">
-                <p className="text-white w-100">{t("content.Accompanying")}</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-7 col-12">
-            <div
-              id="carouselExampleCaptions"
-              className="carousel carousel-fade hero-carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-inner">
-                {listAllBanner?.data?.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className={`carousel-item rounded-lg overflow-hidden ${
-                      idx == 0 ? "active" : ""
-                    }`}
-                  >
-                    <div className="carousel-image-wrap">
-                      <img
-                        loading="lazy"
-                        src={item.image}
-                        className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
-                        alt={item.image}
-                      />
-                    </div>
-                    <div className="carousel-caption break-words">
-                      <p className="text-white text-2xl font-bold ">
-                        {" "}
-                        {item.title}
-                      </p>
-                      <h4 className="hero-text truncate break-words">
-                        {item.sub_title}
-                      </h4>
-                    </div>
-                  </div>
-                ))}
-                {/* <div className="carousel-item rounded-lg overflow-hidden">
-                  <div className="carousel-image-wrap">
-                    <img
-                      src="https://npnaphtha.com.vn/images/slideshow/hinh_cty_2.jpg"
-                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
-                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
-                    />
-                  </div>
-                  <div className="carousel-caption">
-                    <div className="d-flex align-items-center">
-                      <h4 className="hero-text">Steak</h4>
-                    </div>
-                    <div className="d-flex flex-wrap align-items-center">
-                      <h5 className="reviews-text mb-0 me-3">3.8/5</h5>
-                      <div className="reviews-stars">
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star reviews-icon" />
-                        <i className="bi-star reviews-icon" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="carousel-item rounded-lg overflow-hidden">
-                  <div className="carousel-image-wrap">
-                    <img
-                      src="https://npnaphtha.com.vn/images/slideshow/11.jpg"
-                      className=" w-full lg:h-[450px] h-[208px] object-cover carousel-image "
-                      alt="https://npnaphtha.com.vn/images/slideshow/nen-cong-ty-da-chinh-sua.jpg"
-                    />
-                  </div>
-                  <div className="carousel-caption">
-                    <div className="d-flex align-items-center">
-                      <h4 className="hero-text">Sausage Pasta</h4>
-                    </div>
-                    <div className="d-flex flex-wrap align-items-center">
-                      <h5 className="reviews-text mb-0 me-3">4.2/5</h5>
-                      <div className="reviews-stars">
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star-fill reviews-icon" />
-                        <i className="bi-star reviews-icon" />
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
-              <button
-                className="carousel-control-prev bg-colorPrimary"
-                type="button"
-                data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev"
-              >
-                <i className="fa-solid fa-arrow-left"></i>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next bg-green-400 rounded-br-lg"
-                type="button"
-                data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next"
-              >
-                <i className="fa-solid fa-arrow-right"></i>
 
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
+  const banners = listAllBanner?.data || [];
+  const videoUrl = listAllVideo?.data?.[0]?.url;
+
+  return (
+    <section className="relative isolate overflow-hidden bg-brand-950">
+      {videoUrl && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-950/95 via-brand-900/85 to-brand-700/60" />
+
+      <div className="wrap grid items-center gap-10 py-12 lg:grid-cols-12 lg:gap-12 lg:py-20">
+        <div className="lg:col-span-5">
+          <span className="eyebrow !bg-white/10 !text-brand-100">
+            NP NAPHTHA
+          </span>
+          <h1 className="text-3xl font-bold uppercase leading-tight text-white sm:text-4xl lg:text-5xl">
+            {t("content.intro-banner")}
+          </h1>
+          <p className="mt-5 max-w-md text-lg text-brand-100">
+            {t("content.Accompanying")}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/product" className="btn-primary">
+              {t("content.view-products")}
+              <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" />
+            </Link>
+            <Link to="/contact" className="btn-outline">
+              {t("content.contact-now")}
+            </Link>
           </div>
         </div>
+
+        <div className="lg:col-span-7">
+          {banners.length > 0 ? (
+            <Swiper
+              modules={[Autoplay, EffectFade, Pagination]}
+              effect="fade"
+              loop={banners.length > 1}
+              autoplay={{ delay: 4500, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              style={{
+                "--swiper-pagination-color": "#ffffff",
+                "--swiper-pagination-bullet-inactive-color": "#ffffff",
+              }}
+              className="overflow-hidden rounded-3xl shadow-card-hover ring-1 ring-white/20"
+            >
+              {banners.map((item, idx) => (
+                <SwiperSlide key={item._id || idx}>
+                  <div className="relative aspect-[16/10] w-full bg-brand-900">
+                    <img
+                      src={item.image}
+                      alt={item.title || "NP NAPHTHA"}
+                      loading={idx === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                    {(item.title || item.sub_title) && (
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pb-9 sm:p-7 sm:pb-10">
+                        {item.title && (
+                          <p className="line-clamp-2 text-lg font-bold text-white sm:text-2xl">
+                            {item.title}
+                          </p>
+                        )}
+                        {item.sub_title && (
+                          <p className="mt-1 line-clamp-2 text-sm text-slate-200 sm:text-base">
+                            {item.sub_title}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="skeleton aspect-[16/10] w-full !rounded-3xl !bg-white/10" />
+          )}
+        </div>
       </div>
-      <div className="video-wrap ">
-        {listAllVideo?.data?.length > 0 && (
-          <video autoPlay loop muted className="custom-video" poster>
-            <source src={listAllVideo.data[0].url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
-      </div>
-      <div className="overlay" />
-    </>
+    </section>
   );
 }

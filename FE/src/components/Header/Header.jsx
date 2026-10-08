@@ -1,197 +1,99 @@
-import { Option, Select } from "@material-tailwind/react";
-import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import Drawer from "../Drawer/DrawerComponent";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { showDrawer } from "../../redux/reducer/LoadingSlice";
 import { useTranslation } from "react-i18next";
+import Drawer from "../Drawer/DrawerComponent";
+import LanguageSwitch from "./LanguageSwitch";
+import { NAV_ITEMS } from "./navItems";
+import { showDrawer } from "../../redux/reducer/LoadingSlice";
+import logo from "../../assets/images/logo-cty.jpg";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-
+  const { t } = useTranslation();
   const { isOpenDrawer } = useSelector((state) => state.loadingSlice);
-  const [value, setValue] = useState(localStorage.getItem("lng") ?? "vi");
+  const [scrolled, setScrolled] = useState(false);
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    setValue(lng);
-    localStorage.setItem("lng", lng);
-  };
-  const closeDrawer = () => {
-    dispatch(showDrawer(false));
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const closeDrawer = () => dispatch(showDrawer(false));
+
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-lg fixed w-screen z-10 top-0 justify-between items-center px-[8%]">
-      <div
-        onClick={() => navigate("/")}
-        className="sm:w-[120px] w-[100px] cursor-pointer"
-        href="index.html"
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-30 border-b bg-white/90 backdrop-blur transition-shadow duration-200 ${
+          scrolled ? "border-ink-line shadow-card" : "border-transparent"
+        }`}
       >
-        <img
-          className="sm:w-[90px] sm:h-[90px] h-[70px] w-[70px] block object-cover"
-          src={require("../../assets/images/logo-cty.jpg")}
-        />
-      </div>
-      <div className="hidden sm:block ">
-        <ul className="navbar-nav ">
-          <li className="nav-item uppercase ">
-            <NavLink
-              to=""
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              {t("content.home")}
-            </NavLink>
-          </li>
-          <li className="nav-item uppercase ">
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              {t("content.about")}
-            </NavLink>
-          </li>
-          <li className="nav-item uppercase ">
-            <NavLink
-              to="/product"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              {t("content.product")}
-            </NavLink>
-          </li>
-          <li className="nav-item uppercase ">
-            <NavLink
-              to="/blog"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              {t("content.blog")}
-            </NavLink>
-          </li>{" "}
-          <li className="nav-item uppercase ">
-            <NavLink
-              to="/catalogue"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              catalogue
-            </NavLink>
-          </li>
-          <li className="nav-item uppercase ">
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link inactive"
-              }
-            >
-              {t("content.contact")}
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-      <div className="d-none d-lg-block">
-        <Select
-          className=""
-          size="md"
-          defaultValue={"VN"}
-          label=""
-          value={value}
-          onChange={(val) => changeLanguage(val)}
-        >
-          <Option value="vi" defaultValue={"vi"}>
-            <div className="flex justify-start items-center">
-              <img
-                className="w-5 h-5 mr-2"
-                src={require("../../assets/images/vietnam.png")}
-                alt=""
-              />
-              <p className="text-sm">Tiếng việt</p>
-            </div>
-          </Option>
-          <Option value="en">
-            <div className="flex justify-start items-center">
-              <img
-                className="w-5 h-5 mr-2"
-                src={require("../../assets/images/united-states.png")}
-                alt=""
-              />
-              <p className="text-sm">English</p>
-            </div>
-          </Option>
-        </Select>
+        <div className="wrap flex h-16 items-center justify-between gap-4 lg:h-20">
+          <Link
+            to="/"
+            className="flex shrink-0 items-center"
+            aria-label="NP NAPHTHA"
+          >
+            <img
+              src={logo}
+              alt="NP NAPHTHA"
+              width={64}
+              height={64}
+              className="h-12 w-12 rounded-lg object-cover lg:h-14 lg:w-14"
+            />
+          </Link>
 
-        {/* <button
-            type="button"
-            className="custom-btn btn btn-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#BookingModal"
-          >
-            Reservation
-          </button> */}
-      </div>
-      <div className="flex">
-        <div className="d-lg-none flex items-center">
-          <img
-            className="w-[25px] h-[25px]  mr-2"
-            src={
-              value == "vi"
-                ? require("../../assets/images/vietnam.png")
-                : require("../../assets/images/united-states.png")
-            }
-            alt=""
-          />
-          <select
-            value={value}
-            onChange={(e) => changeLanguage(e.target.value)}
-            id="countries"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          >
-            <option selected value="vi">
-              <div className="flex justify-center items-center">
-                <img
-                  className="w-5 h-5 mr-2"
-                  src={require("../../assets/images/vietnam.png")}
-                  alt=""
-                />
-                <p className="text-sm">Tiếng việt</p>
-              </div>
-            </option>
-            <option value="en">
-              <div className="flex justify-center items-center">
-                <img
-                  className="w-5 h-5 mr-2"
-                  src={require("../../assets/images/vietnam.png")}
-                  alt=""
-                />
-                <p className="text-sm">English</p>
-              </div>
-            </option>
-          </select>
+          <nav aria-label="Main" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      `relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors ${
+                        isActive
+                          ? "text-brand-600 after:absolute after:inset-x-3.5 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-brand-500"
+                          : "text-ink hover:bg-brand-50 hover:text-brand-700"
+                      }`
+                    }
+                  >
+                    {t(item.label)}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <LanguageSwitch className="hidden sm:inline-flex" />
+            <Link
+              to="/contact"
+              className="btn-primary hidden !py-2.5 lg:inline-flex"
+            >
+              {t("content.contact-now")}
+            </Link>
+            <button
+              type="button"
+              onClick={() => dispatch(showDrawer(!isOpenDrawer))}
+              aria-label={
+                isOpenDrawer ? t("content.close-menu") : t("content.open-menu")
+              }
+              aria-expanded={isOpenDrawer}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-ink-line text-ink transition-colors hover:bg-brand-50 lg:hidden"
+            >
+              <i
+                className={`fa-solid ${
+                  isOpenDrawer ? "fa-xmark" : "fa-bars"
+                } text-lg`}
+              />
+            </button>
+          </div>
         </div>
-        <button
-          onClick={() => {
-            dispatch(showDrawer(true));
-          }}
-          className="navbar-toggler"
-          type="button"
-        >
-          <i
-            className={`fa-solid ${
-              !isOpenDrawer ? "fa-bars" : "fa-xmark"
-            } text-2xl`}
-          ></i>
-        </button>
-      </div>
+      </header>
       <Drawer closeDrawer={closeDrawer} />
-    </nav>
+    </>
   );
 }

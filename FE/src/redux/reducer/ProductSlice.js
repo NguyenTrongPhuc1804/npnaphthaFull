@@ -152,7 +152,7 @@ export const deleteAllProduct = createAsyncThunk(
 );
 export const searchProduct = createAsyncThunk(
   "product/searchProduct",
-  async ({ searchBy, searchValue }, { dispatch }) => {
+  async ({ searchBy, searchValue, page, limit }, { dispatch }) => {
     dispatch(setLoading(true));
     try {
       if (searchValue == "") {
@@ -160,8 +160,12 @@ export const searchProduct = createAsyncThunk(
         dispatch(setLoading(false));
         return data;
       }
+      const paging =
+        page !== undefined ? `&page=${page}&limit=${limit ?? 8}` : "";
       const data = await api.get(
-        `/product/all?searchBy=${searchBy}&searchValue=${searchValue}`
+        `/product/all?searchBy=${searchBy}&searchValue=${encodeURIComponent(
+          searchValue
+        )}${paging}`
       );
       dispatch(setLoading(false));
       return data;

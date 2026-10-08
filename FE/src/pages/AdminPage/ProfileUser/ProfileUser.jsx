@@ -80,10 +80,12 @@ export default function ProfileUser() {
     );
   }, []);
   return (
-    <div className="px-5 py-5">
-      <p className="text-4xl mb-5">Thông tin và dữ liệu người dùng </p>
-      <div className="w-full flex justify-around">
-        <div className=" w-[50%] max-w-[550px] bg-white">
+    <div className="grid gap-6 lg:grid-cols-3">
+      <div className="order-2 lg:order-1 lg:col-span-2">
+        <div className="rounded-2xl border border-ink-line bg-white p-6 shadow-card">
+          <h2 className="mb-5 text-lg font-bold text-ink">
+            Thông tin và dữ liệu người dùng
+          </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-5">
               <Controller
@@ -191,23 +193,21 @@ export default function ProfileUser() {
             </div>
           </form>
         </div>
-        <div className="w-[400px] h-[400px] ">
+      </div>
+      <div className="order-1 lg:order-2">
+        <div className="flex flex-col items-center rounded-2xl border border-ink-line bg-white p-6 shadow-card">
           <img
-            className="h-full w-full rounded-full object-cover object-center shadow-xl shadow-blue-gray-900/50"
+            className="h-40 w-40 rounded-full object-cover shadow-card-hover ring-4 ring-brand-100"
             src={
               imageDefault
                 ? imageDefault
                 : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
             }
-            alt="nature image"
+            alt="Ảnh đại diện"
           />
-          <Typography
-            as="caption"
-            variant="small"
-            className="mt-2 text-center font-normal"
-          >
+          <p className="mt-4 text-sm font-medium text-ink-muted">
             Ảnh đại diện
-          </Typography>
+          </p>
         </div>
       </div>
     </div>
