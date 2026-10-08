@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as yup from "yup";
 
+import { PlusIcon } from "@heroicons/react/24/solid";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { notify, validateMess } from "../../../toolkits/help";
 import { openModal, setCallBack } from "../../../redux/reducer/ModalSlice";
@@ -16,11 +17,13 @@ import {
 } from "../../../redux/reducer/ProductSlice";
 import ReactQuill, { Quill } from "react-quill";
 import ImageResize from "quill-image-resize-module-react";
+const MAX_IMAGE = 5;
 export default function FormUpdateProduct({ data, listAllCategory }) {
   const { _id } = data;
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState([]);
   const editorRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const schema = yup
     .object({
@@ -54,27 +57,43 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
   //submit form
 
   const onSubmit = (data) => {
+    const listImage = data.list_image || [];
+    // ảnh cũ còn giữ lại (URL) và ảnh mới chọn (File)
+    const keepImages = listImage.filter((item) => typeof item === "string");
+    const newFiles = listImage.filter((item) => typeof item !== "string");
+
+    if (keepImages.length + newFiles.length === 0) {
+      notify("error", "Sản phẩm phải có ít nhất 1 ảnh");
+      return;
+    }
+    if (keepImages.length + newFiles.length > MAX_IMAGE) {
+      notify("error", `Chỉ được upload tối đa ${MAX_IMAGE} ảnh`);
+      return;
+    }
+
     const formData = new FormData();
     for (let key in data) {
+      if (key === "list_image") continue;
       formData.append(key, data[key]);
-      if (key === "list_image") {
-        for (let i = 0; i < data["list_image"]?.length; i++) {
-          formData.append("list_image", data["list_image"][i]);
-        }
-      }
     }
+    formData.append("keep_images", JSON.stringify(keepImages));
+    newFiles.forEach((file) => formData.append("list_image", file));
     dispatch(updateProduct({ id: _id, payload: formData }));
   };
   //event upload image
   const handleChangeFileMultiple = async (e) => {
-    if (selectedImage.length > 4) {
+    const files = Array.from(e.target.files || []);
+    // cho phép chọn lại cùng một file
+    e.target.value = "";
+    const remaining = MAX_IMAGE - selectedImage.length;
+    if (remaining <= 0) {
+      notify("error", `Chỉ được upload tối đa ${MAX_IMAGE} ảnh`);
       return;
     }
-    const selectedFiles = e.target.files[0];
-    setSelectedImage([
-      ...selectedImage.filter((item) => typeof item !== "string"),
-      selectedFiles,
-    ]);
+    if (files.length > remaining) {
+      notify("warning", `Chỉ được upload tối đa ${MAX_IMAGE} ảnh`);
+    }
+    setSelectedImage([...selectedImage, ...files.slice(0, remaining)]);
   };
   const removeImage = async (index) => {
     setSelectedImage([...selectedImage].filter((item, idx) => idx !== index));
@@ -84,7 +103,7 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
   }, [selectedImage]);
   useEffect(() => {
     dispatch(setCallBack({ callBack: handleSubmit(onSubmit) }));
-    setSelectedImage(data.thumb_image);
+    setSelectedImage(data.thumb_image || []);
   }, []);
   return (
     <div className=" lg:px-5 px-2 py-2 overflow-y-scroll h-[400px]">
@@ -197,26 +216,16 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
 
           <div className="w-fit">
             <p>Chọn ảnh review sản phẩm</p>
-            <label className="block">
-              <span className="sr-only">Choose profile photo </span>
-              <input
-                accept="image/*"
-                onChange={handleChangeFileMultiple}
-                type="file"
-                className="block w-full text-sm text-gray-500
-                  file:me-4 file:py-2 file:px-4
-                  file:rounded-lg file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-blue-600 file:text-white
-                  hover:file:bg-blue-700
-                  file:disabled:opacity-50 file:disabled:pointer-events-none
-                  dark:file:bg-blue-500
-                  dark:hover:file:bg-blue-400
-                "
-              />
-            </label>
+            <input
+              ref={fileInputRef}
+              accept="image/*"
+              multiple
+              onChange={handleChangeFileMultiple}
+              type="file"
+              className="hidden"
+            />
             <div className="mt-4">
-              <div className="flex mt-4">
+              <div className="flex flex-wrap gap-y-2 mt-4">
                 {selectedImage?.map((item, idx) => (
                   <div key={idx} className="mr-2">
                     <img
@@ -238,21 +247,29 @@ export default function FormUpdateProduct({ data, listAllCategory }) {
                       }
                       alt=""
                     />
-                    {typeof item !== "string" && (
-                      <Button
-                        onClick={() => removeImage(idx)}
-                        color="red"
-                        className="px-2 py-1 w-full text-[10px]"
-                      >
-                        X
-                      </Button>
-                    )}
+                    <Button
+                      onClick={() => removeImage(idx)}
+                      color="red"
+                      className="px-2 py-1 w-full text-[10px]"
+                    >
+                      X
+                    </Button>
                   </div>
                 ))}
+                {selectedImage.length < MAX_IMAGE && (
+                  <button
+                    type="button"
+                    title="Thêm ảnh mới"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-20 h-20 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-400 text-gray-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                  >
+                    <PlusIcon className="h-8 w-8" />
+                  </button>
+                )}
               </div>
-              {selectedImage.length > 4 && (
+              {selectedImage.length >= MAX_IMAGE && (
                 <p className="text-red-400 mt-2">
-                  Chỉ được upload tối đa 5 ảnh
+                  Đã đạt tối đa {MAX_IMAGE} ảnh, hãy xoá bớt ảnh để thêm ảnh mới
                 </p>
               )}
             </div>
